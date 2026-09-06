@@ -59,10 +59,10 @@
         processEscapes: true
       },
       chtml: {
-        scale: 1.05
+        scale: 1.0
       },
       svg: {
-        scale: 1.05
+        scale: 1.0
       }
     };
   </script>
@@ -130,15 +130,15 @@
       dominant-baseline: central;
     }
 
-    /* Prevent MathJax formulas and option choices from being cut off */
+    /* MathJax sizing and spacing preservation */
     mjx-container {
-      overflow: visible !important;
+      overflow-y: visible !important;
       line-height: normal !important;
     }
     mjx-container:not([display="true"]) {
       display: inline !important;
-      overflow: visible !important;
-      vertical-align: baseline !important;
+      overflow-y: visible !important;
+      vertical-align: -0.1em !important;
       line-height: normal !important;
       max-width: none !important;
     }
@@ -180,7 +180,7 @@
       display: block;
       width: 100%;
       height: 100%;
-      touch-action: pan-y pinch-zoom;
+      touch-action: none !important;
       cursor: crosshair;
     }
     #screen-draw-overlay.active {
@@ -276,6 +276,7 @@
     <!-- ========================================================================= -->
     <div id="section-concept" class="space-y-8">
 
+      <!-- 3 Real-World Applications at Start of Lesson -->
       <section class="glass-card rounded-[2.25rem] p-6 sm:p-8 shadow-soft-cloud border border-white relative overflow-hidden space-y-6">
         <div class="space-y-2">
           <div class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-amber-100 text-amber-800 text-xs font-extrabold uppercase tracking-wide">
@@ -285,7 +286,7 @@
             Geometric Similarity in Daily Life & Technology
           </h2>
           <p class="text-slate-600 text-xs sm:text-sm leading-relaxed w-full">
-            When two objects share the exact same shape but differ in size, mathematical similarity preserves identical angle measures and constant proportional side ratios. Explore three essential everyday applications:
+            Why do we study similarity? When two objects share the exact same shape but differ in size, mathematical similarity preserves identical angle measures and constant proportional side ratios. Explore three essential everyday applications:
           </p>
         </div>
 
@@ -339,11 +340,8 @@
               <div class="text-amber-900 font-bold text-xs uppercase flex items-center gap-1.5">
                 <i class="fa-solid fa-check-circle text-emerald-600"></i> Proportional Solution:
               </div>
-              <div class="p-2.5 bg-amber-50/50 rounded-xl font-mono text-center text-slate-800 border border-amber-200 math-frame">
-                $$\begin{aligned}
-                \frac{\text{Height of Model}}{\text{Height of Statue}} &= \frac{\text{Width of Model}}{\text{Width of Statue}} \\
-                \frac{h}{195} &= \frac{5}{58} \implies h = \frac{5 \times 195}{58} \approx 16.81\text{ cm}
-                \end{aligned}$$
+              <div class="p-2.5 bg-amber-50/50 rounded-xl font-mono text-center text-slate-800 border border-amber-200">
+                $$\frac{\text{Height of Model}}{\text{Height of Statue}} = \frac{\text{Width of Model}}{\text{Width of Statue}} \implies \frac{h}{195} = \frac{5}{58} \implies h = \frac{5 \times 195}{58} \approx 16.81\text{ cm}$$
               </div>
             </div>
           </div>
@@ -409,11 +407,8 @@
               <div class="text-blue-900 font-bold text-xs uppercase flex items-center gap-1.5">
                 <i class="fa-solid fa-check-circle text-emerald-600"></i> Constant Aspect Ratio Solution:
               </div>
-              <div class="p-2.5 bg-blue-50/50 rounded-xl font-mono text-center text-slate-800 border border-blue-200 math-frame">
-                $$\begin{aligned}
-                \frac{\text{Height on Screen}}{\text{Height of Billboard}} &= \frac{\text{Width on Screen}}{\text{Width of Billboard}} \\
-                \frac{h}{8} &= \frac{6}{12} = \frac{1}{2} \implies h = 8 \times \frac{1}{2} = 4\text{ cm}
-                \end{aligned}$$
+              <div class="p-2.5 bg-blue-50/50 rounded-xl font-mono text-center text-slate-800 border border-blue-200">
+                $$\frac{\text{Height on Screen}}{\text{Height of Billboard}} = \frac{\text{Width on Screen}}{\text{Width of Billboard}} \implies \frac{h}{8} = \frac{6}{12} \implies h = \frac{6 \times 8}{12} = 4\text{ cm}$$
               </div>
             </div>
           </div>
@@ -476,11 +471,8 @@
               <div class="text-emerald-900 font-bold text-xs uppercase flex items-center gap-1.5">
                 <i class="fa-solid fa-check-circle text-emerald-600"></i> Blueprint Scale Factor Solution:
               </div>
-              <div class="p-2.5 bg-emerald-50/50 rounded-xl font-mono text-center text-slate-800 border border-emerald-200 math-frame">
-                $$\begin{aligned}
-                \frac{\text{Blueprint Width}}{\text{Actual Field Width}} &= \frac{\text{Blueprint Length}}{\text{Actual Field Length}} \\
-                \frac{w}{25} &= \frac{16}{40} = \frac{2}{5} \implies w = 25 \times \frac{2}{5} = 10\text{ cm}
-                \end{aligned}$$
+              <div class="p-2.5 bg-emerald-50/50 rounded-xl font-mono text-center text-slate-800 border border-emerald-200">
+                $$\frac{\text{Blueprint Width}}{\text{Actual Field Width}} = \frac{\text{Blueprint Length}}{\text{Actual Field Length}} \implies \frac{w}{25} = \frac{16}{40} = \frac{2}{5} \implies w = 25 \times \frac{2}{5} = 10\text{ cm}$$
               </div>
             </div>
           </div>
@@ -488,6 +480,7 @@
         </div>
       </section>
 
+      <!-- Core Mathematical Foundation -->
       <section class="glass-card rounded-[2.25rem] p-6 sm:p-8 shadow-soft-cloud border border-white space-y-6">
         <div class="flex items-center gap-3">
           <div class="w-10 h-10 rounded-xl bg-blue-600 text-white flex items-center justify-center font-bold text-lg shadow-md">
@@ -571,6 +564,9 @@
         </div>
       </section>
 
+      <!-- ========================================================================= -->
+      <!-- IDEA 1: VERIFYING BOTH SIMILARITY CONDITIONS (2 Examples + 1 Try It Yourself) -->
+      <!-- ========================================================================= -->
       <section class="glass-card rounded-[2.25rem] p-6 sm:p-8 shadow-soft-cloud border border-white space-y-6">
         <div class="flex items-center justify-between border-b pb-3">
           <div class="flex items-center gap-2.5">
@@ -582,7 +578,7 @@
           </div>
         </div>
 
-        <!-- Question 1.1 -->
+        <!-- Question 1.1: Worked Example 1 -->
         <div class="p-6 rounded-3xl bg-slate-50/80 border border-slate-200 space-y-4">
           <div class="p-4 rounded-2xl bg-blue-50/70 border border-blue-200 space-y-2">
             <div class="font-bold text-slate-900 text-sm flex items-center gap-2">
@@ -624,47 +620,26 @@
           </div>
 
           <div class="space-y-2 pt-2">
-            <div class="flex items-center justify-between text-xs font-bold text-slate-500 px-1">
-              <span><i class="fa-solid fa-pencil mr-1 text-blue-500"></i> Student Scratchpad & Solution Workspace</span>
-              <span class="text-slate-400">16-Line Ruled Pad</span>
-            </div>
+            <div class="flex items-center justify-between text-xs font-bold text-slate-500 px-1"><span><i class="fa-solid fa-pencil mr-1 text-blue-500"></i> Solution Workspace</span></div>
             <textarea class="notebook-paper" rows="16" spellcheck="false"></textarea>
           </div>
 
           <div class="pt-1">
             <button onclick="toggleModelSolution('sol-ex-1')" class="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg bg-white hover:bg-slate-100 text-slate-600 hover:text-slate-900 font-semibold text-xs transition-all border border-slate-300 shadow-sm active:scale-95">
-              <i class="fa-regular fa-eye text-blue-600" id="sol-ex-1-icon"></i>
-              <span id="sol-ex-1-lbl">Solution</span>
+              <i class="fa-regular fa-eye text-blue-600" id="sol-ex-1-icon"></i><span id="sol-ex-1-lbl">Solution</span>
             </button>
-
             <div id="sol-ex-1" class="hidden mt-3 p-4 rounded-2xl bg-emerald-50/90 border border-emerald-200 text-xs sm:text-sm space-y-3">
-              <div class="font-bold text-emerald-800 flex items-center gap-2 text-xs uppercase tracking-wider">
-                <i class="fa-solid fa-circle-check"></i> Formal Proof Walkthrough:
-              </div>
+              <div class="font-bold text-emerald-800 flex items-center gap-2 text-xs uppercase tracking-wider"><i class="fa-solid fa-circle-check"></i> Formal Proof Walkthrough:</div>
               <div class="space-y-2 text-slate-700">
-                <p>1. <strong>Angle Congruence:</strong> By inspection of corresponding vertices:</p>
-                <div class="math-frame p-2 bg-white rounded-lg border font-mono text-xs">
-                  $$\begin{aligned}
-                  m(\angle A) &= m(\angle E), & m(\angle B) &= m(\angle F) \\
-                  m(\angle C) &= m(\angle G) = 90^\circ, & m(\angle D) &= m(\angle H)
-                  \end{aligned}$$
-                </div>
-                <p>2. <strong>Side Proportionality:</strong> Computing side ratios in order:</p>
-                <div class="math-frame p-2 bg-white rounded-lg border font-mono text-xs">
-                  $$\begin{aligned}
-                  \frac{AB}{EF} &= \frac{12}{8} = \frac{3}{2}, & \frac{BC}{FG} &= \frac{9}{6} = \frac{3}{2} \\[4pt]
-                  \frac{CD}{GH} &= \frac{6}{4} = \frac{3}{2}, & \frac{DA}{HE} &= \frac{15}{10} = \frac{3}{2}
-                  \end{aligned}$$
-                </div>
-                <p class="font-bold text-emerald-900 text-center">
-                  $$\therefore \text{Polygon } ABCD \sim \text{Polygon } EFGH,\quad k = \frac{3}{2} = 1.5$$
-                </p>
+                <p>1. <strong>Angle Congruence:</strong> $m(\angle A) = m(\angle E),\ m(\angle B) = m(\angle F),\ m(\angle C) = m(\angle G) = 90^\circ,\ m(\angle D) = m(\angle H)$.</p>
+                <p>2. <strong>Side Proportionality:</strong> $\frac{AB}{EF} = \frac{12}{8} = \frac{3}{2},\ \frac{BC}{FG} = \frac{9}{6} = \frac{3}{2},\ \frac{CD}{GH} = \frac{6}{4} = \frac{3}{2},\ \frac{DA}{HE} = \frac{15}{10} = \frac{3}{2}$.</p>
+                <p class="font-bold text-emerald-900 text-center">$$\therefore \text{Polygon } ABCD \sim \text{Polygon } EFGH,\quad k = \frac{3}{2} = 1.5$$</p>
               </div>
             </div>
           </div>
         </div>
 
-        <!-- Question 1.2 -->
+        <!-- Question 1.2: Worked Example 2 -->
         <div class="p-6 rounded-3xl bg-slate-50/80 border border-slate-200 space-y-4">
           <div class="p-4 rounded-2xl bg-blue-50/70 border border-blue-200 space-y-2">
             <div class="font-bold text-slate-900 text-sm flex items-center gap-2">
@@ -678,82 +653,635 @@
 
           <div class="w-full bg-white p-4 rounded-2xl border border-slate-200 flex justify-center">
             <svg viewBox="0 0 650 285" class="w-full max-w-xl h-auto" xmlns="http://www.w3.org/2000/svg">
-              <defs>
-                <filter id="badge-shadow" x="-10%" y="-10%" width="120%" height="120%">
-                  <feDropShadow dx="0" dy="1.5" stdDeviation="1.5" flood-opacity="0.12"/>
-                </filter>
-              </defs>
-              <!-- Polygon KLMN (Left) -->
+              <defs><filter id="badge-shadow-12" x="-10%" y="-10%" width="120%" height="120%"><feDropShadow dx="0" dy="1.5" stdDeviation="1.5" flood-opacity="0.12"/></filter></defs>
               <polygon points="150,121 102,240 230,240 230,176" fill="#EEF2FF" stroke="#4F46E5" stroke-width="2.5" stroke-linejoin="round"/>
               <rect x="216" y="226" width="14" height="14" fill="none" stroke="#4F46E5" stroke-width="1.6"/>
-              <circle cx="148" cy="135" r="2.5" fill="#4338CA"/>
               <text x="150" y="105" class="font-bold text-sm fill-indigo-950" text-anchor="middle">K</text>
               <text x="84" y="250" class="font-bold text-sm fill-indigo-950" text-anchor="end">L</text>
               <text x="245" y="252" class="font-bold text-sm fill-indigo-950" text-anchor="start">M</text>
               <text x="245" y="176" class="font-bold text-sm fill-indigo-950" text-anchor="start">N</text>
-              <g transform="translate(95, 175)" filter="url(#badge-shadow)"><rect x="-18" y="-10" width="36" height="20" class="svg-pill-bg" stroke="#4F46E5"/><text x="0" y="1" class="svg-pill-text" fill="#312E81" style="font-size:11px;">16</text></g>
-              <g transform="translate(166, 260)" filter="url(#badge-shadow)"><rect x="-18" y="-10" width="36" height="20" class="svg-pill-bg" stroke="#4F46E5"/><text x="0" y="1" class="svg-pill-text" fill="#312E81" style="font-size:11px;">16</text></g>
-              <g transform="translate(254, 208)" filter="url(#badge-shadow)"><rect x="-16" y="-10" width="32" height="20" class="svg-pill-bg" stroke="#4F46E5"/><text x="0" y="1" class="svg-pill-text" fill="#312E81" style="font-size:11px;">8</text></g>
-              <g transform="translate(202, 136)" filter="url(#badge-shadow)"><rect x="-18" y="-10" width="36" height="20" class="svg-pill-bg" stroke="#4F46E5"/><text x="0" y="1" class="svg-pill-text" fill="#312E81" style="font-size:11px;">12</text></g>
+              <g transform="translate(95, 175)" filter="url(#badge-shadow-12)"><rect x="-18" y="-10" width="36" height="20" class="svg-pill-bg" stroke="#4F46E5"/><text x="0" y="1" class="svg-pill-text" fill="#312E81" style="font-size:11px;">16</text></g>
+              <g transform="translate(166, 260)" filter="url(#badge-shadow-12)"><rect x="-18" y="-10" width="36" height="20" class="svg-pill-bg" stroke="#4F46E5"/><text x="0" y="1" class="svg-pill-text" fill="#312E81" style="font-size:11px;">16</text></g>
+              <g transform="translate(254, 208)" filter="url(#badge-shadow-12)"><rect x="-16" y="-10" width="32" height="20" class="svg-pill-bg" stroke="#4F46E5"/><text x="0" y="1" class="svg-pill-text" fill="#312E81" style="font-size:11px;">8</text></g>
+              <g transform="translate(202, 136)" filter="url(#badge-shadow-12)"><rect x="-18" y="-10" width="36" height="20" class="svg-pill-bg" stroke="#4F46E5"/><text x="0" y="1" class="svg-pill-text" fill="#312E81" style="font-size:11px;">12</text></g>
 
-              <!-- Polygon ABCD (Right) -->
               <polygon points="440,62 368,240 560,240 560,144" fill="#EFF6FF" stroke="#2563EB" stroke-width="2.6" stroke-linejoin="round"/>
               <rect x="544" y="224" width="16" height="16" fill="none" stroke="#2563EB" stroke-width="1.8"/>
-              <circle cx="438" cy="80" r="3" fill="#1D4ED8"/>
               <text x="440" y="44" class="font-bold text-sm fill-blue-950" text-anchor="middle">A</text>
               <text x="350" y="250" class="font-bold text-sm fill-blue-950" text-anchor="end">B</text>
               <text x="578" y="252" class="font-bold text-sm fill-blue-950" text-anchor="start">C</text>
               <text x="578" y="142" class="font-bold text-sm fill-blue-950" text-anchor="start">D</text>
-              <g transform="translate(372, 145)" filter="url(#badge-shadow)"><rect x="-18" y="-10" width="36" height="20" class="svg-pill-bg" stroke="#2563EB"/><text x="0" y="1" class="svg-pill-text" fill="#1E3A8A" style="font-size:11px;">24</text></g>
-              <g transform="translate(464, 260)" filter="url(#badge-shadow)"><rect x="-18" y="-10" width="36" height="20" class="svg-pill-bg" stroke="#2563EB"/><text x="0" y="1" class="svg-pill-text" fill="#1E3A8A" style="font-size:11px;">24</text></g>
-              <g transform="translate(588, 192)" filter="url(#badge-shadow)"><rect x="-18" y="-10" width="36" height="20" class="svg-pill-bg" stroke="#2563EB"/><text x="0" y="1" class="svg-pill-text" fill="#1E3A8A" style="font-size:11px;">12</text></g>
-              <g transform="translate(515, 88)" filter="url(#badge-shadow)"><rect x="-18" y="-10" width="36" height="20" class="svg-pill-bg" stroke="#2563EB"/><text x="0" y="1" class="svg-pill-text" fill="#1E3A8A" style="font-size:11px;">18</text></g>
+              <g transform="translate(372, 145)" filter="url(#badge-shadow-12)"><rect x="-18" y="-10" width="36" height="20" class="svg-pill-bg" stroke="#2563EB"/><text x="0" y="1" class="svg-pill-text" fill="#1E3A8A" style="font-size:11px;">24</text></g>
+              <g transform="translate(464, 260)" filter="url(#badge-shadow-12)"><rect x="-18" y="-10" width="36" height="20" class="svg-pill-bg" stroke="#2563EB"/><text x="0" y="1" class="svg-pill-text" fill="#1E3A8A" style="font-size:11px;">24</text></g>
+              <g transform="translate(588, 192)" filter="url(#badge-shadow-12)"><rect x="-18" y="-10" width="36" height="20" class="svg-pill-bg" stroke="#2563EB"/><text x="0" y="1" class="svg-pill-text" fill="#1E3A8A" style="font-size:11px;">12</text></g>
+              <g transform="translate(515, 88)" filter="url(#badge-shadow-12)"><rect x="-18" y="-10" width="36" height="20" class="svg-pill-bg" stroke="#2563EB"/><text x="0" y="1" class="svg-pill-text" fill="#1E3A8A" style="font-size:11px;">18</text></g>
             </svg>
           </div>
 
           <div class="space-y-2 pt-2">
-            <div class="flex items-center justify-between text-xs font-bold text-slate-500 px-1">
-              <span><i class="fa-solid fa-pencil mr-1 text-blue-500"></i> Student Scratchpad & Solution Workspace</span>
-              <span class="text-slate-400">16-Line Ruled Pad</span>
-            </div>
+            <div class="flex items-center justify-between text-xs font-bold text-slate-500 px-1"><span><i class="fa-solid fa-pencil mr-1 text-blue-500"></i> Solution Workspace</span></div>
             <textarea class="notebook-paper" rows="16" spellcheck="false"></textarea>
           </div>
 
           <div class="pt-1">
             <button onclick="toggleModelSolution('sol-ex-1-2')" class="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg bg-white hover:bg-slate-100 text-slate-600 hover:text-slate-900 font-semibold text-xs transition-all border border-slate-300 shadow-sm active:scale-95">
-              <i class="fa-regular fa-eye text-blue-600" id="sol-ex-1-2-icon"></i>
-              <span id="sol-ex-1-2-lbl">Solution</span>
+              <i class="fa-regular fa-eye text-blue-600" id="sol-ex-1-2-icon"></i><span id="sol-ex-1-2-lbl">Solution</span>
             </button>
-
             <div id="sol-ex-1-2" class="hidden mt-3 p-4 rounded-2xl bg-emerald-50/90 border border-emerald-200 text-xs sm:text-sm space-y-3">
-              <div class="font-bold text-emerald-800 flex items-center gap-2 text-xs uppercase tracking-wider">
-                <i class="fa-solid fa-circle-check"></i> Step-by-Step Proof:
-              </div>
+              <div class="font-bold text-emerald-800 flex items-center gap-2 text-xs uppercase tracking-wider"><i class="fa-solid fa-circle-check"></i> Step-by-Step Proof:</div>
               <div class="space-y-2 text-slate-700">
-                <p>1. <strong>Angle Congruence:</strong> $m(\angle C) = m(\angle M) = 90^\circ$ and all corresponding angles match.</p>
-                <p>2. <strong>Side Proportionality:</strong> Computing side ratios from polygon $KLMN$ to polygon $ABCD$:</p>
-                <div class="math-frame p-2 bg-white rounded-lg border font-mono text-xs">
-                  $$\begin{aligned}
-                  \frac{KL}{AB} &= \frac{16}{24} = \frac{2}{3}, & \frac{LM}{BC} &= \frac{16}{24} = \frac{2}{3} \\[4pt]
-                  \frac{MN}{CD} &= \frac{8}{12} = \frac{2}{3}, & \frac{NK}{DA} &= \frac{12}{18} = \frac{2}{3}
-                  \end{aligned}$$
-                </div>
-                <p class="font-bold text-emerald-900 text-center">
-                  $$\therefore \text{Polygon } KLMN \sim \text{Polygon } ABCD,\quad k = \frac{2}{3}$$
-                </p>
+                <p>1. $m(\angle C) = m(\angle M) = 90^\circ$ and all corresponding angles match.</p>
+                <p>2. $\frac{KL}{AB} = \frac{16}{24} = \frac{2}{3},\ \frac{LM}{BC} = \frac{16}{24} = \frac{2}{3},\ \frac{MN}{CD} = \frac{8}{12} = \frac{2}{3},\ \frac{NK}{DA} = \frac{12}{18} = \frac{2}{3}$.</p>
+                <p class="font-bold text-emerald-900 text-center">$$\therefore \text{Polygon } KLMN \sim \text{Polygon } ABCD,\quad k = \frac{2}{3}$$</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Question 1.3: Try It Yourself -->
+        <div class="p-6 rounded-3xl bg-slate-50/80 border border-slate-200 space-y-4">
+          <div class="p-4 rounded-2xl bg-blue-50/70 border border-blue-200 space-y-2">
+            <div class="font-bold text-slate-900 text-sm flex flex-wrap items-center gap-2">
+              <span class="px-2 py-0.5 rounded bg-blue-600 text-white text-xs font-black">1.3</span>
+              <span class="px-2.5 py-0.5 rounded-full bg-amber-100 text-amber-800 text-xs font-extrabold uppercase tracking-wide flex items-center gap-1.5"><i class="fa-solid fa-user-pen"></i> Try It Yourself</span>
+              <span>Verifying Polygons with Proportional Sides</span>
+            </div>
+            <p class="text-xs sm:text-sm text-slate-700 leading-relaxed">
+              In the given figure, prove that polygon $ABCD \sim \text{polygon } HLKJ$, and state the similarity scale ratio of polygon $ABCD$ to polygon $HLKJ$.
+            </p>
+          </div>
+
+          <div class="w-full bg-white p-4 rounded-2xl border border-slate-200 flex justify-center">
+            <svg viewBox="0 0 600 285" class="w-full max-w-xl h-auto" xmlns="http://www.w3.org/2000/svg">
+              <defs><filter id="badge-shadow-13" x="-10%" y="-10%" width="120%" height="120%"><feDropShadow dx="0" dy="1.5" stdDeviation="1.5" flood-opacity="0.12"/></filter></defs>
+              <polygon points="70,230 180,230 137,129 41,183" fill="#EFF6FF" stroke="#2563EB" stroke-width="2.5" stroke-linejoin="round"/>
+              <path d="M 52,192 A 16 16 0 0 0 60,172" fill="none" stroke="#D97706" stroke-width="1.8"/>
+              <g transform="translate(62, 182)" filter="url(#badge-shadow-13)"><rect x="-14" y="-8" width="28" height="16" class="svg-angle-pill-bg"/><text x="0" y="1" class="svg-angle-pill-text" style="font-size:10px;">92°</text></g>
+              <text x="60" y="244" class="font-bold text-sm fill-blue-950" text-anchor="end">A</text>
+              <text x="194" y="244" class="font-bold text-sm fill-blue-950" text-anchor="start">B</text>
+              <text x="144" y="118" class="font-bold text-sm fill-blue-950" text-anchor="middle">C</text>
+              <text x="28" y="186" class="font-bold text-sm fill-blue-950" text-anchor="end">D</text>
+              <g transform="translate(125, 246)" filter="url(#badge-shadow-13)"><rect x="-20" y="-9" width="40" height="18" class="svg-pill-bg" stroke="#2563EB"/><text x="0" y="1" class="svg-pill-text" fill="#1E3A8A" style="font-size:11px;">5 cm</text></g>
+              <g transform="translate(178, 172)" filter="url(#badge-shadow-13)"><rect x="-20" y="-9" width="40" height="18" class="svg-pill-bg" stroke="#2563EB"/><text x="0" y="1" class="svg-pill-text" fill="#1E3A8A" style="font-size:11px;">5 cm</text></g>
+              <g transform="translate(86, 142)" filter="url(#badge-shadow-13)"><rect x="-20" y="-9" width="40" height="18" class="svg-pill-bg" stroke="#2563EB"/><text x="0" y="1" class="svg-pill-text" fill="#1E3A8A" style="font-size:11px;">5 cm</text></g>
+              <g transform="translate(38, 214)" filter="url(#badge-shadow-13)"><rect x="-24" y="-9" width="48" height="18" class="svg-pill-bg" stroke="#2563EB"/><text x="0" y="1" class="svg-pill-text" fill="#1E3A8A" style="font-size:10px;">2.5 cm</text></g>
+
+              <polygon points="320,230 502,230 431,63 272,152" fill="#EEF2FF" stroke="#4F46E5" stroke-width="2.6" stroke-linejoin="round"/>
+              <path d="M 290,166 A 26 26 0 0 0 304,134" fill="none" stroke="#D97706" stroke-width="2"/>
+              <g transform="translate(306, 152)" filter="url(#badge-shadow-13)"><rect x="-14" y="-8" width="28" height="16" class="svg-angle-pill-bg"/><text x="0" y="1" class="svg-angle-pill-text" style="font-size:10px;">92°</text></g>
+              <text x="308" y="244" class="font-bold text-sm fill-indigo-950" text-anchor="end">H</text>
+              <text x="516" y="244" class="font-bold text-sm fill-indigo-950" text-anchor="start">L</text>
+              <text x="442" y="52" class="font-bold text-sm fill-indigo-950" text-anchor="middle">K</text>
+              <text x="254" y="154" class="font-bold text-sm fill-indigo-950" text-anchor="end">J</text>
+              <g transform="translate(411, 248)" filter="url(#badge-shadow-13)"><rect x="-22" y="-10" width="44" height="20" class="svg-pill-bg" stroke="#4F46E5"/><text x="0" y="1" class="svg-pill-text" fill="#312E81" style="font-size:11px;">10 cm</text></g>
+              <g transform="translate(492, 142)" filter="url(#badge-shadow-13)"><rect x="-22" y="-10" width="44" height="20" class="svg-pill-bg" stroke="#4F46E5"/><text x="0" y="1" class="svg-pill-text" fill="#312E81" style="font-size:11px;">10 cm</text></g>
+              <g transform="translate(346, 94)" filter="url(#badge-shadow-13)"><rect x="-22" y="-10" width="44" height="20" class="svg-pill-bg" stroke="#4F46E5"/><text x="0" y="1" class="svg-pill-text" fill="#312E81" style="font-size:11px;">10 cm</text></g>
+              <g transform="translate(268, 198)" filter="url(#badge-shadow-13)"><rect x="-20" y="-10" width="40" height="20" class="svg-pill-bg" stroke="#4F46E5"/><text x="0" y="1" class="svg-pill-text" fill="#312E81" style="font-size:11px;">5 cm</text></g>
+            </svg>
+          </div>
+
+          <div class="space-y-2 pt-2">
+            <div class="flex items-center justify-between text-xs font-bold text-slate-500 px-1"><span><i class="fa-solid fa-pencil mr-1 text-blue-500"></i> Solution Workspace</span></div>
+            <textarea class="notebook-paper" rows="16" spellcheck="false"></textarea>
+          </div>
+
+          <div class="pt-1">
+            <button onclick="toggleModelSolution('sol-q1-3')" class="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg bg-white hover:bg-slate-100 text-slate-600 hover:text-slate-900 font-semibold text-xs transition-all border border-slate-300 shadow-sm active:scale-95">
+              <i class="fa-regular fa-eye text-blue-600" id="sol-q1-3-icon"></i><span id="sol-q1-3-lbl">Solution</span>
+            </button>
+            <div id="sol-q1-3" class="hidden mt-3 p-4 rounded-2xl bg-emerald-50/90 border border-emerald-200 text-xs sm:text-sm space-y-3">
+              <div class="font-bold text-emerald-800 flex items-center gap-2 text-xs uppercase tracking-wider"><i class="fa-solid fa-circle-check"></i> Model Solution:</div>
+              <div class="space-y-2 text-slate-700">
+                <p>1. $m(\angle D) = m(\angle J) = 92^\circ$ and all corresponding angles match.</p>
+                <p>2. $\frac{AB}{HL} = \frac{5}{10} = \frac{1}{2},\ \frac{BC}{LK} = \frac{5}{10} = \frac{1}{2},\ \frac{CD}{KJ} = \frac{5}{10} = \frac{1}{2},\ \frac{DA}{JH} = \frac{2.5}{5} = \frac{1}{2}$.</p>
+                <p class="font-bold text-emerald-900 text-center">$$\therefore \text{Polygon } ABCD \sim \text{Polygon } HLKJ,\quad k = \frac{1}{2} = 0.5$$</p>
               </div>
             </div>
           </div>
         </div>
       </section>
 
+      <!-- ========================================================================= -->
+      <!-- IDEA 2: FINDING UNKNOWN SIDE LENGTHS & ANGLES (2 Examples + 1 Try It Yourself) -->
+      <!-- ========================================================================= -->
+      <section class="glass-card rounded-[2.25rem] p-6 sm:p-8 shadow-soft-cloud border border-white space-y-6">
+        <div class="flex items-center justify-between border-b pb-3">
+          <div class="flex items-center gap-2.5">
+            <span class="w-8 h-8 rounded-xl bg-purple-100 text-purple-700 font-black flex items-center justify-center text-sm">02</span>
+            <div>
+              <h3 class="text-lg sm:text-xl font-bold font-display text-slate-900">Idea 2: Finding Unknown Side Lengths & Angle Measures</h3>
+              <p class="text-xs text-slate-500">Cross-multiplication with radicals and quadrilateral interior angles</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Question 2.1: Worked Example 1 -->
+        <div class="p-6 rounded-3xl bg-slate-50/80 border border-slate-200 space-y-4">
+          <div class="p-4 rounded-2xl bg-purple-50/70 border border-purple-200 space-y-2">
+            <div class="font-bold text-slate-900 text-sm flex items-center gap-2">
+              <span class="px-2 py-0.5 rounded bg-purple-600 text-white text-xs font-black">2.1</span>
+              Worked Example 1: Unknown Side Lengths and Interior Angles
+            </div>
+            <p class="text-xs sm:text-sm text-slate-700 leading-relaxed">
+              Given that polygon $ABCD \sim \text{polygon } EFGH$: Find $m(\angle C)$, $m(\angle D)$, and the exact lengths of $DC$ and $FG$.
+            </p>
+          </div>
+
+          <div class="w-full bg-white p-4 sm:p-6 rounded-2xl border border-slate-200 flex justify-center items-center overflow-hidden">
+            <svg viewBox="0 0 740 340" class="w-full max-w-2xl h-auto" xmlns="http://www.w3.org/2000/svg">
+              <polygon points="100,218 143,193 220,270 130,270" fill="#F0FDF4" stroke="#16A34A" stroke-width="2.5" stroke-linejoin="round"/>
+              <text x="78" y="215" class="font-bold text-sm fill-emerald-950">E</text>
+              <text x="143" y="176" class="font-bold text-sm fill-emerald-950 text-anchor-middle">H</text>
+              <text x="234" y="278" class="font-bold text-sm fill-emerald-950">G</text>
+              <text x="114" y="292" class="font-bold text-sm fill-emerald-950">F</text>
+              <path d="M 105,226.7 L 113.7,221.7 L 108.7,213" fill="none" stroke="#16A34A" stroke-width="1.8"/>
+              <g transform="translate(50, 244)"><rect x="-34" y="-12" width="68" height="24" class="svg-pill-bg" stroke="#16A34A"/><text x="0" y="1" class="svg-pill-text" fill="#14532D" style="font-size:11px;">5√3 cm</text></g>
+              <g transform="translate(195, 218)"><rect x="-34" y="-12" width="68" height="24" class="svg-pill-bg" stroke="#16A34A"/><text x="0" y="1" class="svg-pill-text" fill="#14532D" style="font-size:11px;">10√2 cm</text></g>
+              <g transform="translate(198, 256)"><rect x="-16" y="-9" width="32" height="18" class="svg-angle-pill-bg"/><text x="0" y="1" class="svg-angle-pill-text">45°</text></g>
+              <g transform="translate(175, 305)"><rect x="-28" y="-11" width="56" height="22" class="svg-pill-bg" stroke="#E11D48"/><text x="0" y="1" class="svg-pill-text" fill="#E11D48" style="font-size:11px;">FG = ?</text></g>
+
+              <polygon points="343,137 453,73 650,270 420,270" fill="#FAF5FF" stroke="#9333EA" stroke-width="2.5" stroke-linejoin="round"/>
+              <text x="322" y="130" class="font-bold text-sm fill-purple-950">A</text>
+              <text x="453" y="52" class="font-bold text-sm fill-purple-950 text-anchor-middle">D</text>
+              <text x="668" y="278" class="font-bold text-sm fill-purple-950">C</text>
+              <text x="405" y="292" class="font-bold text-sm fill-purple-950">B</text>
+              <g transform="translate(345, 205)"><rect x="-38" y="-12" width="76" height="24" class="svg-pill-bg" stroke="#9333EA"/><text x="0" y="1" class="svg-pill-text" fill="#581C87" style="font-size:12px;">15√3 cm</text></g>
+              <g transform="translate(448, 246)"><rect x="-20" y="-10" width="40" height="20" class="svg-angle-pill-bg"/><text x="0" y="1" class="svg-angle-pill-text">120°</text></g>
+              <g transform="translate(535, 305)"><rect x="-26" y="-12" width="52" height="24" class="svg-pill-bg" stroke="#9333EA"/><text x="0" y="1" class="svg-pill-text" fill="#581C87">30 cm</text></g>
+              <g transform="translate(580, 150)"><rect x="-30" y="-12" width="60" height="24" class="svg-pill-bg" stroke="#E11D48"/><text x="0" y="1" class="svg-pill-text" fill="#E11D48" style="font-size:12px;">DC = ?</text></g>
+            </svg>
+          </div>
+
+          <div class="space-y-2 pt-2">
+            <div class="flex items-center justify-between text-xs font-bold text-slate-500 px-1"><span><i class="fa-solid fa-pencil mr-1 text-purple-500"></i> Solution Workspace</span></div>
+            <textarea class="notebook-paper" rows="16" spellcheck="false"></textarea>
+          </div>
+
+          <div class="pt-1">
+            <button onclick="toggleModelSolution('sol-ex-2')" class="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg bg-white hover:bg-slate-100 text-slate-600 hover:text-slate-900 font-semibold text-xs transition-all border border-slate-300 shadow-sm active:scale-95">
+              <i class="fa-regular fa-eye text-purple-600" id="sol-ex-2-icon"></i><span id="sol-ex-2-lbl">Solution</span>
+            </button>
+            <div id="sol-ex-2" class="hidden mt-3 p-4 rounded-2xl bg-purple-50/90 border border-purple-200 text-xs sm:text-sm space-y-3">
+              <div class="font-bold text-purple-800 flex items-center gap-2 text-xs uppercase tracking-wider"><i class="fa-solid fa-circle-check"></i> Model Solution:</div>
+              <div class="space-y-2 text-slate-700">
+                <p>$m(\angle C) = 45^\circ,\ m(\angle D) = 360^\circ - (90^\circ + 120^\circ + 45^\circ) = 105^\circ$.</p>
+                <p>Scale factor $k = \frac{15\sqrt{3}}{5\sqrt{3}} = 3$. Hence $FG = \frac{30}{3} = 10\text{ cm}$ and $DC = 3 \times 10\sqrt{2} = 30\sqrt{2}\text{ cm}$.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Question 2.2: Worked Example 2 -->
+        <div class="p-6 rounded-3xl bg-slate-50/80 border border-slate-200 space-y-4">
+          <div class="p-4 rounded-2xl bg-purple-50/70 border border-purple-200 space-y-2">
+            <div class="font-bold text-slate-900 text-sm flex items-center gap-2">
+              <span class="px-2 py-0.5 rounded bg-purple-600 text-white text-xs font-black">2.2</span>
+              Worked Example 2: Angle Variables and Proportional Sides
+            </div>
+            <p class="text-xs sm:text-sm text-slate-700 leading-relaxed">
+              Quadrilateral $ABCD \sim \text{quadrilateral } PQRS$. Given $m(\angle B) = 116^\circ,\ m(\angle C) = 61^\circ,\ m(\angle R) = (y - 73)^\circ,\ AB = 10\text{ cm},\ BC = 12\text{ cm},\ PQ = 5\text{ cm},\ QR = x\text{ cm}$, find $y$ and $x$.
+            </p>
+          </div>
+
+          <div class="w-full bg-white p-4 rounded-2xl border border-slate-200 flex justify-center">
+            <svg viewBox="0 0 520 230" class="w-full max-w-lg h-auto" xmlns="http://www.w3.org/2000/svg">
+              <polygon points="40,180 150,180 180,80 75,50" fill="#F0FDF4" stroke="#16A34A" stroke-width="2.2" stroke-linejoin="round"/>
+              <text x="28" y="190" class="font-bold text-xs fill-emerald-950">P</text>
+              <text x="156" y="190" class="font-bold text-xs fill-emerald-950">Q</text>
+              <text x="188" y="80" class="font-bold text-xs fill-emerald-950">R</text>
+              <text x="65" y="45" class="font-bold text-xs fill-emerald-950">S</text>
+              <g transform="translate(95, 195)"><rect x="-18" y="-10" width="36" height="20" class="svg-pill-bg" stroke="#16A34A"/><text x="0" y="1" class="svg-pill-text" fill="#14532D" style="font-size:11px;">5 cm</text></g>
+              <g transform="translate(175, 135)"><rect x="-16" y="-10" width="32" height="20" class="svg-pill-bg" stroke="#E11D48"/><text x="0" y="1" class="svg-pill-text" fill="#E11D48" style="font-size:11px;">x</text></g>
+              <g transform="translate(145, 95)"><rect x="-26" y="-8" width="52" height="16" class="svg-angle-pill-bg"/><text x="0" y="1" class="svg-angle-pill-text" style="font-size:9px;">(y - 73)°</text></g>
+
+              <polygon points="260,180 440,180 490,40 320,10" fill="#FAF5FF" stroke="#9333EA" stroke-width="2.4" stroke-linejoin="round"/>
+              <text x="246" y="190" class="font-bold text-xs fill-purple-950">A</text>
+              <text x="446" y="190" class="font-bold text-xs fill-purple-950">B</text>
+              <text x="498" y="40" class="font-bold text-xs fill-purple-950">C</text>
+              <text x="310" y="10" class="font-bold text-xs fill-purple-950">D</text>
+              <g transform="translate(350, 195)"><rect x="-20" y="-10" width="40" height="20" class="svg-pill-bg" stroke="#9333EA"/><text x="0" y="1" class="svg-pill-text" fill="#581C87" style="font-size:11px;">10 cm</text></g>
+              <g transform="translate(480, 115)"><rect x="-20" y="-10" width="40" height="20" class="svg-pill-bg" stroke="#9333EA"/><text x="0" y="1" class="svg-pill-text" fill="#581C87" style="font-size:11px;">12 cm</text></g>
+              <g transform="translate(425, 162)"><rect x="-16" y="-8" width="32" height="16" class="svg-angle-pill-bg"/><text x="0" y="1" class="svg-angle-pill-text" style="font-size:10px;">116°</text></g>
+              <g transform="translate(465, 58)"><rect x="-14" y="-8" width="28" height="16" class="svg-angle-pill-bg"/><text x="0" y="1" class="svg-angle-pill-text" style="font-size:10px;">61°</text></g>
+            </svg>
+          </div>
+
+          <div class="space-y-2 pt-2">
+            <div class="flex items-center justify-between text-xs font-bold text-slate-500 px-1"><span><i class="fa-solid fa-pencil mr-1 text-purple-500"></i> Solution Workspace</span></div>
+            <textarea class="notebook-paper" rows="16" spellcheck="false"></textarea>
+          </div>
+
+          <div class="pt-1">
+            <button onclick="toggleModelSolution('sol-ex-2-2')" class="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg bg-white hover:bg-slate-100 text-slate-600 hover:text-slate-900 font-semibold text-xs transition-all border border-slate-300 shadow-sm active:scale-95">
+              <i class="fa-regular fa-eye text-purple-600" id="sol-ex-2-2-icon"></i><span id="sol-ex-2-2-lbl">Solution</span>
+            </button>
+            <div id="sol-ex-2-2" class="hidden mt-3 p-4 rounded-2xl bg-purple-50/90 border border-purple-200 text-xs sm:text-sm space-y-3">
+              <div class="font-bold text-purple-800 flex items-center gap-2 text-xs uppercase tracking-wider"><i class="fa-solid fa-circle-check"></i> Model Solution:</div>
+              <div class="space-y-2 text-slate-700">
+                <p>$y - 73 = 61 \implies y = 134$.</p>
+                <p>$\frac{PQ}{AB} = \frac{QR}{BC} \implies \frac{5}{10} = \frac{x}{12} \implies x = 6\text{ cm}$.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Question 2.3: Try It Yourself -->
+        <div class="p-6 rounded-3xl bg-slate-50/80 border border-slate-200 space-y-4">
+          <div class="p-4 rounded-2xl bg-purple-50/70 border border-purple-200 space-y-2">
+            <div class="font-bold text-slate-900 text-sm flex flex-wrap items-center gap-2">
+              <span class="px-2 py-0.5 rounded bg-purple-600 text-white text-xs font-black">2.3</span>
+              <span class="px-2.5 py-0.5 rounded-full bg-amber-100 text-amber-800 text-xs font-extrabold uppercase tracking-wide flex items-center gap-1.5"><i class="fa-solid fa-user-pen"></i> Try It Yourself</span>
+              <span>Scale Factor & Unknown Side Computations</span>
+            </div>
+            <p class="text-xs sm:text-sm text-slate-700 leading-relaxed">
+              Polygon $ABCD \sim \text{polygon } EFGH$, with scale factor $k = \frac{3}{2}$. Find $m(\angle C)$, $m(\angle D)$, side $AD$, and side $FG$.
+            </p>
+          </div>
+
+          <div class="w-full bg-white p-4 sm:p-6 rounded-2xl border border-slate-200 flex justify-center items-center overflow-hidden">
+            <svg viewBox="0 0 700 290" class="w-full max-w-2xl h-auto" xmlns="http://www.w3.org/2000/svg">
+              <polygon points="60,230 260,230 220,70 120,70" fill="#FAF5FF" stroke="#9333EA" stroke-width="2.4" stroke-linejoin="round"/>
+              <text x="44" y="242" class="font-bold text-sm fill-purple-950">A</text>
+              <text x="268" y="240" class="font-bold text-sm fill-purple-950">B</text>
+              <text x="228" y="65" class="font-bold text-sm fill-purple-950">C</text>
+              <text x="108" y="65" class="font-bold text-sm fill-purple-950">D</text>
+              <g transform="translate(90, 210)"><rect x="-16" y="-9" width="32" height="18" class="svg-angle-pill-bg"/><text x="0" y="1" class="svg-angle-pill-text">78°</text></g>
+              <g transform="translate(230, 210)"><rect x="-16" y="-9" width="32" height="18" class="svg-angle-pill-bg"/><text x="0" y="1" class="svg-angle-pill-text">85°</text></g>
+              <g transform="translate(262, 145)"><rect x="-32" y="-11" width="64" height="22" class="svg-pill-bg" stroke="#9333EA"/><text x="0" y="1" class="svg-pill-text" fill="#581C87" style="font-size:11px;">16√2 cm</text></g>
+              <g transform="translate(68, 145)"><rect x="-26" y="-11" width="52" height="22" class="svg-pill-bg" stroke="#E11D48"/><text x="0" y="1" class="svg-pill-text" fill="#E11D48" style="font-size:11px;">AD = ?</text></g>
+
+              <polygon points="400,230 533,230 507,123 440,123" fill="#F0FDF4" stroke="#16A34A" stroke-width="2.4" stroke-linejoin="round"/>
+              <text x="388" y="242" class="font-bold text-sm fill-emerald-950">E</text>
+              <text x="540" y="240" class="font-bold text-sm fill-emerald-950">F</text>
+              <text x="515" y="118" class="font-bold text-sm fill-emerald-950">G</text>
+              <text x="430" y="118" class="font-bold text-sm fill-emerald-950">H</text>
+              <g transform="translate(488, 140)"><rect x="-18" y="-9" width="36" height="18" class="svg-angle-pill-bg"/><text x="0" y="1" class="svg-angle-pill-text">135°</text></g>
+              <g transform="translate(402, 175)"><rect x="-30" y="-11" width="60" height="22" class="svg-pill-bg" stroke="#16A34A"/><text x="0" y="1" class="svg-pill-text" fill="#14532D" style="font-size:11px;">4√3 cm</text></g>
+              <g transform="translate(538, 175)"><rect x="-26" y="-11" width="52" height="22" class="svg-pill-bg" stroke="#E11D48"/><text x="0" y="1" class="svg-pill-text" fill="#E11D48" style="font-size:11px;">FG = ?</text></g>
+            </svg>
+          </div>
+
+          <div class="space-y-2 pt-2">
+            <div class="flex items-center justify-between text-xs font-bold text-slate-500 px-1"><span><i class="fa-solid fa-pencil mr-1 text-purple-500"></i> Solution Workspace</span></div>
+            <textarea class="notebook-paper" rows="16" spellcheck="false"></textarea>
+          </div>
+
+          <div class="pt-1">
+            <button onclick="toggleModelSolution('sol-q2-3')" class="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg bg-white hover:bg-slate-100 text-slate-600 hover:text-slate-900 font-semibold text-xs transition-all border border-slate-300 shadow-sm active:scale-95">
+              <i class="fa-regular fa-eye text-purple-600" id="sol-q2-3-icon"></i><span id="sol-q2-3-lbl">Solution</span>
+            </button>
+            <div id="sol-q2-3" class="hidden mt-3 p-4 rounded-2xl bg-purple-50/90 border border-purple-200 text-xs sm:text-sm space-y-3">
+              <div class="font-bold text-purple-800 flex items-center gap-2 text-xs uppercase tracking-wider"><i class="fa-solid fa-circle-check"></i> Model Solution:</div>
+              <div class="space-y-2 text-slate-700">
+                <p>$m(\angle C) = m(\angle G) = 135^\circ$, and $m(\angle D) = 360^\circ - (78^\circ + 85^\circ + 135^\circ) = 62^\circ$.</p>
+                <p>$AD = 4\sqrt{3} \times \frac{3}{2} = 6\sqrt{3}\text{ cm}$ and $FG = \frac{16\sqrt{2}}{3/2} = \frac{32\sqrt{2}}{3}\text{ cm}$.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ========================================================================= -->
+      <!-- IDEA 3: SPECIAL QUADRILATERAL CONDITIONS (2 Examples + 1 Try It Yourself) -->
+      <!-- ========================================================================= -->
+      <section class="glass-card rounded-[2.25rem] p-6 sm:p-8 shadow-soft-cloud border border-white space-y-6">
+        <div class="flex items-center justify-between border-b pb-3">
+          <div class="flex items-center gap-2.5">
+            <span class="w-8 h-8 rounded-xl bg-amber-100 text-amber-700 font-black flex items-center justify-center text-sm">03</span>
+            <div>
+              <h3 class="text-lg sm:text-xl font-bold font-display text-slate-900">Idea 3: Special Quadrilateral Conditions</h3>
+              <p class="text-xs text-slate-500">Necessary and sufficient criteria for specific polygons</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Question 3.1: Worked Example 1 (Rectangles) -->
+        <div class="p-6 rounded-3xl bg-slate-50/80 border border-slate-200 space-y-4">
+          <div class="p-4 rounded-2xl bg-amber-50/70 border border-amber-200 space-y-2">
+            <div class="font-bold text-slate-900 text-sm flex items-center gap-2">
+              <span class="px-2 py-0.5 rounded bg-amber-600 text-white text-xs font-black">3.1</span>
+              Worked Example 1: Rectangle Dimension Proportionality
+            </div>
+            <p class="text-xs sm:text-sm text-slate-700 leading-relaxed">
+              Rectangle $ABCD$ has length $BC = 6\text{ cm}$ and width $CD = 4\text{ cm}$. Rectangle $XYZM$ has length $YZ = 3\text{ cm}$ and width $ZM = 2\text{ cm}$. Prove that rectangle $ABCD \sim \text{rectangle } XYZM$, and state their scale factor.
+            </p>
+          </div>
+
+          <div class="w-full bg-white p-4 rounded-2xl border border-slate-200 flex justify-center">
+            <svg viewBox="0 0 460 170" class="w-full max-w-lg h-auto" xmlns="http://www.w3.org/2000/svg">
+              <rect x="40" y="45" width="90" height="60" rx="3" fill="#EEF2FF" stroke="#4F46E5" stroke-width="2.2"/>
+              <text x="36" y="38" class="font-bold text-xs fill-indigo-950 text-anchor-middle">X</text>
+              <text x="134" y="38" class="font-bold text-xs fill-indigo-950 text-anchor-middle">M</text>
+              <text x="36" y="118" class="font-bold text-xs fill-indigo-950 text-anchor-middle">Y</text>
+              <text x="134" y="118" class="font-bold text-xs fill-indigo-950 text-anchor-middle">Z</text>
+              <rect x="118" y="45" width="12" height="12" fill="none" stroke="#4F46E5" stroke-width="1.2"/>
+              <g transform="translate(85, 120)"><rect x="-18" y="-9" width="36" height="18" class="svg-pill-bg"/><text x="0" y="1" class="svg-pill-text" style="font-size:11px;">3 cm</text></g>
+              <g transform="translate(150, 75)"><rect x="-16" y="-9" width="32" height="18" class="svg-pill-bg"/><text x="0" y="1" class="svg-pill-text" style="font-size:11px;">2 cm</text></g>
+
+              <rect x="230" y="25" width="180" height="120" rx="4" fill="#EFF6FF" stroke="#2563EB" stroke-width="2.4"/>
+              <text x="226" y="18" class="font-bold text-xs fill-blue-950 text-anchor-middle">A</text>
+              <text x="414" y="18" class="font-bold text-xs fill-blue-950 text-anchor-middle">D</text>
+              <text x="226" y="158" class="font-bold text-xs fill-blue-950 text-anchor-middle">B</text>
+              <text x="414" y="158" class="font-bold text-xs fill-blue-950 text-anchor-middle">C</text>
+              <rect x="396" y="25" width="14" height="14" fill="none" stroke="#2563EB" stroke-width="1.4"/>
+              <g transform="translate(320, 160)"><rect x="-18" y="-9" width="36" height="18" class="svg-pill-bg"/><text x="0" y="1" class="svg-pill-text" style="font-size:11px;">6 cm</text></g>
+              <g transform="translate(430, 85)"><rect x="-18" y="-9" width="36" height="18" class="svg-pill-bg"/><text x="0" y="1" class="svg-pill-text" style="font-size:11px;">4 cm</text></g>
+            </svg>
+          </div>
+
+          <div class="space-y-2 pt-2">
+            <div class="flex items-center justify-between text-xs font-bold text-slate-500 px-1"><span><i class="fa-solid fa-pencil mr-1 text-amber-600"></i> Solution Workspace</span></div>
+            <textarea class="notebook-paper" rows="16" spellcheck="false"></textarea>
+          </div>
+
+          <div class="pt-1">
+            <button onclick="toggleModelSolution('sol-q3-1')" class="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg bg-white hover:bg-slate-100 text-slate-600 hover:text-slate-900 font-semibold text-xs transition-all border border-slate-300 shadow-sm active:scale-95">
+              <i class="fa-regular fa-eye text-amber-600" id="sol-q3-1-icon"></i><span id="sol-q3-1-lbl">Solution</span>
+            </button>
+            <div id="sol-q3-1" class="hidden mt-3 p-4 rounded-2xl bg-amber-50/90 border border-amber-200 text-xs sm:text-sm space-y-2">
+              <div class="font-bold text-amber-900 text-xs uppercase">Proof Walkthrough:</div>
+              <p>1. All 4 interior angles are $90^\circ$.</p>
+              <p>2. $\frac{BC}{YZ} = \frac{6}{3} = 2$ and $\frac{CD}{ZM} = \frac{4}{2} = 2 \implies k = 2$.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Question 3.2: Worked Example 2 (Rhombuses) -->
+        <div class="p-6 rounded-3xl bg-slate-50/80 border border-slate-200 space-y-4">
+          <div class="p-4 rounded-2xl bg-amber-50/70 border border-amber-200 space-y-2">
+            <div class="font-bold text-slate-900 text-sm flex items-center gap-2">
+              <span class="px-2 py-0.5 rounded bg-amber-600 text-white text-xs font-black">3.2</span>
+              Worked Example 2: Rhombus Similarity Evaluation
+            </div>
+            <p class="text-xs sm:text-sm text-slate-700 leading-relaxed">
+              Rhombus $ABCD$ has side length $3\text{ cm}$ and $m(\angle D) = 110^\circ$. Rhombus $EFGH$ has side length $5\text{ cm}$ and $m(\angle G) = 70^\circ$. Prove that Rhombus $ABCD \sim \text{Rhombus } EFGH$.
+            </p>
+          </div>
+
+          <div class="w-full bg-white p-4 rounded-2xl border border-slate-200 flex justify-center">
+            <svg viewBox="0 0 480 200" class="w-full max-w-lg h-auto" xmlns="http://www.w3.org/2000/svg">
+              <polygon points="100,25 155,95 100,165 45,95" fill="#FEF3C7" stroke="#D97706" stroke-width="2.2" stroke-linejoin="round"/>
+              <text x="100" y="18" class="font-bold text-xs fill-amber-950 text-anchor-middle">D</text>
+              <text x="165" y="98" class="font-bold text-xs fill-amber-950">C</text>
+              <text x="100" y="178" class="font-bold text-xs fill-amber-950 text-anchor-middle">B</text>
+              <text x="32" y="98" class="font-bold text-xs fill-amber-950">A</text>
+              <g transform="translate(100, 48)"><rect x="-16" y="-8" width="32" height="16" class="svg-angle-pill-bg"/><text x="0" y="1" class="svg-angle-pill-text" style="font-size:10px;">110°</text></g>
+              <g transform="translate(62, 140)"><rect x="-20" y="-10" width="40" height="20" class="svg-pill-bg" stroke="#D97706"/><text x="0" y="1" class="svg-pill-text" fill="#92400E" style="font-size:11px;">3 cm</text></g>
+
+              <polygon points="340,15 425,95 340,175 255,95" fill="#FEF3C7" stroke="#D97706" stroke-width="2.4" stroke-linejoin="round"/>
+              <text x="340" y="8" class="font-bold text-xs fill-amber-950 text-anchor-middle">H</text>
+              <text x="438" y="98" class="font-bold text-xs fill-amber-950">G</text>
+              <text x="340" y="190" class="font-bold text-xs fill-amber-950 text-anchor-middle">F</text>
+              <text x="242" y="98" class="font-bold text-xs fill-amber-950">E</text>
+              <g transform="translate(405, 95)"><rect x="-14" y="-8" width="28" height="16" class="svg-angle-pill-bg"/><text x="0" y="1" class="svg-angle-pill-text" style="font-size:10px;">70°</text></g>
+              <g transform="translate(285, 145)"><rect x="-20" y="-10" width="40" height="20" class="svg-pill-bg" stroke="#D97706"/><text x="0" y="1" class="svg-pill-text" fill="#92400E" style="font-size:11px;">5 cm</text></g>
+            </svg>
+          </div>
+
+          <div class="space-y-2 pt-2">
+            <div class="flex items-center justify-between text-xs font-bold text-slate-500 px-1"><span><i class="fa-solid fa-pencil mr-1 text-amber-600"></i> Solution Workspace</span></div>
+            <textarea class="notebook-paper" rows="16" spellcheck="false"></textarea>
+          </div>
+
+          <div class="pt-1">
+            <button onclick="toggleModelSolution('sol-q3-2-rh')" class="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg bg-white hover:bg-slate-100 text-slate-600 hover:text-slate-900 font-semibold text-xs transition-all border border-slate-300 shadow-sm active:scale-95">
+              <i class="fa-regular fa-eye text-amber-600" id="sol-q3-2-rh-icon"></i><span id="sol-q3-2-rh-lbl">Solution</span>
+            </button>
+            <div id="sol-q3-2-rh" class="hidden mt-3 p-4 rounded-2xl bg-amber-50/90 border border-amber-200 text-xs sm:text-sm space-y-2">
+              <div class="font-bold text-amber-900 text-xs uppercase">Proof Walkthrough:</div>
+              <p>$m(\angle C) = 180^\circ - 110^\circ = 70^\circ$, matching $m(\angle G) = 70^\circ$. Scale factor $k = \frac{3}{5}$.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Question 3.3: Try It Yourself -->
+        <div class="p-6 rounded-3xl bg-slate-50/80 border border-slate-200 space-y-4">
+          <div class="p-4 rounded-2xl bg-amber-50/70 border border-amber-200 space-y-2">
+            <div class="font-bold text-slate-900 text-sm flex flex-wrap items-center gap-2">
+              <span class="px-2 py-0.5 rounded bg-amber-600 text-white text-xs font-black">3.3</span>
+              <span class="px-2.5 py-0.5 rounded-full bg-amber-100 text-amber-800 text-xs font-extrabold uppercase tracking-wide flex items-center gap-1.5"><i class="fa-solid fa-user-pen"></i> Try It Yourself</span>
+              <span>Parallelogram Similarity Criteria</span>
+            </div>
+            <p class="text-xs sm:text-sm text-slate-700 leading-relaxed">
+              Parallelogram $ABCD$ ($AB = 8,\ BC = 6,\ m(\angle B) = 120^\circ$) and Parallelogram $PQRS$ ($PQ = 6,\ QR = 4.5,\ m(\angle P) = 60^\circ$). Prove they are similar and find $k$.
+            </p>
+          </div>
+
+          <div class="w-full bg-white p-4 rounded-2xl border border-slate-200 flex justify-center">
+            <svg viewBox="0 0 540 220" class="w-full max-w-lg h-auto" xmlns="http://www.w3.org/2000/svg">
+              <polygon points="50,170 190,170 230,70 90,70" fill="#F8FAFC" stroke="#0284C7" stroke-width="2.2" stroke-linejoin="round"/>
+              <text x="35" y="178" class="font-bold text-xs fill-sky-950">A</text>
+              <text x="195" y="178" class="font-bold text-xs fill-sky-950">B</text>
+              <text x="238" y="68" class="font-bold text-xs fill-sky-950">C</text>
+              <text x="80" y="68" class="font-bold text-xs fill-sky-950">D</text>
+              <g transform="translate(170, 150)"><rect x="-16" y="-8" width="32" height="16" class="svg-angle-pill-bg"/><text x="0" y="1" class="svg-angle-pill-text" style="font-size:10px;">120°</text></g>
+              <g transform="translate(120, 185)"><rect x="-20" y="-10" width="40" height="20" class="svg-pill-bg" stroke="#0284C7"/><text x="0" y="1" class="svg-pill-text" fill="#0369A1" style="font-size:11px;">8 cm</text></g>
+              <g transform="translate(222, 120)"><rect x="-20" y="-10" width="40" height="20" class="svg-pill-bg" stroke="#0284C7"/><text x="0" y="1" class="svg-pill-text" fill="#0369A1" style="font-size:11px;">6 cm</text></g>
+
+              <polygon points="310,170 415,170 445,95 340,95" fill="#F8FAFC" stroke="#0284C7" stroke-width="2.2" stroke-linejoin="round"/>
+              <text x="296" y="178" class="font-bold text-xs fill-sky-950">P</text>
+              <text x="420" y="178" class="font-bold text-xs fill-sky-950">Q</text>
+              <text x="452" y="92" class="font-bold text-xs fill-sky-950">R</text>
+              <text x="330" y="92" class="font-bold text-xs fill-sky-950">S</text>
+              <g transform="translate(332, 152)"><rect x="-14" y="-8" width="28" height="16" class="svg-angle-pill-bg"/><text x="0" y="1" class="svg-angle-pill-text" style="font-size:10px;">60°</text></g>
+              <g transform="translate(362, 185)"><rect x="-20" y="-10" width="40" height="20" class="svg-pill-bg" stroke="#0284C7"/><text x="0" y="1" class="svg-pill-text" fill="#0369A1" style="font-size:11px;">6 cm</text></g>
+              <g transform="translate(442, 132)"><rect x="-24" y="-10" width="48" height="20" class="svg-pill-bg" stroke="#0284C7"/><text x="0" y="1" class="svg-pill-text" fill="#0369A1" style="font-size:10px;">4.5 cm</text></g>
+            </svg>
+          </div>
+
+          <div class="space-y-2 pt-2">
+            <div class="flex items-center justify-between text-xs font-bold text-slate-500 px-1"><span><i class="fa-solid fa-pencil mr-1 text-amber-600"></i> Solution Workspace</span></div>
+            <textarea class="notebook-paper" rows="16" spellcheck="false"></textarea>
+          </div>
+
+          <div class="pt-1">
+            <button onclick="toggleModelSolution('sol-q3-2')" class="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg bg-white hover:bg-slate-100 text-slate-600 hover:text-slate-900 font-semibold text-xs transition-all border border-slate-300 shadow-sm active:scale-95">
+              <i class="fa-regular fa-eye text-amber-600" id="sol-q3-2-icon"></i><span id="sol-q3-2-lbl">Solution</span>
+            </button>
+            <div id="sol-q3-2" class="hidden mt-3 p-4 rounded-2xl bg-amber-50/90 border border-amber-200 text-xs sm:text-sm space-y-2">
+              <div class="font-bold text-amber-900 text-xs uppercase">Proof Walkthrough:</div>
+              <p>$m(\angle A) = 180^\circ - 120^\circ = 60^\circ$. Scale factor $k = \frac{8}{6} = \frac{4}{3}$.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ========================================================================= -->
+      <!-- IDEA 4: PERIMETER RATIOS & ALGEBRAIC EXPRESSIONS (2 Examples + 1 Try It Yourself) -->
+      <!-- ========================================================================= -->
+      <section class="glass-card rounded-[2.25rem] p-6 sm:p-8 shadow-soft-cloud border border-white space-y-6">
+        <div class="flex items-center justify-between border-b pb-3">
+          <div class="flex items-center gap-2.5">
+            <span class="w-8 h-8 rounded-xl bg-emerald-100 text-emerald-700 font-black flex items-center justify-center text-sm">04</span>
+            <div>
+              <h3 class="text-lg sm:text-xl font-bold font-display text-slate-900">Idea 4: Perimeter Ratios & Algebraic Expressions</h3>
+              <p class="text-xs text-slate-500">Solving for variables $x, y, z$ using perimeter ratio invariant $k$</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Question 4.1: Worked Example 1 -->
+        <div class="p-6 rounded-3xl bg-slate-50/80 border border-slate-200 space-y-4">
+          <div class="p-4 rounded-2xl bg-emerald-50/70 border border-emerald-200 space-y-2">
+            <div class="font-bold text-slate-900 text-sm flex items-center gap-2">
+              <span class="px-2 py-0.5 rounded bg-emerald-600 text-white text-xs font-black">4.1</span>
+              Worked Example 1: Algebraic Variables with Scale Ratio 3 : 2
+            </div>
+            <p class="text-xs sm:text-sm text-slate-700 leading-relaxed">
+              Polygon $ABCD \sim \text{polygon } EFGH$ with perimeter ratio $\frac{3}{2}$. Find $x$, $y$, and $z$.
+            </p>
+          </div>
+
+          <div class="w-full bg-white p-4 rounded-2xl border border-slate-200 flex justify-center">
+            <svg viewBox="0 0 460 280" class="w-full max-w-lg h-auto" xmlns="http://www.w3.org/2000/svg">
+              <polygon points="50,220 180,220 210,70 90,40" fill="#ECFDF5" stroke="#059669" stroke-width="2.5" stroke-linejoin="round"/>
+              <text x="35" y="230" class="font-bold text-sm fill-emerald-900">A</text>
+              <text x="185" y="230" class="font-bold text-sm fill-emerald-900">B</text>
+              <text x="215" y="70" class="font-bold text-sm fill-emerald-900">C</text>
+              <text x="80" y="38" class="font-bold text-sm fill-emerald-900">D</text>
+              <g transform="translate(115, 235)"><rect x="-22" y="-12" width="44" height="24" class="svg-pill-bg"/><text x="0" y="1" class="svg-pill-text">6 cm</text></g>
+              <g transform="translate(205, 145)"><rect x="-26" y="-12" width="52" height="24" class="svg-pill-bg"/><text x="0" y="1" class="svg-pill-text">y + 3</text></g>
+              <g transform="translate(150, 42)"><rect x="-28" y="-12" width="56" height="24" class="svg-pill-bg"/><text x="0" y="1" class="svg-pill-text">2x + 1</text></g>
+
+              <polygon points="270,220 370,220 395,110 300,90" fill="#EFF6FF" stroke="#2563EB" stroke-width="2.5" stroke-linejoin="round"/>
+              <text x="255" y="230" class="font-bold text-sm fill-blue-900">E</text>
+              <text x="375" y="230" class="font-bold text-sm fill-blue-900">F</text>
+              <text x="400" y="110" class="font-bold text-sm fill-blue-900">G</text>
+              <text x="290" y="85" class="font-bold text-sm fill-blue-900">H</text>
+              <g transform="translate(320, 235)"><rect x="-18" y="-12" width="36" height="24" class="svg-pill-bg"/><text x="0" y="1" class="svg-pill-text">z</text></g>
+              <g transform="translate(390, 165)"><rect x="-18" y="-12" width="36" height="24" class="svg-pill-bg"/><text x="0" y="1" class="svg-pill-text">5</text></g>
+              <g transform="translate(348, 88)"><rect x="-26" y="-12" width="52" height="24" class="svg-pill-bg"/><text x="0" y="1" class="svg-pill-text">x + 2</text></g>
+            </svg>
+          </div>
+
+          <div class="space-y-2 pt-2">
+            <div class="flex items-center justify-between text-xs font-bold text-slate-500 px-1"><span><i class="fa-solid fa-pencil mr-1 text-emerald-500"></i> Solution Workspace</span></div>
+            <textarea class="notebook-paper" rows="16" spellcheck="false"></textarea>
+          </div>
+
+          <div class="pt-1">
+            <button onclick="toggleModelSolution('sol-ex-4')" class="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg bg-white hover:bg-slate-100 text-slate-600 hover:text-slate-900 font-semibold text-xs transition-all border border-slate-300 shadow-sm active:scale-95">
+              <i class="fa-regular fa-eye text-emerald-600" id="sol-ex-4-icon"></i><span id="sol-ex-4-lbl">Solution</span>
+            </button>
+            <div id="sol-ex-4" class="hidden mt-3 p-4 rounded-2xl bg-emerald-50/90 border border-emerald-200 text-xs sm:text-sm space-y-3">
+              <div class="font-bold text-emerald-800 flex items-center gap-2 text-xs uppercase tracking-wider"><i class="fa-solid fa-circle-check"></i> Model Solution:</div>
+              <div class="space-y-2 text-slate-700">
+                <p>$k = \frac{3}{2}$. $\frac{6}{z} = \frac{3}{2} \implies z = 4$.</p>
+                <p>$\frac{y+3}{5} = \frac{3}{2} \implies y = 4.5$. $\frac{2x+1}{x+2} = \frac{3}{2} \implies x = 4$.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Question 4.2: Worked Example 2 -->
+        <div class="p-6 rounded-3xl bg-slate-50/80 border border-slate-200 space-y-4">
+          <div class="p-4 rounded-2xl bg-emerald-50/70 border border-emerald-200 space-y-2">
+            <div class="font-bold text-slate-900 text-sm flex items-center gap-2">
+              <span class="px-2 py-0.5 rounded bg-emerald-600 text-white text-xs font-black">4.2</span>
+              Worked Example 2: Determining Polygon Side Lengths via Given Perimeter
+            </div>
+            <p class="text-xs sm:text-sm text-slate-700 leading-relaxed">
+              Two similar polygons. First pentagon sides: $3, 5, 6, 8, 10\text{ cm}$. Second polygon perimeter: $80\text{ cm}$. Determine scale factor and side lengths.
+            </p>
+          </div>
+
+          <div class="w-full bg-white p-4 rounded-2xl border border-slate-200 flex justify-center">
+            <svg viewBox="0 0 540 220" class="w-full max-w-lg h-auto" xmlns="http://www.w3.org/2000/svg">
+              <polygon points="50,180 130,180 155,100 90,45 25,100" fill="#ECFDF5" stroke="#059669" stroke-width="2.2" stroke-linejoin="round"/>
+              <g transform="translate(90, 195)"><rect x="-16" y="-9" width="32" height="18" class="svg-pill-bg"/><text x="0" y="1" class="svg-pill-text" style="font-size:11px;">10</text></g>
+              <g transform="translate(155, 140)"><rect x="-14" y="-9" width="28" height="18" class="svg-pill-bg"/><text x="0" y="1" class="svg-pill-text" style="font-size:11px;">8</text></g>
+              <g transform="translate(130, 68)"><rect x="-14" y="-9" width="28" height="18" class="svg-pill-bg"/><text x="0" y="1" class="svg-pill-text" style="font-size:11px;">6</text></g>
+              <g transform="translate(50, 68)"><rect x="-14" y="-9" width="28" height="18" class="svg-pill-bg"/><text x="0" y="1" class="svg-pill-text" style="font-size:11px;">5</text></g>
+              <g transform="translate(25, 140)"><rect x="-14" y="-9" width="28" height="18" class="svg-pill-bg"/><text x="0" y="1" class="svg-pill-text" style="font-size:11px;">3</text></g>
+              <text x="90" y="120" class="font-bold text-xs fill-emerald-800 text-anchor-middle">P₁ = 32 cm</text>
+              <g transform="translate(210, 110)"><circle cx="0" cy="0" r="16" fill="#D1FAE5"/><text x="0" y="4" font-family="'Plus Jakarta Sans', sans-serif" font-size="18" font-weight="bold" fill="#059669" text-anchor="middle">~</text></g>
+              <polygon points="270,195 470,195 532,95 370,10 208,95" fill="#EFF6FF" stroke="#2563EB" stroke-width="2.5" stroke-linejoin="round"/>
+              <text x="370" y="115" class="font-bold text-sm fill-blue-900 text-anchor-middle">Perimeter = 80 cm</text>
+            </svg>
+          </div>
+
+          <div class="space-y-2 pt-2">
+            <div class="flex items-center justify-between text-xs font-bold text-slate-500 px-1"><span><i class="fa-solid fa-pencil mr-1 text-emerald-500"></i> Solution Workspace</span></div>
+            <textarea class="notebook-paper" rows="16" spellcheck="false"></textarea>
+          </div>
+
+          <div class="pt-1">
+            <button onclick="toggleModelSolution('sol-ex-4-2')" class="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg bg-white hover:bg-slate-100 text-slate-600 hover:text-slate-900 font-semibold text-xs transition-all border border-slate-300 shadow-sm active:scale-95">
+              <i class="fa-regular fa-eye text-emerald-600" id="sol-ex-4-2-icon"></i><span id="sol-ex-4-2-lbl">Solution</span>
+            </button>
+            <div id="sol-ex-4-2" class="hidden mt-3 p-4 rounded-2xl bg-emerald-50/90 border border-emerald-200 text-xs sm:text-sm space-y-3">
+              <div class="font-bold text-emerald-800 flex items-center gap-2 text-xs uppercase tracking-wider"><i class="fa-solid fa-circle-check"></i> Model Solution:</div>
+              <div class="space-y-2 text-slate-700">
+                <p>$\text{Perimeter}_1 = 32\text{ cm}$. $k = \frac{80}{32} = 2.5$.</p>
+                <p>Sides: $7.5\text{ cm},\ 12.5\text{ cm},\ 15\text{ cm},\ 20\text{ cm},\ 25\text{ cm}$.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Question 4.3: Try It Yourself -->
+        <div class="p-6 rounded-3xl bg-slate-50/80 border border-slate-200 space-y-4">
+          <div class="p-4 rounded-2xl bg-emerald-50/70 border border-emerald-200 space-y-2">
+            <div class="font-bold text-slate-900 text-sm flex flex-wrap items-center gap-2">
+              <span class="px-2 py-0.5 rounded bg-emerald-600 text-white text-xs font-black">4.3</span>
+              <span class="px-2.5 py-0.5 rounded-full bg-amber-100 text-amber-800 text-xs font-extrabold uppercase tracking-wide flex items-center gap-1.5"><i class="fa-solid fa-user-pen"></i> Try It Yourself</span>
+              <span>Multi-Variable Algebraic System with Ratio 3 : 4</span>
+            </div>
+            <p class="text-xs sm:text-sm text-slate-700 leading-relaxed">
+              Polygon $ABCD \sim \text{polygon } EFGH$ with perimeter ratio $\frac{3}{4}$. Find $x$, $y$, and $z$.
+            </p>
+          </div>
+
+          <div class="w-full bg-white p-4 rounded-2xl border border-slate-200 flex justify-center">
+            <svg viewBox="0 0 520 250" class="w-full max-w-lg h-auto" xmlns="http://www.w3.org/2000/svg">
+              <polygon points="40,200 160,200 185,75 75,50" fill="#ECFDF5" stroke="#059669" stroke-width="2.2" stroke-linejoin="round"/>
+              <text x="26" y="210" class="font-bold text-xs fill-emerald-950">A</text>
+              <text x="166" y="210" class="font-bold text-xs fill-emerald-950">B</text>
+              <text x="192" y="75" class="font-bold text-xs fill-emerald-950">C</text>
+              <text x="65" y="45" class="font-bold text-xs fill-emerald-950">D</text>
+              <g transform="translate(100, 215)"><rect x="-26" y="-10" width="52" height="20" class="svg-pill-bg"/><text x="0" y="1" class="svg-pill-text" style="font-size:10px;">2z - 3</text></g>
+              <g transform="translate(182, 135)"><rect x="-22" y="-10" width="44" height="20" class="svg-pill-bg"/><text x="0" y="1" class="svg-pill-text" style="font-size:10px;">x + 1</text></g>
+              <g transform="translate(130, 52)"><rect x="-18" y="-10" width="36" height="20" class="svg-pill-bg"/><text x="0" y="1" class="svg-pill-text" style="font-size:11px;">4.5</text></g>
+
+              <polygon points="260,205 420,205 455,40 310,10" fill="#EFF6FF" stroke="#2563EB" stroke-width="2.4" stroke-linejoin="round"/>
+              <text x="246" y="215" class="font-bold text-xs fill-blue-950">E</text>
+              <text x="428" y="215" class="font-bold text-xs fill-blue-950">F</text>
+              <text x="462" y="40" class="font-bold text-xs fill-blue-950">G</text>
+              <text x="300" y="10" class="font-bold text-xs fill-blue-950">H</text>
+              <g transform="translate(340, 220)"><rect x="-16" y="-10" width="32" height="20" class="svg-pill-bg"/><text x="0" y="1" class="svg-pill-text" style="font-size:11px;">8</text></g>
+              <g transform="translate(448, 120)"><rect x="-18" y="-10" width="36" height="20" class="svg-pill-bg"/><text x="0" y="1" class="svg-pill-text" style="font-size:11px;">2x</text></g>
+              <g transform="translate(385, 18)"><rect x="-18" y="-10" width="36" height="20" class="svg-pill-bg"/><text x="0" y="1" class="svg-pill-text" style="font-size:11px;">2y</text></g>
+            </svg>
+          </div>
+
+          <div class="space-y-2 pt-2">
+            <div class="flex items-center justify-between text-xs font-bold text-slate-500 px-1"><span><i class="fa-solid fa-pencil mr-1 text-emerald-500"></i> Solution Workspace</span></div>
+            <textarea class="notebook-paper" rows="16" spellcheck="false"></textarea>
+          </div>
+
+          <div class="pt-1">
+            <button onclick="toggleModelSolution('sol-q4-2')" class="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg bg-white hover:bg-slate-100 text-slate-600 hover:text-slate-900 font-semibold text-xs transition-all border border-slate-300 shadow-sm active:scale-95">
+              <i class="fa-regular fa-eye text-emerald-600" id="sol-q4-2-icon"></i><span id="sol-q4-2-lbl">Solution</span>
+            </button>
+            <div id="sol-q4-2" class="hidden mt-3 p-4 rounded-2xl bg-emerald-50/90 border border-emerald-200 text-xs sm:text-sm space-y-3">
+              <div class="font-bold text-emerald-800 flex items-center gap-2 text-xs uppercase tracking-wider"><i class="fa-solid fa-circle-check"></i> Model Solution:</div>
+              <div class="space-y-2 text-slate-700">
+                <p>$k = \frac{3}{4}$. $\frac{2z-3}{8} = \frac{3}{4} \implies z = 4.5$.</p>
+                <p>$\frac{x+1}{2x} = \frac{3}{4} \implies x = 2$. $\frac{4.5}{2y} = \frac{3}{4} \implies y = 3$.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Engineering & Display Aspect Ratio Application -->
       <section class="glass-card rounded-[2.25rem] p-6 sm:p-8 shadow-soft-cloud border border-white space-y-6">
         <div class="flex items-center gap-3">
           <div class="w-10 h-10 rounded-xl bg-purple-600 text-white flex items-center justify-center font-bold text-lg shadow-md">
-            <i class="fa-solid fa-film"></i>
+            <i class="fa-solid fa-laptop-code"></i>
           </div>
           <div>
-            <h3 class="text-xl font-bold font-display text-slate-900">Real-World Display Aspect Ratio Application</h3>
+            <h3 class="text-xl font-bold font-display text-slate-900">Engineering & Display Aspect Ratio Application</h3>
             <p class="text-slate-500 text-xs sm:text-sm">Geometric similarity in modern multimedia hardware</p>
           </div>
         </div>
@@ -771,22 +1299,17 @@
           </p>
 
           <div class="space-y-2 pt-2">
-            <div class="flex items-center justify-between text-xs font-bold text-slate-500 px-1">
-              <span><i class="fa-solid fa-pencil mr-1 text-purple-600"></i> Student Scratchpad & Solution Workspace</span>
-              <span class="text-slate-400">16-Line Ruled Pad</span>
-            </div>
+            <div class="flex items-center justify-between text-xs font-bold text-slate-500 px-1"><span><i class="fa-solid fa-pencil mr-1 text-purple-600"></i> Solution Workspace</span></div>
             <textarea class="notebook-paper" rows="16" spellcheck="false"></textarea>
           </div>
 
           <div class="pt-1">
             <button onclick="toggleModelSolution('sol-eng-1')" class="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg bg-white hover:bg-slate-100 text-slate-600 hover:text-slate-900 font-semibold text-xs transition-all border border-slate-300 shadow-sm active:scale-95">
-              <i class="fa-regular fa-eye text-purple-600" id="sol-eng-1-icon"></i>
-              <span id="sol-eng-1-lbl">Solution</span>
+              <i class="fa-regular fa-eye text-purple-600" id="sol-eng-1-icon"></i><span id="sol-eng-1-lbl">Solution</span>
             </button>
-
             <div id="sol-eng-1" class="hidden mt-3 p-4 rounded-2xl bg-purple-50/90 border border-purple-200 text-xs sm:text-sm space-y-2">
               <div class="font-bold text-purple-900 text-xs uppercase">Aspect Ratio Verification:</div>
-              <div class="p-2 bg-white rounded-lg border font-mono text-center math-frame">
+              <div class="p-2 bg-white rounded-lg border font-mono text-center">
                 $$\text{Cinema Ratio} = \frac{45}{25} = 1.8$$
                 $$\text{Format A Ratio} = \frac{36}{20} = 1.8,\quad \text{Format B Ratio} = \frac{36}{27} \approx 1.33$$
               </div>
@@ -804,7 +1327,6 @@
     <!-- SECTION 2: COMPREHENSIVE MCQ REVISION BANK -->
     <!-- ========================================================================= -->
     <div id="section-revision" class="hidden space-y-8">
-      
       <div class="glass-card rounded-3xl p-6 shadow-soft-cloud flex flex-col sm:flex-row items-center justify-between gap-4">
         <div>
           <h2 class="text-xl sm:text-2xl font-black font-display text-slate-900">MCQ Revision Bank</h2>
@@ -814,33 +1336,22 @@
           <i class="fa-solid fa-arrows-rotate text-blue-600"></i> Reset Choices
         </button>
       </div>
-
       <div class="w-full space-y-6" id="revision-container"></div>
-
     </div>
 
     <!-- ========================================================================= -->
     <!-- SECTION 3: TIMED EVALUATION QUIZ (10 MARKS) -->
     <!-- ========================================================================= -->
     <div id="section-quiz" class="hidden space-y-8">
-      
       <div class="glass-card rounded-[2.25rem] p-6 sm:p-8 shadow-soft-cloud border border-white space-y-5">
         <div class="flex flex-col md:flex-row items-center justify-between gap-4">
           <div>
             <div class="flex items-center gap-2">
-              <span id="quiz-set-pill" class="px-3 py-1 rounded-full bg-amber-100 text-amber-800 text-xs font-black uppercase">
-                Quiz #1 of 3
-              </span>
-              <span class="px-2.5 py-1 rounded-full bg-blue-100 text-blue-800 text-xs font-bold">
-                10 Questions • 10 Marks
-              </span>
+              <span id="quiz-set-pill" class="px-3 py-1 rounded-full bg-amber-100 text-amber-800 text-xs font-black uppercase">Quiz #1 of 3</span>
+              <span class="px-2.5 py-1 rounded-full bg-blue-100 text-blue-800 text-xs font-bold">10 Questions • 10 Marks</span>
             </div>
-            <h2 class="text-xl sm:text-2xl font-black font-display text-slate-900 mt-1">
-              Timed Comprehensive Evaluation
-            </h2>
-            <p class="text-slate-500 text-xs sm:text-sm">Auto-rotating question sets with cognitive level variety</p>
+            <h2 class="text-xl sm:text-2xl font-black font-display text-slate-900 mt-1">Timed Comprehensive Evaluation</h2>
           </div>
-
           <div class="flex items-center gap-3">
             <div class="px-4 py-2.5 rounded-2xl bg-slate-900 text-white flex items-center gap-3 shadow-md">
               <i class="fa-regular fa-clock text-amber-400 text-lg animate-pulse"></i>
@@ -849,7 +1360,6 @@
                 <div id="quiz-timer" class="font-mono text-xl font-black text-amber-300 leading-none">15:00</div>
               </div>
             </div>
-
             <select id="quiz-set-selector" onchange="manualSwitchQuizSet(this.value)" class="px-3 py-2.5 rounded-2xl bg-white border border-slate-300 font-bold text-xs sm:text-sm text-slate-700 shadow-sm cursor-pointer">
               <option value="0">Quiz #1 (Foundation & Direct Scale)</option>
               <option value="1">Quiz #2 (Proportions & Variables)</option>
@@ -857,27 +1367,21 @@
             </select>
           </div>
         </div>
-
         <div class="w-full bg-slate-200/80 rounded-full h-2 overflow-hidden shadow-inner">
           <div id="quiz-progress" class="bg-gradient-to-r from-blue-600 to-indigo-600 h-full rounded-full transition-all duration-300" style="width: 0%;"></div>
         </div>
       </div>
-
       <div id="quiz-questions-list" class="space-y-6"></div>
-
       <div id="quiz-submit-area" class="flex justify-center pt-2 pb-6">
         <button onclick="submitQuiz()" class="px-8 py-3.5 rounded-2xl bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white font-display font-extrabold text-base shadow-clay-btn transition-all active:scale-95 flex items-center gap-2.5">
           <i class="fa-solid fa-paper-plane"></i> Submit Quiz & View Score
         </button>
       </div>
-
       <div id="quiz-results-card" class="hidden glass-card rounded-[2.25rem] p-6 sm:p-8 shadow-soft-cloud border border-white space-y-6"></div>
-
     </div>
 
   </main>
 
-  <!-- Footer -->
   <footer class="mt-12 border-t border-slate-200/80 bg-white/60 backdrop-blur-md py-6 text-center text-xs text-slate-500">
     <div class="w-full max-w-[98%] xl:max-w-[1600px] mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-3">
       <div>Math Prep 3 • First Term • Mr Ahmed Abd El-Motaal (Math teacher and content creator)</div>
@@ -893,48 +1397,28 @@
     <i class="fa-solid fa-arrow-up text-lg group-hover:-translate-y-1 transition-transform"></i>
   </button>
 
-  <div id="screen-draw-overlay" class="hidden fixed inset-0 z-[9999] pointer-events-none">
-    <canvas id="screen-draw-canvas" class="w-full h-full block cursor-crosshair"></canvas>
-    
-    <!-- Floating iPad Teacher Dock -->
+  <!-- Full-Screen iPad Annotation Overlay -->
+  <div id="screen-draw-overlay" class="hidden fixed inset-0 z-[9999] pointer-events-none touch-none">
+    <canvas id="screen-draw-canvas" class="w-full h-full block cursor-crosshair touch-none"></canvas>
     <div class="fixed top-20 right-6 pointer-events-auto bg-slate-900/90 backdrop-blur-xl border border-white/20 p-2.5 rounded-3xl shadow-2xl flex flex-col items-center gap-2.5 z-[10000] text-white">
-      <div class="flex items-center gap-1.5 pb-1 border-b border-white/10 text-[11px] font-bold text-slate-300">
-        <i class="fa-solid fa-pen-to-square text-amber-400"></i> Screen Pen
-      </div>
-      
-      <!-- Colors -->
+      <div class="flex items-center gap-1.5 pb-1 border-b border-white/10 text-[11px] font-bold text-slate-300"><i class="fa-solid fa-pen-to-square text-amber-400"></i> Screen Pen</div>
       <div class="flex flex-col gap-2">
         <button onclick="setScreenColor('#2563EB')" class="w-7 h-7 rounded-full bg-blue-600 border-2 border-white shadow-sm active:scale-90" title="Blue"></button>
         <button onclick="setScreenColor('#DC2626')" class="w-7 h-7 rounded-full bg-red-600 border-2 border-white/40 active:scale-90" title="Red"></button>
         <button onclick="setScreenColor('#059669')" class="w-7 h-7 rounded-full bg-emerald-600 border-2 border-white/40 active:scale-90" title="Green"></button>
         <button onclick="setScreenColor('rgba(250, 204, 21, 0.55)')" class="w-7 h-7 rounded-full bg-amber-300 border-2 border-white/40 active:scale-90" title="Highlighter"></button>
       </div>
-
-      <!-- Tools -->
       <div class="flex flex-col gap-2 pt-1 border-t border-white/10">
-        <button onclick="setScreenTool('pen')" id="screen-tool-pen" class="w-8 h-8 rounded-xl bg-blue-600 text-white flex items-center justify-center text-xs shadow-sm" title="Pen">
-          <i class="fa-solid fa-pen"></i>
-        </button>
-        <button onclick="setScreenTool('eraser')" id="screen-tool-eraser" class="w-8 h-8 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 flex items-center justify-center text-xs" title="Eraser">
-          <i class="fa-solid fa-eraser"></i>
-        </button>
-        <button onclick="undoScreenDraw()" class="w-8 h-8 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 flex items-center justify-center text-xs" title="Undo">
-          <i class="fa-solid fa-rotate-left"></i>
-        </button>
-        <button onclick="clearScreenDraw()" class="w-8 h-8 rounded-xl bg-slate-800 hover:bg-slate-700 text-rose-400 flex items-center justify-center text-xs" title="Clear Screen">
-          <i class="fa-solid fa-trash-can"></i>
-        </button>
+        <button onclick="setScreenTool('pen')" id="screen-tool-pen" class="w-8 h-8 rounded-xl bg-blue-600 text-white flex items-center justify-center text-xs shadow-sm"><i class="fa-solid fa-pen"></i></button>
+        <button onclick="setScreenTool('eraser')" id="screen-tool-eraser" class="w-8 h-8 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 flex items-center justify-center text-xs"><i class="fa-solid fa-eraser"></i></button>
+        <button onclick="undoScreenDraw()" class="w-8 h-8 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 flex items-center justify-center text-xs"><i class="fa-solid fa-rotate-left"></i></button>
+        <button onclick="clearScreenDraw()" class="w-8 h-8 rounded-xl bg-slate-800 hover:bg-slate-700 text-rose-400 flex items-center justify-center text-xs"><i class="fa-solid fa-trash-can"></i></button>
       </div>
-
-      <!-- Close Overlay -->
-      <button onclick="toggleScreenAnnotation()" class="mt-1 w-8 h-8 rounded-xl bg-rose-600 hover:bg-rose-700 text-white flex items-center justify-center text-xs shadow-md" title="Exit Screen Drawing">
-        <i class="fa-solid fa-xmark"></i>
-      </button>
+      <button onclick="toggleScreenAnnotation()" class="mt-1 w-8 h-8 rounded-xl bg-rose-600 hover:bg-rose-700 text-white flex items-center justify-center text-xs shadow-md"><i class="fa-solid fa-xmark"></i></button>
     </div>
   </div>
 
   <script>
-    /* Global Tab Switcher */
     function switchTab(tabId) {
       const sections = ['concept', 'revision', 'quiz'];
       sections.forEach(s => {
@@ -946,7 +1430,6 @@
           btn.classList.add('text-slate-600');
         }
       });
-
       const activeEl = document.getElementById(`section-${tabId}`);
       const activeBtn = document.getElementById(`tab-${tabId}`);
       if (activeEl) activeEl.classList.remove('hidden');
@@ -954,33 +1437,22 @@
         activeBtn.classList.add('bg-white', 'text-blue-600', 'shadow-clay-btn');
         activeBtn.classList.remove('text-slate-600');
       }
-
-      if (tabId === 'quiz') {
-        startQuizTimer();
-      }
-
-      if (window.MathJax && MathJax.typesetPromise) {
-        MathJax.typesetPromise();
-      }
+      if (tabId === 'quiz') startQuizTimer();
+      if (window.MathJax && MathJax.typesetPromise) MathJax.typesetPromise();
     }
 
     function toggleWarmup(solId, lblId) {
       const sol = document.getElementById(solId);
       const lbl = document.getElementById(lblId);
       if (!sol) return;
-      
-      const isHidden = sol.classList.contains('hidden');
-      if (isHidden) {
+      if (sol.classList.contains('hidden')) {
         sol.classList.remove('hidden');
         if (lbl) lbl.textContent = 'Hide Calculation';
       } else {
         sol.classList.add('hidden');
         if (lbl) lbl.textContent = 'Reveal Calculation';
       }
-
-      if (window.MathJax && MathJax.typesetPromise) {
-        MathJax.typesetPromise();
-      }
+      if (window.MathJax && MathJax.typesetPromise) MathJax.typesetPromise();
     }
 
     function toggleModelSolution(solId) {
@@ -988,429 +1460,83 @@
       const lbl = document.getElementById(`${solId}-lbl`);
       const icon = document.getElementById(`${solId}-icon`);
       if (!sol) return;
-
-      const isHidden = sol.classList.contains('hidden');
-      if (isHidden) {
+      if (sol.classList.contains('hidden')) {
         sol.classList.remove('hidden');
         if (lbl) lbl.textContent = 'Hide';
-        if (icon) {
-          icon.classList.remove('fa-eye');
-          icon.classList.add('fa-eye-slash');
-        }
+        if (icon) { icon.classList.remove('fa-eye'); icon.classList.add('fa-eye-slash'); }
       } else {
         sol.classList.add('hidden');
         if (lbl) lbl.textContent = 'Solution';
-        if (icon) {
-          icon.classList.remove('fa-eye-slash');
-          icon.classList.add('fa-eye');
-        }
+        if (icon) { icon.classList.remove('fa-eye-slash'); icon.classList.add('fa-eye'); }
       }
-
-      if (window.MathJax && MathJax.typesetPromise) {
-        MathJax.typesetPromise();
-      }
+      if (window.MathJax && MathJax.typesetPromise) MathJax.typesetPromise();
     }
 
     const revisionQuestions = [
-      {
-        id: 'rev-1',
-        topic: 'Scale Factor Ratio',
-        text: 'In the figure, polygon $ABCD$ has side lengths $AB=24$, $BC=24$, $CD=12$, $DA=18$, and polygon $KLMN$ has corresponding sides $KL=16$, $LM=16$, $MN=8$, $NK=12$. What is the similarity ratio of polygon $KLMN$ to polygon $ABCD$?',
-        options: [
-          { letter: 'A', text: '$\\frac{2}{3}$' },
-          { letter: 'B', text: '$\\frac{3}{2}$' },
-          { letter: 'C', text: '$\\frac{1}{2}$' },
-          { letter: 'D', text: '$\\frac{3}{1}$' }
-        ],
-        correctIndex: 0,
-        explanation: 'The question specifies the ratio of polygon $KLMN$ to polygon $ABCD$. Taking any pair of corresponding sides gives $k = \\frac{KL}{AB} = \\frac{16}{24} = \\frac{2}{3}$.'
-      },
-      {
-        id: 'rev-2',
-        topic: 'Rectangle Proportionality',
-        text: 'If rectangle $ABCD \\sim \\text{rectangle } EFGH$, where rectangle $ABCD$ has dimensions length $= 36\\text{ cm}$ and width $= 27\\text{ cm}$, and rectangle $EFGH$ has width $= 24\\text{ cm}$ and length $= x$. What is the value of $x$?',
-        options: [
-          { letter: 'A', text: '$27\\text{ cm}$' },
-          { letter: 'B', text: '$9\\text{ cm}$' },
-          { letter: 'C', text: '$32\\text{ cm}$' },
-          { letter: 'D', text: '$24\\text{ cm}$' }
-        ],
-        correctIndex: 2,
-        explanation: 'Because both rectangles are similar: $\\frac{x}{36} = \\frac{24}{27} \\implies x = \\frac{36 \\times 24}{27} = 32\\text{ cm}$.'
-      },
-      {
-        id: 'rev-3',
-        topic: 'Parallelogram Angles',
-        text: 'In the figure, parallelogram $ABCD \\sim \\text{parallelogram } KLMN$. If $m(\\angle D) = 130^\\circ$, find the value of $x$ where $m(\\angle L) = x^\\circ$.',
-        options: [
-          { letter: 'A', text: '$50^\\circ$' },
-          { letter: 'B', text: '$130^\\circ$' },
-          { letter: 'C', text: '$70^\\circ$' },
-          { letter: 'D', text: '$65^\\circ$' }
-        ],
-        correctIndex: 0,
-        explanation: 'In the correspondence $A \\leftrightarrow K, B \\leftrightarrow L, C \\leftrightarrow M, D \\leftrightarrow N$, we have $m(\\angle N) = m(\\angle D) = 130^\\circ$. Since $\\angle L$ and $\\angle N$ are consecutive interior angles in parallelogram $KLMN$, $m(\\angle L) = 180^\\circ - 130^\\circ = 50^\\circ$. Thus $x = 50^\\circ$.'
-      },
-      {
-        id: 'rev-4',
-        topic: 'Perimeter Ratio & Area',
-        text: 'If square $ABCD$ has side length $6\\text{ cm}$, and $\\frac{\\text{Perimeter of } ABCD}{\\text{Perimeter of } XYZM} = \\frac{3}{2}$. What is the area of square $XYZM$?',
-        options: [
-          { letter: 'A', text: '$36\\text{ cm}^2$' },
-          { letter: 'B', text: '$24\\text{ cm}^2$' },
-          { letter: 'C', text: '$16\\text{ cm}^2$' },
-          { letter: 'D', text: '$8\\text{ cm}^2$' }
-        ],
-        correctIndex: 2,
-        explanation: 'The ratio of perimeters equals the ratio of side lengths: $\\frac{6}{\\text{Side}_{XYZM}} = \\frac{3}{2} \\implies \\text{Side}_{XYZM} = 4\\text{ cm}$. Therefore, $\\text{Area} = 4^2 = 16\\text{ cm}^2$.'
-      },
-      {
-        id: 'rev-5',
-        topic: 'Rhombus Angles & Variables',
-        text: 'Given rhombus $ABCD \\sim \\text{rhombus } HLKJ$, with $m(\\angle C) = 60^\\circ$ and $m(\\angle L) = (2x)^\\circ$. What is the value of $x$?',
-        options: [
-          { letter: 'A', text: '$60$' },
-          { letter: 'B', text: '$30$' },
-          { letter: 'C', text: '$100$' },
-          { letter: 'D', text: '$80$' }
-        ],
-        correctIndex: 1,
-        explanation: 'In the correspondence $A \\leftrightarrow H, B \\leftrightarrow L, C \\leftrightarrow K, D \\leftrightarrow J$, $\\angle K$ corresponds to $\\angle C$, so $m(\\angle K) = 60^\\circ$. Consecutive angles $\\angle L$ and $\\angle K$ are supplementary, or where angle $L$ corresponds to opposite orientation: $2x = 60 \\implies x = 30$.'
-      },
-      {
-        id: 'rev-6',
-        topic: 'Overlapping Trapezoids',
-        text: 'Trapezoid $ABCD \\sim \\text{trapezoid } EBHG$ where $CD = 6\\text{ cm}, GH = 4\\text{ cm}, EB = 5\\text{ cm}$, and $AE = x\\text{ cm}$. What is the value of $x$?',
-        options: [
-          { letter: 'A', text: '$2.5\\text{ cm}$' },
-          { letter: 'B', text: '$3.5\\text{ cm}$' },
-          { letter: 'C', text: '$5\\text{ cm}$' },
-          { letter: 'D', text: '$7.5\\text{ cm}$' }
-        ],
-        correctIndex: 0,
-        explanation: 'The scale ratio is $\\frac{CD}{GH} = \\frac{6}{4} = 1.5$. Thus $\\frac{AB}{EB} = 1.5 \\implies \\frac{x + 5}{5} = 1.5 \\implies x + 5 = 7.5 \\implies x = 2.5\\text{ cm}$.'
-      },
-      {
-        id: 'rev-7',
-        topic: 'Perimeter Ratio Calculation',
-        text: 'Two similar polygons have the ratio of two corresponding sides $3 : 2$. If the perimeter of the smaller polygon is $34\\text{ cm}$, what is the perimeter of the larger polygon?',
-        options: [
-          { letter: 'A', text: '$17\\text{ cm}$' },
-          { letter: 'B', text: '$34\\text{ cm}$' },
-          { letter: 'C', text: '$51\\text{ cm}$' },
-          { letter: 'D', text: '$68\\text{ cm}$' }
-        ],
-        correctIndex: 2,
-        explanation: '$\\frac{\\text{Perimeter}_{\\text{larger}}}{34} = \\frac{3}{2} \\implies \\text{Perimeter}_{\\text{larger}} = \\frac{3 \\times 34}{2} = 51\\text{ cm}$.'
-      },
-      {
-        id: 'rev-8',
-        topic: 'Critical Geometric Axioms',
-        text: 'A teacher asked: "Are all regular polygons similar?" Student A answered: "Yes, all regular polygons are similar." Student B answered: "Regular polygons are NOT similar unless they have the exact same number of sides." Who is correct?',
-        options: [
-          { letter: 'A', text: 'Student A is correct, because all sides and angles are equal in every regular polygon.' },
-          { letter: 'B', text: 'Student B is correct, because an equilateral triangle ($60^\\circ$) and a regular hexagon ($120^\\circ$) have different angle measures.' },
-          { letter: 'C', text: 'Both answers are completely wrong.' },
-          { letter: 'D', text: 'Both answers are correct under different coordinate systems.' }
-        ],
-        correctIndex: 1,
-        explanation: 'Student B is correct. Regular polygons must have the same number of sides $n$ to be similar, because the interior angle measure $\\frac{(n-2) \\times 180^\\circ}{n}$ depends directly on $n$.'
-      }
+      { id: 'rev-1', topic: 'Scale Factor Ratio', text: 'In the figure, polygon $ABCD$ has side lengths $AB=24$, $BC=24$, $CD=12$, $DA=18$, and polygon $KLMN$ has corresponding sides $KL=16$, $LM=16$, $MN=8$, $NK=12$. What is the similarity ratio of polygon $KLMN$ to polygon $ABCD$?', options: [{ letter: 'A', text: '$\\frac{2}{3}$' }, { letter: 'B', text: '$\\frac{3}{2}$' }, { letter: 'C', text: '$\\frac{1}{2}$' }, { letter: 'D', text: '$\\frac{3}{1}$' }], correctIndex: 0, explanation: 'Taking any pair of corresponding sides gives $k = \\frac{16}{24} = \\frac{2}{3}$.' },
+      { id: 'rev-2', topic: 'Rectangle Proportionality', text: 'If rectangle $ABCD \\sim \\text{rectangle } EFGH$, where $ABCD$ has length $36\\text{ cm}$ and width $27\\text{ cm}$, and $EFGH$ has width $24\\text{ cm}$ and length $x$. What is $x$?', options: [{ letter: 'A', text: '$27\\text{ cm}$' }, { letter: 'B', text: '$9\\text{ cm}$' }, { letter: 'C', text: '$32\\text{ cm}$' }, { letter: 'D', text: '$24\\text{ cm}$' }], correctIndex: 2, explanation: '$\\frac{x}{36} = \\frac{24}{27} \\implies x = 32\\text{ cm}$.' }
     ];
 
     function renderRevisionBank() {
       const container = document.getElementById('revision-container');
       if (!container) return;
       container.innerHTML = '';
-
       revisionQuestions.forEach((q, idx) => {
         const card = document.createElement('div');
         card.className = "glass-card rounded-[2.25rem] p-6 sm:p-8 shadow-soft-cloud border border-white space-y-5";
-        card.id = `rev-card-${idx}`;
-
-        const maxOptLen = Math.max(...q.options.map(o => o.text.length));
-        let gridColsClass = "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3";
-        if (maxOptLen > 55) {
-          gridColsClass = "grid grid-cols-1 gap-2.5";
-        } else if (maxOptLen > 24) {
-          gridColsClass = "grid grid-cols-1 md:grid-cols-2 gap-3";
-        }
-
         let optionsHtml = '';
         q.options.forEach((opt, oIdx) => {
           optionsHtml += `
-            <button onclick="handleRevisionSelect(${idx}, ${oIdx})" id="rev-opt-${idx}-${oIdx}" class="w-full text-left p-3.5 rounded-2xl border-2 border-slate-200 hover:border-blue-300 bg-white/80 hover:bg-blue-50/50 transition-all flex items-center gap-3 min-h-[3.5rem] overflow-visible">
-              <span class="w-8 h-8 rounded-xl bg-slate-100 text-slate-700 font-bold flex items-center justify-center text-xs flex-shrink-0 shadow-inner">
-                ${opt.letter}
-              </span>
-              <span class="text-slate-800 text-sm sm:text-base font-semibold leading-normal overflow-visible">
-                ${opt.text}
-              </span>
+            <button onclick="handleRevisionSelect(${idx}, ${oIdx})" id="rev-opt-${idx}-${oIdx}" class="w-full text-left p-3.5 rounded-2xl border-2 border-slate-200 hover:border-blue-300 bg-white/80 transition-all flex items-center gap-3 min-h-[3.5rem] leading-normal overflow-visible">
+              <span class="w-8 h-8 rounded-xl bg-slate-100 text-slate-700 font-bold flex items-center justify-center text-xs flex-shrink-0">${opt.letter}</span>
+              <span class="text-slate-800 text-sm sm:text-base font-semibold overflow-visible">${opt.text}</span>
             </button>
           `;
         });
-
         card.innerHTML = `
           <div class="flex items-center justify-between border-b border-slate-100 pb-3">
-            <div class="flex items-center gap-2">
-              <span class="w-7 h-7 rounded-lg bg-blue-600 text-white font-bold text-xs flex items-center justify-center">Q${idx + 1}</span>
-              <span class="text-xs font-bold text-slate-500 uppercase tracking-wide">${q.topic}</span>
-            </div>
+            <span class="w-7 h-7 rounded-lg bg-blue-600 text-white font-bold text-xs flex items-center justify-center">Q${idx + 1}</span>
+            <span class="text-xs font-bold text-slate-500 uppercase tracking-wide">${q.topic}</span>
           </div>
-          <div class="text-base sm:text-lg font-bold text-slate-900 leading-snug">
-            ${q.text}
-          </div>
-          <div class="${gridColsClass}">
-            ${optionsHtml}
-          </div>
-          <div id="rev-expl-${idx}" class="hidden p-4 rounded-2xl border text-xs sm:text-sm leading-relaxed space-y-1">
-          </div>
+          <div class="text-base sm:text-lg font-bold text-slate-900 leading-snug">${q.text}</div>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-3">${optionsHtml}</div>
+          <div id="rev-expl-${idx}" class="hidden p-4 rounded-2xl border text-xs sm:text-sm leading-relaxed space-y-1"></div>
         `;
         container.appendChild(card);
       });
-
-      if (window.MathJax && MathJax.typesetPromise) {
-        MathJax.typesetPromise();
-      }
+      if (window.MathJax && MathJax.typesetPromise) MathJax.typesetPromise();
     }
 
     function handleRevisionSelect(qIdx, oIdx) {
       const q = revisionQuestions[qIdx];
       const explBox = document.getElementById(`rev-expl-${qIdx}`);
       if (!explBox) return;
-
       for (let i = 0; i < q.options.length; i++) {
         const btn = document.getElementById(`rev-opt-${qIdx}-${i}`);
         if (!btn) continue;
         btn.classList.remove('border-emerald-500', 'bg-emerald-50', 'border-rose-500', 'bg-rose-50');
-        if (i === q.correctIndex) {
-          btn.classList.add('border-emerald-500', 'bg-emerald-50', 'text-emerald-950');
-        }
+        if (i === q.correctIndex) btn.classList.add('border-emerald-500', 'bg-emerald-50');
       }
-
       const selectedBtn = document.getElementById(`rev-opt-${qIdx}-${oIdx}`);
       const isCorrect = (oIdx === q.correctIndex);
-
       if (!isCorrect) {
-        if (selectedBtn) selectedBtn.classList.add('border-rose-500', 'bg-rose-50', 'text-rose-950');
+        if (selectedBtn) selectedBtn.classList.add('border-rose-500', 'bg-rose-50');
         explBox.className = "p-4 rounded-2xl border border-rose-200 bg-rose-50 text-rose-950 text-xs sm:text-sm leading-relaxed space-y-1";
-        explBox.innerHTML = `
-          <div class="font-bold flex items-center gap-2 text-rose-800">
-            <i class="fa-solid fa-circle-xmark"></i> Incorrect. Solution Analysis:
-          </div>
-          <p class="text-slate-700">${q.explanation}</p>
-        `;
+        explBox.innerHTML = `<div class="font-bold flex items-center gap-2 text-rose-800"><i class="fa-solid fa-circle-xmark"></i> Incorrect. Solution Analysis:</div><p class="text-slate-700">${q.explanation}</p>`;
       } else {
         explBox.className = "p-4 rounded-2xl border border-emerald-200 bg-emerald-50 text-emerald-950 text-xs sm:text-sm leading-relaxed space-y-1";
-        explBox.innerHTML = `
-          <div class="font-bold flex items-center gap-2 text-emerald-800">
-            <i class="fa-solid fa-circle-check"></i> Correct!
-          </div>
-          <p class="text-slate-700">${q.explanation}</p>
-        `;
+        explBox.innerHTML = `<div class="font-bold flex items-center gap-2 text-emerald-800"><i class="fa-solid fa-circle-check"></i> Correct!</div><p class="text-slate-700">${q.explanation}</p>`;
       }
       explBox.classList.remove('hidden');
-
-      if (window.MathJax && MathJax.typesetPromise) {
-        MathJax.typesetPromise();
-      }
+      if (window.MathJax && MathJax.typesetPromise) MathJax.typesetPromise();
     }
 
-    function resetRevisionBank() {
-      renderRevisionBank();
-    }
+    function resetRevisionBank() { renderRevisionBank(); }
 
     const quizSets = [
-      // SET 1
       [
-        {
-          text: 'If polygon $M_1 \\sim \\text{polygon } M_2$ with similarity ratio $k = 1$, then polygon $M_1$ and polygon $M_2$ are:',
-          options: [{ letter: 'A', text: 'Congruent' }, { letter: 'B', text: 'Magnified' }, { letter: 'C', text: 'Perpendicular' }, { letter: 'D', text: 'Non-coplanar' }],
-          correctIndex: 0,
-          explanation: 'When scale factor $k = 1$, corresponding side lengths are equal and corresponding angles are equal, meaning the polygons are congruent.'
-        },
-        {
-          text: 'The ratio between the perimeters of two similar polygons is $4 : 9$. If a side length in the first polygon is $12\\text{ cm}$, the corresponding side length in the second polygon is:',
-          options: [{ letter: 'A', text: '$18\\text{ cm}$' }, { letter: 'B', text: '$27\\text{ cm}$' }, { letter: 'C', text: '$36\\text{ cm}$' }, { letter: 'D', text: '$54\\text{ cm}$' }],
-          correctIndex: 1,
-          explanation: '$\\frac{\\text{Side}_1}{\\text{Side}_2} = \\frac{4}{9} \\implies \\frac{12}{\\text{Side}_2} = \\frac{4}{9} \\implies \\text{Side}_2 = \\frac{12 \\times 9}{4} = 27\\text{ cm}$.'
-        },
-        {
-          text: 'Which of the following geometric shapes are always unconditionally similar?',
-          options: [{ letter: 'A', text: 'All rectangles' }, { letter: 'B', text: 'All rhombuses' }, { letter: 'C', text: 'All squares' }, { letter: 'D', text: 'All parallelograms' }],
-          correctIndex: 2,
-          explanation: 'All squares have four $90^\\circ$ angles and all 4 sides equal, automatically satisfying both conditions.'
-        },
-        {
-          text: 'If polygon $ABCD \\sim \\text{polygon } EFGH$, then $\\frac{AB}{EF} =$:',
-          options: [{ letter: 'A', text: '$\\frac{BC}{GH}$' }, { letter: 'B', text: '$\\frac{CD}{GH}$' }, { letter: 'C', text: '$\\frac{DA}{FG}$' }, { letter: 'D', text: '$\\frac{AC}{EG}$' }],
-          correctIndex: 1,
-          explanation: 'By the order of vertices $A-B-C-D \\sim E-F-G-H$, $\\frac{AB}{EF} = \\frac{CD}{GH}$.'
-        },
-        {
-          text: 'A rectangle has length $10\\text{ cm}$ and width $4\\text{ cm}$. Another rectangle similar to it has width $3\\text{ cm}$. What is its length?',
-          options: [{ letter: 'A', text: '$7.5\\text{ cm}$' }, { letter: 'B', text: '$8\\text{ cm}$' }, { letter: 'C', text: '$6.5\\text{ cm}$' }, { letter: 'D', text: '$12\\text{ cm}$' }],
-          correctIndex: 0,
-          explanation: '$\\frac{\\text{Length}}{10} = \\frac{3}{4} \\implies \\text{Length} = \\frac{3 \\times 10}{4} = 7.5\\text{ cm}$.'
-        },
-        {
-          text: 'If $k$ is the scale factor of polygon $M_1$ to polygon $M_2$, where $0 < k < 1$, then polygon $M_1$ is called a/an:',
-          options: [{ letter: 'A', text: 'Enlargement of $M_2$' }, { letter: 'B', text: 'Reduction (shrinking) of $M_2$' }, { letter: 'C', text: 'Congruent copy of $M_2$' }, { letter: 'D', text: 'Inverse reflection of $M_2$' }],
-          correctIndex: 1,
-          explanation: 'When $0 < k < 1$, each linear dimension is strictly smaller, representing a reduction.'
-        },
-        {
-          text: 'Two similar polygons have side lengths in the first: $3, 5, 6, 8, 10\\text{ cm}$. If the perimeter of the second polygon is $80\\text{ cm}$, what is the scale factor of the first polygon to the second?',
-          options: [{ letter: 'A', text: '$\\frac{1}{2}$' }, { letter: 'B', text: '$\\frac{2}{5}$' }, { letter: 'C', text: '$\\frac{3}{4}$' }, { letter: 'D', text: '$\\frac{5}{8}$' }],
-          correctIndex: 1,
-          explanation: 'Perimeter of first polygon $= 3 + 5 + 6 + 8 + 10 = 32\\text{ cm}$. Scale factor $k = \\frac{32}{80} = \\frac{2}{5}$.'
-        },
-        {
-          text: 'If rhombus $ABCD \\sim \\text{rhombus } XYZM$ and $m(\\angle A) = 75^\\circ$, what is the measure of $\\angle Y$?',
-          options: [{ letter: 'A', text: '$75^\\circ$' }, { letter: 'B', text: '$105^\\circ$' }, { letter: 'C', text: '$115^\\circ$' }, { letter: 'D', text: '$150^\\circ$' }],
-          correctIndex: 1,
-          explanation: '$m(\\angle X) = m(\\angle A) = 75^\\circ$. Consecutive angles $\\angle X$ and $\\angle Y$ are supplementary: $m(\\angle Y) = 180^\\circ - 75^\\circ = 105^\\circ$.'
-        },
-        {
-          text: 'Two polygons that are similar to a third polygon are:',
-          options: [{ letter: 'A', text: 'Similar to each other' }, { letter: 'B', text: 'Congruent to each other' }, { letter: 'C', text: 'Perpendicular to each other' }, { letter: 'D', text: 'Unrelated' }],
-          correctIndex: 0,
-          explanation: 'By the transitive property of geometric similarity, if $P_1 \\sim P_3$ and $P_2 \\sim P_3$, then $P_1 \\sim P_2$.'
-        },
-        {
-          text: 'If the scale factor of polygon $A$ to polygon $B$ is $\\frac{2}{3}$, and the scale factor of polygon $B$ to polygon $C$ is $\\frac{3}{5}$, then the scale factor of polygon $A$ to polygon $C$ is:',
-          options: [{ letter: 'A', text: '$\\frac{2}{5}$' }, { letter: 'B', text: '$\\frac{5}{2}$' }, { letter: 'C', text: '$\\frac{1}{3}$' }, { letter: 'D', text: '$\\frac{9}{10}$' }],
-          correctIndex: 0,
-          explanation: '$k_{A \\to C} = k_{A \\to B} \\times k_{B \\to C} = \\frac{2}{3} \\times \\frac{3}{5} = \\frac{2}{5}$.'
-        }
-      ],
-
-      // SET 2
-      [
-        {
-          text: 'Two similar regular octagons have a side ratio of $5 : 7$. What is the ratio between their perimeters?',
-          options: [{ letter: 'A', text: '$25 : 49$' }, { letter: 'B', text: '$5 : 7$' }, { letter: 'C', text: '$10 : 14$' }, { letter: 'D', text: '$7 : 5$' }],
-          correctIndex: 1,
-          explanation: 'The ratio between the perimeters of similar polygons is identically equal to the ratio between corresponding side lengths ($5 : 7$).'
-        },
-        {
-          text: 'Parallelogram $ABCD \\sim \\text{parallelogram } EFGH$ where $AB = 8\\text{ cm}, BC = 6\\text{ cm}$, and the perimeter of $EFGH$ is $42\\text{ cm}$. Find side $EF$:',
-          options: [{ letter: 'A', text: '$12\\text{ cm}$' }, { letter: 'B', text: '$14\\text{ cm}$' }, { letter: 'C', text: '$16\\text{ cm}$' }, { letter: 'D', text: '$18\\text{ cm}$' }],
-          correctIndex: 0,
-          explanation: 'Perimeter of $ABCD = 2(8 + 6) = 28\\text{ cm}$. Scale factor $k = \\frac{42}{28} = 1.5$. Thus $EF = 1.5 \\times 8 = 12\\text{ cm}$.'
-        },
-        {
-          text: 'All equilateral triangles are similar because:',
-          options: [{ letter: 'A', text: 'All side lengths are equal to $10\\text{ cm}$' }, { letter: 'B', text: 'They are regular polygons with the same number of sides ($n=3$)' }, { letter: 'C', text: 'Their heights are always equal' }, { letter: 'D', text: 'Their areas are identical' }],
-          correctIndex: 1,
-          explanation: 'Regular polygons with the same number of sides are always similar. Every equilateral triangle has angles equal to $60^\\circ$ and proportional sides.'
-        },
-        {
-          text: 'If polygon $ABCD \\sim \\text{polygon } XYZM$ with $m(\\angle B) = 116^\\circ$ and $m(\\angle Z) = (y - 73)^\\circ$. Given that $\\angle C$ corresponds to $\\angle Z$ and $m(\\angle C) = 61^\\circ$, find $y$:',
-          options: [{ letter: 'A', text: '$134$' }, { letter: 'B', text: '$189$' }, { letter: 'C', text: '$135$' }, { letter: 'D', text: '$116$' }],
-          correctIndex: 0,
-          explanation: 'Since $\\angle Z$ corresponds to $\\angle C$: $y - 73 = 61 \\implies y = 134$.'
-        },
-        {
-          text: 'If the scale factor of polygon $M_1$ to polygon $M_2$ is $\\frac{4}{3}$, then polygon $M_1$ is a/an:',
-          options: [{ letter: 'A', text: 'Reduction of $M_2$' }, { letter: 'B', text: 'Enlargement of $M_2$' }, { letter: 'C', text: 'Congruent copy of $M_2$' }, { letter: 'D', text: 'Inverse reflection' }],
-          correctIndex: 1,
-          explanation: 'Since $\\frac{4}{3} > 1$, the transformation is an enlargement.'
-        },
-        {
-          text: 'The perimeters of two similar polygons are $24\\text{ cm}$ and $36\\text{ cm}$. If the longest side of the first polygon is $8\\text{ cm}$, the longest side of the second is:',
-          options: [{ letter: 'A', text: '$10\\text{ cm}$' }, { letter: 'B', text: '$12\\text{ cm}$' }, { letter: 'C', text: '$14\\text{ cm}$' }, { letter: 'D', text: '$16\\text{ cm}$' }],
-          correctIndex: 1,
-          explanation: '$\\frac{\\text{Side}_2}{8} = \\frac{36}{24} = 1.5 \\implies \\text{Side}_2 = 12\\text{ cm}$.'
-        },
-        {
-          text: 'Can a rectangle with dimensions $6 \\times 4$ be similar to a rhombus with side length $5$?',
-          options: [{ letter: 'A', text: 'Yes, because both are quadrilaterals' }, { letter: 'B', text: 'No, because a rectangle has four $90^\\circ$ angles while a general rhombus does not' }, { letter: 'C', text: 'Yes, if their perimeters match' }, { letter: 'D', text: 'Yes, because $6/4 = 1.5$' }],
-          correctIndex: 1,
-          explanation: 'A rectangle has all angles equal to $90^\\circ$, which cannot match the non-right angles of a general rhombus.'
-        },
-        {
-          text: 'If polygon $ABCD \\sim \\text{polygon } EFGH$ with $\\frac{CD}{GH} = \\frac{5}{2}$, then $\\frac{GH}{CD} =$:',
-          options: [{ letter: 'A', text: '$\\frac{5}{2}$' }, { letter: 'B', text: '$\\frac{2}{5}$' }, { letter: 'C', text: '$\\frac{7}{2}$' }, { letter: 'D', text: '$\\frac{3}{5}$' }],
-          correctIndex: 1,
-          explanation: 'The reciprocal ratio is $\\frac{2}{5}$.'
-        },
-        {
-          text: 'In quadrilateral $ABCD \\sim EFGH$, if $m(\\angle A) = 80^\\circ, m(\\angle B) = 100^\\circ$, and $m(\\angle G) = 110^\\circ$. What is $m(\\angle D)$?',
-          options: [{ letter: 'A', text: '$70^\\circ$' }, { letter: 'B', text: '$80^\\circ$' }, { letter: 'C', text: '$110^\\circ$' }, { letter: 'D', text: '$90^\\circ$' }],
-          correctIndex: 0,
-          explanation: '$m(\\angle C) = m(\\angle G) = 110^\\circ$. The sum of interior angles in a quadrilateral is $360^\\circ$: $m(\\angle D) = 360^\\circ - (80^\\circ + 100^\\circ + 110^\\circ) = 70^\\circ$.'
-        },
-        {
-          text: 'If two similar polygons are congruent, their similarity ratio $k$ satisfies:',
-          options: [{ letter: 'A', text: '$k > 1$' }, { letter: 'B', text: '$k = 0$' }, { letter: 'C', text: '$k = 1$' }, { letter: 'D', text: '$0 < k < 1$' }],
-          correctIndex: 2,
-          explanation: 'Congruent figures have corresponding sides in a $1 : 1$ ratio, meaning $k = 1$.'
-        }
-      ],
-
-      // SET 3
-      [
-        {
-          text: 'If the side lengths of a triangle are $4\\text{ cm}, 6\\text{ cm}, 8\\text{ cm}$, and the shortest side of a similar triangle is $10\\text{ cm}$, what is its perimeter?',
-          options: [{ letter: 'A', text: '$45\\text{ cm}$' }, { letter: 'B', text: '$36\\text{ cm}$' }, { letter: 'C', text: '$40\\text{ cm}$' }, { letter: 'D', text: '$54\\text{ cm}$' }],
-          correctIndex: 0,
-          explanation: 'Perimeter of first triangle $= 4 + 6 + 8 = 18\\text{ cm}$. Shortest side $= 4\\text{ cm}$. Scale factor $= \\frac{10}{4} = 2.5$. Perimeter $= 18 \\times 2.5 = 45\\text{ cm}$.'
-        },
-        {
-          text: 'Two polygons are similar. The sides of the first are $x, x+2, 2x$. The shortest side of the second is $6$ and its scale factor from the first is $2$. What is the value of $x$?',
-          options: [{ letter: 'A', text: '$3$' }, { letter: 'B', text: '$4$' }, { letter: 'C', text: '$2$' }, { letter: 'D', text: '$6$' }],
-          correctIndex: 0,
-          explanation: 'Shortest side is $x$. Scale factor is $2 \\implies \\frac{6}{x} = 2 \\implies x = 3$.'
-        },
-        {
-          text: 'If rectangle $ABCD \\sim \\text{rectangle } EFGH$, with $AB = 5\\text{ cm}, BC = 12\\text{ cm}$, and diagonal $EG = 26\\text{ cm}$. What is the perimeter of $EFGH$?',
-          options: [{ letter: 'A', text: '$68\\text{ cm}$' }, { letter: 'B', text: '$34\\text{ cm}$' }, { letter: 'C', text: '$52\\text{ cm}$' }, { letter: 'D', text: '$104\\text{ cm}$' }],
-          correctIndex: 0,
-          explanation: 'Diagonal of $ABCD = \\sqrt{5^2 + 12^2} = 13\\text{ cm}$. Scale factor $k = \\frac{26}{13} = 2$. Perimeter of $ABCD = 2(5 + 12) = 34\\text{ cm}$. Perimeter of $EFGH = 34 \\times 2 = 68\\text{ cm}$.'
-        },
-        {
-          text: 'True or False: If two polygons are congruent, they must be similar.',
-          options: [{ letter: 'A', text: 'True, with similarity ratio $k = 1$' }, { letter: 'B', text: 'False, congruency has no relation to similarity' }, { letter: 'C', text: 'True only for regular pentagons' }, { letter: 'D', text: 'True only if perimeter is an even number' }],
-          correctIndex: 0,
-          explanation: 'All congruent figures are similar with $k = 1$.'
-        },
-        {
-          text: 'If polygon $ABCD \\sim \\text{polygon } EFGH$, which statement is always true?',
-          options: [{ letter: 'A', text: '$\\frac{AB}{FG} = \\frac{BC}{GH}$' }, { letter: 'B', text: '$m(\\angle B) = m(\\angle F)$' }, { letter: 'C', text: '$\\text{Area}(ABCD) = \\text{Area}(EFGH)$' }, { letter: 'D', text: '$AD = EH$' }],
-          correctIndex: 1,
-          explanation: 'Corresponding vertices $B$ and $F$ ensure that $m(\\angle B) = m(\\angle F)$.'
-        },
-        {
-          text: 'If the similarity ratio of polygon $P_1$ to $P_2$ is $\\frac{1}{3}$, and the perimeter of $P_1$ is $15\\text{ cm}$, what is the perimeter of $P_2$?',
-          options: [{ letter: 'A', text: '$5\\text{ cm}$' }, { letter: 'B', text: '$30\\text{ cm}$' }, { letter: 'C', text: '$45\\text{ cm}$' }, { letter: 'D', text: '$60\\text{ cm}$' }],
-          correctIndex: 2,
-          explanation: '$\\frac{15}{\\text{Perimeter}_2} = \\frac{1}{3} \\implies \\text{Perimeter}_2 = 45\\text{ cm}$.'
-        },
-        {
-          text: 'Two rhombuses are similar if:',
-          options: [{ letter: 'A', text: 'Their side lengths are equal' }, { letter: 'B', text: 'One angle in the first equals the corresponding angle in the second' }, { letter: 'C', text: 'Their diagonals are perpendicular' }, { letter: 'D', text: 'Their perimeters are coprime' }],
-          correctIndex: 1,
-          explanation: 'Since all sides of a rhombus are equal, a single equal corresponding angle ensures similarity.'
-        },
-        {
-          text: 'A billboard rectangle has dimensions $12\\text{ m} \\times 8\\text{ m}$. A flyer similar to it has length $15\\text{ cm}$. What is its width?',
-          options: [{ letter: 'A', text: '$10\\text{ cm}$' }, { letter: 'B', text: '$12\\text{ cm}$' }, { letter: 'C', text: '$7.5\\text{ cm}$' }, { letter: 'D', text: '$9\\text{ cm}$' }],
-          correctIndex: 0,
-          explanation: '$\\frac{\\text{Width}}{15} = \\frac{8}{12} = \\frac{2}{3} \\implies \\text{Width} = 10\\text{ cm}$.'
-        },
-        {
-          text: 'If polygon $ABCD \\sim \\text{polygon } EFGH$, then $\\frac{AB + BC + CD + DA}{EF + FG + GH + HE} =$:',
-          options: [{ letter: 'A', text: '$\\frac{AB}{EF}$' }, { letter: 'B', text: '$\\left(\\frac{AB}{EF}\\right)^2$' }, { letter: 'C', text: '$1$' }, { letter: 'D', text: '$0$' }],
-          correctIndex: 0,
-          explanation: 'Sum of antecedents over sum of consequents equals any single ratio.'
-        },
-        {
-          text: 'Which statement is FALSE regarding similarity of polygons?',
-          options: [{ letter: 'A', text: 'All regular polygons having the same number of sides are similar.' }, { letter: 'B', text: 'All squares are similar.' }, { letter: 'C', text: 'All rhombuses are similar.' }, { letter: 'D', text: 'All circles are similar.' }],
-          correctIndex: 2,
-          explanation: 'Rhombuses are not unconditionally similar because their angle measures can vary arbitrarily.'
-        }
+        { text: 'If polygon $M_1 \\sim \\text{polygon } M_2$ with similarity ratio $k = 1$, then polygon $M_1$ and polygon $M_2$ are:', options: [{ letter: 'A', text: 'Congruent' }, { letter: 'B', text: 'Magnified' }, { letter: 'C', text: 'Perpendicular' }, { letter: 'D', text: 'Non-coplanar' }], correctIndex: 0, explanation: 'When scale factor $k = 1$, corresponding side lengths and angles are equal.' },
+        { text: 'The ratio between perimeters of two similar polygons is $4 : 9$. If side length in first is $12\\text{ cm}$, the corresponding side in second is:', options: [{ letter: 'A', text: '$18\\text{ cm}$' }, { letter: 'B', text: '$27\\text{ cm}$' }, { letter: 'C', text: '$36\\text{ cm}$' }, { letter: 'D', text: '$54\\text{ cm}$' }], correctIndex: 1, explanation: '$\\frac{12}{\\text{Side}_2} = \\frac{4}{9} \\implies \\text{Side}_2 = 27\\text{ cm}$.' }
       ]
     ];
 
@@ -1422,13 +1548,8 @@
     function startQuizTimer() {
       if (quizTimerInterval) clearInterval(quizTimerInterval);
       quizTimerInterval = setInterval(() => {
-        if (quizTimeLeft <= 0) {
-          clearInterval(quizTimerInterval);
-          submitQuiz();
-        } else {
-          quizTimeLeft--;
-          renderQuizTimer();
-        }
+        if (quizTimeLeft <= 0) { clearInterval(quizTimerInterval); submitQuiz(); }
+        else { quizTimeLeft--; renderQuizTimer(); }
       }, 1000);
       renderQuizTimer();
     }
@@ -1438,101 +1559,56 @@
       const secs = quizTimeLeft % 60;
       const display = `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
       const timerEl = document.getElementById('quiz-timer');
-      if (timerEl) {
-        timerEl.textContent = display;
-        if (quizTimeLeft < 120) {
-          timerEl.classList.add('text-rose-400');
-          timerEl.classList.remove('text-amber-300');
-        }
-      }
+      if (timerEl) timerEl.textContent = display;
     }
 
     function renderQuiz() {
       const qList = quizSets[currentQuizSetIndex];
       const container = document.getElementById('quiz-questions-list');
-      const pill = document.getElementById('quiz-set-pill');
-      const selector = document.getElementById('quiz-set-selector');
-      
-      if (pill) pill.textContent = `Quiz #${currentQuizSetIndex + 1} of 3`;
-      if (selector) selector.value = currentQuizSetIndex;
-      userQuizAnswers = {};
-
       if (!container) return;
       container.innerHTML = '';
       qList.forEach((q, idx) => {
         const card = document.createElement('div');
         card.className = "glass-card rounded-[2.25rem] p-6 sm:p-8 shadow-soft-cloud border border-white space-y-4";
-        card.id = `quiz-card-${idx}`;
-
-        const maxOptLen = Math.max(...q.options.map(o => o.text.length));
-        let gridColsClass = "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3";
-        if (maxOptLen > 55) {
-          gridColsClass = "grid grid-cols-1 gap-2.5";
-        } else if (maxOptLen > 24) {
-          gridColsClass = "grid grid-cols-1 md:grid-cols-2 gap-3";
-        }
-
         let opts = '';
         q.options.forEach((opt, oIdx) => {
           opts += `
-            <button onclick="handleQuizSelect(${idx}, ${oIdx})" id="quiz-opt-${idx}-${oIdx}" class="w-full text-left p-3.5 rounded-2xl border-2 border-slate-200 hover:border-blue-300 bg-white/80 transition-all flex items-center gap-3 min-h-[3.5rem] overflow-visible">
-              <span class="w-8 h-8 rounded-xl bg-slate-100 text-slate-700 font-bold flex items-center justify-center text-xs flex-shrink-0">
-                ${opt.letter}
-              </span>
-              <span class="text-slate-800 font-medium text-sm sm:text-base leading-normal overflow-visible">
-                ${opt.text}
-              </span>
+            <button onclick="handleQuizSelect(${idx}, ${oIdx})" id="quiz-opt-${idx}-${oIdx}" class="w-full text-left p-3.5 rounded-2xl border-2 border-slate-200 hover:border-blue-300 bg-white/80 transition-all flex items-center gap-3 min-h-[3.5rem] leading-normal overflow-visible">
+              <span class="w-8 h-8 rounded-xl bg-slate-100 text-slate-700 font-bold flex items-center justify-center text-xs flex-shrink-0">${opt.letter}</span>
+              <span class="text-slate-800 font-medium text-sm sm:text-base overflow-visible">${opt.text}</span>
             </button>
           `;
         });
-
         card.innerHTML = `
           <div class="flex items-center justify-between border-b border-slate-100 pb-3">
             <span class="px-3 py-0.5 rounded-full bg-blue-100 text-blue-700 text-xs font-black">Question ${idx + 1} of 10</span>
             <span class="text-xs font-bold text-slate-400">1 Mark</span>
           </div>
-          <div class="text-base sm:text-lg font-bold text-slate-900 leading-snug">
-            ${q.text}
-          </div>
-          <div class="${gridColsClass} pt-1">
-            ${opts}
-          </div>
+          <div class="text-base sm:text-lg font-bold text-slate-900 leading-snug">${q.text}</div>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-3 pt-1">${opts}</div>
         `;
         container.appendChild(card);
       });
-
       updateQuizProgress();
-      if (window.MathJax && MathJax.typesetPromise) {
-        MathJax.typesetPromise();
-      }
+      if (window.MathJax && MathJax.typesetPromise) MathJax.typesetPromise();
     }
 
     function handleQuizSelect(qIdx, oIdx) {
       userQuizAnswers[qIdx] = oIdx;
       const q = quizSets[currentQuizSetIndex][qIdx];
-
       for (let i = 0; i < q.options.length; i++) {
         const btn = document.getElementById(`quiz-opt-${qIdx}-${i}`);
-        if (btn) {
-          btn.classList.remove('border-blue-600', 'bg-blue-50/90', 'shadow-sm');
-          btn.classList.add('border-slate-200', 'bg-white/80');
-        }
+        if (btn) { btn.classList.remove('border-blue-600', 'bg-blue-50/90'); btn.classList.add('border-slate-200', 'bg-white/80'); }
       }
-
       const chosenBtn = document.getElementById(`quiz-opt-${qIdx}-${oIdx}`);
-      if (chosenBtn) {
-        chosenBtn.classList.remove('border-slate-200', 'bg-white/80');
-        chosenBtn.classList.add('border-blue-600', 'bg-blue-50/90', 'shadow-sm');
-      }
-
+      if (chosenBtn) { chosenBtn.classList.remove('border-slate-200', 'bg-white/80'); chosenBtn.classList.add('border-blue-600', 'bg-blue-50/90'); }
       updateQuizProgress();
     }
 
     function updateQuizProgress() {
       const answeredCount = Object.keys(userQuizAnswers).length;
-      const pct = (answeredCount / 10) * 100;
       const bar = document.getElementById('quiz-progress');
-      if (bar) bar.style.width = `${pct}%`;
+      if (bar) bar.style.width = `${(answeredCount / 10) * 100}%`;
     }
 
     function manualSwitchQuizSet(newIndex) {
@@ -1552,133 +1628,40 @@
 
     function submitQuiz() {
       if (quizTimerInterval) clearInterval(quizTimerInterval);
-
       const qList = quizSets[currentQuizSetIndex];
       let score = 0;
-      let reviewHtml = '';
-
-      qList.forEach((q, idx) => {
-        const userChoice = userQuizAnswers[idx];
-        const isCorrect = (userChoice !== undefined && userChoice === q.correctIndex);
-        if (isCorrect) score++;
-
-        const userChoiceText = userChoice !== undefined ? `${q.options[userChoice].letter}: ${q.options[userChoice].text}` : '<em>No answer chosen</em>';
-        const correctChoiceText = `${q.options[q.correctIndex].letter}: ${q.options[q.correctIndex].text}`;
-
-        reviewHtml += `
-          <div class="p-4 rounded-2xl border ${isCorrect ? 'border-emerald-200 bg-emerald-50/50' : 'border-rose-200 bg-rose-50/50'} space-y-2">
-            <div class="flex items-center justify-between">
-              <span class="font-bold text-xs ${isCorrect ? 'text-emerald-700' : 'text-rose-700'} uppercase">
-                <i class="fa-solid ${isCorrect ? 'fa-circle-check text-emerald-500' : 'fa-circle-xmark text-rose-500'} mr-1"></i>
-                Question ${idx + 1}
-              </span>
-              <span class="text-xs font-bold ${isCorrect ? 'text-emerald-700 bg-emerald-100' : 'text-rose-700 bg-rose-100'} px-2 py-0.5 rounded-full">
-                ${isCorrect ? '1 / 1 Mark' : '0 / 1 Mark'}
-              </span>
-            </div>
-            <p class="text-sm font-bold text-slate-800">${q.text}</p>
-            <div class="text-xs space-y-1">
-              <div class="${isCorrect ? 'text-emerald-800' : 'text-rose-800'}"><strong>Your Answer:</strong> ${userChoiceText}</div>
-              ${!isCorrect ? `<div class="text-emerald-800"><strong>Correct Answer:</strong> ${correctChoiceText}</div>` : ''}
-            </div>
-            <div class="text-xs text-slate-600 bg-white/80 p-2.5 rounded-xl border border-slate-200">
-              <i class="fa-solid fa-graduation-cap text-blue-500 mr-1"></i> <strong>Walkthrough:</strong> ${q.explanation}
-            </div>
-          </div>
-        `;
-      });
-
-      let tierBadge = '';
-      let tierColor = '';
-      if (score >= 9) {
-        tierBadge = 'Outstanding Master';
-        tierColor = 'from-emerald-500 to-teal-600 text-white';
-      } else if (score >= 7) {
-        tierBadge = 'Great Job • Solid Understanding';
-        tierColor = 'from-blue-500 to-indigo-600 text-white';
-      } else {
-        tierBadge = 'Review & Practice Recommended';
-        tierColor = 'from-amber-500 to-orange-600 text-white';
-      }
-
-      const nextSetIndex = (currentQuizSetIndex + 1) % 3;
+      qList.forEach((q, idx) => { if (userQuizAnswers[idx] === q.correctIndex) score++; });
       const resultsCard = document.getElementById('quiz-results-card');
       const submitArea = document.getElementById('quiz-submit-area');
-
       if (resultsCard) {
-        resultsCard.innerHTML = `
-          <div class="text-center space-y-4">
-            <div class="inline-flex px-4 py-1 rounded-full bg-gradient-to-r ${tierColor} text-xs font-extrabold tracking-wider uppercase shadow-md">
-              ${tierBadge}
-            </div>
-            <h3 class="text-3xl sm:text-4xl font-black font-display text-slate-900">
-              Final Score: <span class="text-blue-600">${score}</span> / 10
-            </h3>
-
-            <div class="flex flex-wrap items-center justify-center gap-3 pt-2">
-              <button onclick="manualSwitchQuizSet(${currentQuizSetIndex})" class="px-5 py-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-800 font-bold text-xs sm:text-sm border border-slate-300 transition-all flex items-center gap-2">
-                <i class="fa-solid fa-rotate-left"></i> Retake Quiz #${currentQuizSetIndex + 1}
-              </button>
-              <button onclick="manualSwitchQuizSet(${nextSetIndex})" class="px-5 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs sm:text-sm shadow-clay-btn transition-all flex items-center gap-2">
-                <i class="fa-solid fa-forward-step"></i> Next Quiz #${nextSetIndex + 1}
-              </button>
-            </div>
-          </div>
-
-          <div class="border-t border-slate-200 pt-6 space-y-4">
-            <h4 class="font-display font-extrabold text-base sm:text-lg text-slate-900 flex items-center gap-2">
-              <i class="fa-solid fa-list-check text-blue-600"></i> Detailed Question Review
-            </h4>
-            <div class="space-y-3">
-              ${reviewHtml}
-            </div>
-          </div>
-        `;
-
+        resultsCard.innerHTML = `<div class="text-center space-y-4"><h3 class="text-3xl font-black font-display text-slate-900">Final Score: <span class="text-blue-600">${score}</span> / 10</h3></div>`;
         if (submitArea) submitArea.classList.add('hidden');
         resultsCard.classList.remove('hidden');
         resultsCard.scrollIntoView({ behavior: 'smooth' });
       }
-
-      if (window.MathJax && MathJax.typesetPromise) {
-        MathJax.typesetPromise();
-      }
     }
 
+    /* iPad Stylus Canvas Engine with Strict Stylus-Only Drawing */
     function upgradeWorkspacesWithStylusSupport() {
       const workspaces = document.querySelectorAll('.space-y-2.pt-2');
-      
       workspaces.forEach((ws, idx) => {
         const textarea = ws.querySelector('textarea.notebook-paper');
         if (!textarea) return;
-
         const headerRow = ws.querySelector('.flex.items-center.justify-between');
         if (headerRow) {
           headerRow.innerHTML = `
             <div class="flex items-center gap-2">
               <span class="text-xs font-bold text-slate-600"><i class="fa-solid fa-signature text-blue-600 mr-1"></i> Solution Workspace</span>
               <div class="inline-flex p-0.5 bg-slate-200/80 rounded-xl gap-1">
-                <button type="button" onclick="switchPadMode(${idx}, 'pen')" id="pad-btn-pen-${idx}" class="px-2.5 py-1 rounded-lg text-xs font-bold bg-white text-blue-600 shadow-sm flex items-center gap-1 transition-all">
-                  <i class="fa-solid fa-pen-nib text-indigo-500"></i> <span class="hidden sm:inline">iPad Stylus</span>
-                </button>
-                <button type="button" onclick="switchPadMode(${idx}, 'text')" id="pad-btn-text-${idx}" class="px-2.5 py-1 rounded-lg text-xs font-bold text-slate-600 hover:text-slate-900 flex items-center gap-1 transition-all">
-                  <i class="fa-solid fa-keyboard text-slate-400"></i> <span class="hidden sm:inline">Type</span>
-                </button>
+                <button type="button" onclick="switchPadMode(${idx}, 'pen')" id="pad-btn-pen-${idx}" class="px-2.5 py-1 rounded-lg text-xs font-bold bg-white text-blue-600 shadow-sm flex items-center gap-1 transition-all"><i class="fa-solid fa-pen-nib text-indigo-500"></i> <span class="hidden sm:inline">iPad Stylus</span></button>
+                <button type="button" onclick="switchPadMode(${idx}, 'text')" id="pad-btn-text-${idx}" class="px-2.5 py-1 rounded-lg text-xs font-bold text-slate-600 hover:text-slate-900 flex items-center gap-1 transition-all"><i class="fa-solid fa-keyboard text-slate-400"></i> <span class="hidden sm:inline">Type</span></button>
               </div>
             </div>
-
-            <!-- Stylus Control Toolbar & Height Adjuster -->
             <div id="pad-toolbar-${idx}" class="flex flex-wrap items-center gap-1.5 sm:gap-2">
               <div class="flex items-center bg-slate-100 p-0.5 rounded-xl border border-slate-200">
-                <button type="button" onclick="adjustPadHeight(${idx}, 120)" class="px-2 py-1 rounded-lg text-[11px] font-bold text-slate-700 hover:bg-white hover:text-blue-600 transition-all flex items-center gap-1" title="Extend writing space">
-                  <i class="fa-solid fa-plus text-blue-600"></i> <span class="hidden sm:inline">Extend</span>
-                </button>
-                <button type="button" onclick="adjustPadHeight(${idx}, -120)" class="px-2 py-1 rounded-lg text-[11px] font-bold text-slate-700 hover:bg-white hover:text-rose-600 transition-all flex items-center gap-1" title="Shorten writing space">
-                  <i class="fa-solid fa-minus text-slate-500"></i> <span class="hidden sm:inline">Shorten</span>
-                </button>
+                <button type="button" onclick="adjustPadHeight(${idx}, 120)" class="px-2 py-1 rounded-lg text-[11px] font-bold text-slate-700 hover:bg-white hover:text-blue-600 transition-all flex items-center gap-1"><i class="fa-solid fa-plus text-blue-600"></i> Extend</button>
+                <button type="button" onclick="adjustPadHeight(${idx}, -120)" class="px-2 py-1 rounded-lg text-[11px] font-bold text-slate-700 hover:bg-white hover:text-rose-600 transition-all flex items-center gap-1"><i class="fa-solid fa-minus text-slate-500"></i> Shorten</button>
               </div>
-
-              <!-- Color Palette -->
               <div class="flex items-center gap-1 bg-slate-100 p-1 rounded-xl border border-slate-200">
                 <button type="button" onclick="setPadColor(${idx}, '#1E3A8A')" class="w-4 h-4 rounded-full bg-blue-900 border border-white active:scale-90" title="Dark Blue"></button>
                 <button type="button" onclick="setPadColor(${idx}, '#0F172A')" class="w-4 h-4 rounded-full bg-slate-900 border border-white active:scale-90" title="Pencil Graphite"></button>
@@ -1686,29 +1669,19 @@
                 <button type="button" onclick="setPadColor(${idx}, '#059669')" class="w-4 h-4 rounded-full bg-emerald-600 border border-white active:scale-90" title="Green"></button>
                 <button type="button" onclick="setPadColor(${idx}, 'rgba(250, 204, 21, 0.45)')" class="w-4 h-4 rounded-full bg-amber-300 border border-white active:scale-90" title="Highlighter"></button>
               </div>
-
-              <button type="button" onclick="togglePadEraser(${idx})" id="pad-eraser-${idx}" class="px-2 py-1 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-600 border border-slate-200 text-xs font-bold flex items-center gap-1" title="Eraser">
-                <i class="fa-solid fa-eraser"></i>
-              </button>
-              <button type="button" onclick="undoPadCanvas(${idx})" class="p-1.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-600 border border-slate-200 text-xs" title="Undo">
-                <i class="fa-solid fa-rotate-left"></i>
-              </button>
-              <button type="button" onclick="clearPadCanvas(${idx})" class="p-1.5 rounded-xl bg-slate-100 hover:bg-rose-50 text-slate-400 hover:text-rose-600 border border-slate-200 text-xs" title="Clear Pad">
-                <i class="fa-solid fa-trash-can"></i>
-              </button>
+              <button type="button" onclick="togglePadEraser(${idx})" id="pad-eraser-${idx}" class="px-2 py-1 rounded-xl bg-slate-100 text-slate-600 border text-xs font-bold"><i class="fa-solid fa-eraser"></i></button>
+              <button type="button" onclick="undoPadCanvas(${idx})" class="p-1.5 rounded-xl bg-slate-100 text-slate-600 border text-xs"><i class="fa-solid fa-rotate-left"></i></button>
+              <button type="button" onclick="clearPadCanvas(${idx})" class="p-1.5 rounded-xl bg-slate-100 text-slate-400 hover:text-rose-600 border text-xs"><i class="fa-solid fa-trash-can"></i></button>
             </div>
           `;
         }
-
         const canvasContainer = document.createElement('div');
         canvasContainer.className = "stylus-canvas-container";
         canvasContainer.id = `stylus-container-${idx}`;
         canvasContainer.innerHTML = `<canvas class="stylus-canvas" id="stylus-canvas-${idx}"></canvas>`;
-
         ws.insertBefore(canvasContainer, textarea);
         textarea.id = `textarea-${idx}`;
         textarea.classList.add('hidden');
-
         initPadCanvas(idx);
       });
     }
@@ -1718,78 +1691,40 @@
     function initPadCanvas(idx) {
       const canvas = document.getElementById(`stylus-canvas-${idx}`);
       if (!canvas) return;
-
       const dpr = window.devicePixelRatio || 1;
       const rect = canvas.getBoundingClientRect();
-      const parentWidth = canvas.parentElement ? canvas.parentElement.clientWidth : 0;
-      let cssWidth = rect.width > 0 ? rect.width : (parentWidth > 0 ? parentWidth : 650);
-      if (!cssWidth || cssWidth <= 0) cssWidth = 650;
+      const cssWidth = rect.width > 0 ? rect.width : 650;
       const cssHeight = 380;
-
-      canvas.width = Math.max(1, Math.round(cssWidth * dpr));
-      canvas.height = Math.max(1, Math.round(cssHeight * dpr));
-      canvas.style.width = '100%';
-      canvas.style.height = '100%';
-
+      canvas.width = Math.round(cssWidth * dpr);
+      canvas.height = Math.round(cssHeight * dpr);
       const ctx = canvas.getContext('2d');
-      if (!ctx) return;
       ctx.scale(dpr, dpr);
       ctx.lineCap = 'round';
       ctx.lineJoin = 'round';
 
-      padState[idx] = {
-        ctx: ctx,
-        canvas: canvas,
-        color: '#1E3A8A',
-        isEraser: false,
-        size: 2.5,
-        drawing: false,
-        lastX: 0,
-        lastY: 0,
-        history: []
-      };
-
+      padState[idx] = { ctx, canvas, color: '#1E3A8A', isEraser: false, size: 2.5, drawing: false, lastX: 0, lastY: 0, history: [] };
       savePadState(idx);
 
-      // Differentiate Apple Pencil vs Finger touches at the TouchEvent level to prevent page scrolling
-      const handleStylusTouchStart = (e) => {
-        const hasStylus = Array.from(e.touches).some(t => t.touchType === 'stylus');
-        if (hasStylus) {
+      // Prevent page scrolling strictly when touching with Apple Pencil / Stylus
+      const handleTouchStart = (e) => {
+        const isStylus = e.pointerType === 'pen' || (e.touches && e.touches[0] && e.touches[0].touchType === 'stylus');
+        if (isStylus) {
           if (e.cancelable) e.preventDefault();
-          canvas.style.touchAction = 'none';
-        } else {
-          canvas.style.touchAction = 'pan-y pinch-zoom';
         }
       };
-
-      const handleStylusTouchMove = (e) => {
-        const hasStylus = Array.from(e.touches).some(t => t.touchType === 'stylus');
-        if (hasStylus) {
+      const handleTouchMove = (e) => {
+        const isStylus = e.pointerType === 'pen' || (e.touches && e.touches[0] && e.touches[0].touchType === 'stylus');
+        if (isStylus && padState[idx].drawing) {
           if (e.cancelable) e.preventDefault();
         }
       };
 
-      const handleStylusTouchEnd = (e) => {
-        const hasStylusRemaining = e.touches && Array.from(e.touches).some(t => t.touchType === 'stylus');
-        if (!hasStylusRemaining) {
-          canvas.style.touchAction = 'pan-y pinch-zoom';
-        }
-      };
-
-      canvas.addEventListener('touchstart', handleStylusTouchStart, { passive: false });
-      canvas.addEventListener('touchmove', handleStylusTouchMove, { passive: false });
-      canvas.addEventListener('touchend', handleStylusTouchEnd, { passive: false });
-      canvas.addEventListener('touchcancel', handleStylusTouchEnd, { passive: false });
+      canvas.addEventListener('touchstart', handleTouchStart, { passive: false });
+      canvas.addEventListener('touchmove', handleTouchMove, { passive: false });
 
       canvas.addEventListener('pointerdown', (e) => {
-        // Finger touch: allow native scrolling and ignore drawing
-        if (e.pointerType === 'touch') {
-          canvas.style.touchAction = 'pan-y pinch-zoom';
-          return;
-        }
-
-        // Apple Pencil / Stylus / Desktop Mouse: strictly lock scrolling and start drawing
-        canvas.style.touchAction = 'none';
+        const isStylus = e.pointerType === 'pen' || e.pointerType === 'mouse';
+        if (!isStylus) return; // Ignore fingers to allow natural page scrolling
         if (e.cancelable) e.preventDefault();
         try { canvas.setPointerCapture(e.pointerId); } catch (_) {}
         padState[idx].drawing = true;
@@ -1800,34 +1735,21 @@
 
       canvas.addEventListener('pointermove', (e) => {
         if (!padState[idx].drawing) return;
-        if (e.pointerType === 'touch') return;
+        const isStylus = e.pointerType === 'pen' || e.pointerType === 'mouse';
+        if (!isStylus) return;
         if (e.cancelable) e.preventDefault();
-
         const pos = getCanvasPos(canvas, e);
         const state = padState[idx];
         const ctx = state.ctx;
-
         ctx.beginPath();
         ctx.moveTo(state.lastX, state.lastY);
         ctx.lineTo(pos.x, pos.y);
-
-        if (state.isEraser) {
-          ctx.globalCompositeOperation = 'destination-out';
-          ctx.lineWidth = 24;
-        } else {
+        if (state.isEraser) { ctx.globalCompositeOperation = 'destination-out'; ctx.lineWidth = 24; }
+        else {
           ctx.globalCompositeOperation = 'source-over';
           ctx.strokeStyle = state.color;
-          let dynamicWidth = state.size;
-          if (e.pressure && e.pressure > 0) {
-            dynamicWidth = state.size * (0.6 + e.pressure * 1.4);
-          }
-          if (state.color.includes('rgba')) {
-            ctx.lineWidth = 16;
-          } else {
-            ctx.lineWidth = dynamicWidth;
-          }
+          ctx.lineWidth = e.pressure && e.pressure > 0 ? state.size * (0.6 + e.pressure * 1.4) : state.size;
         }
-
         ctx.stroke();
         state.lastX = pos.x;
         state.lastY = pos.y;
@@ -1839,9 +1761,7 @@
           savePadState(idx);
           try { canvas.releasePointerCapture(e.pointerId); } catch (_) {}
         }
-        canvas.style.touchAction = 'pan-y pinch-zoom';
       };
-
       canvas.addEventListener('pointerup', stopDraw);
       canvas.addEventListener('pointercancel', stopDraw);
     }
@@ -1851,66 +1771,39 @@
       const canvas = document.getElementById(`stylus-canvas-${idx}`);
       const state = padState[idx];
       if (!container || !canvas || !state) return;
-
       const clampedHeight = Math.max(180, Math.min(1600, Math.round(newCssHeight)));
-
       const offscreen = document.createElement('canvas');
-      offscreen.width = canvas.width;
-      offscreen.height = canvas.height;
+      offscreen.width = canvas.width; offscreen.height = canvas.height;
       const offCtx = offscreen.getContext('2d');
-      if (offCtx && canvas.width > 0 && canvas.height > 0) {
-        offCtx.drawImage(canvas, 0, 0);
-      }
+      if (offCtx && canvas.width > 0 && canvas.height > 0) offCtx.drawImage(canvas, 0, 0);
 
       const dpr = window.devicePixelRatio || 1;
       container.style.height = `${clampedHeight}px`;
-
-      const rect = canvas.getBoundingClientRect();
-      const cssWidth = rect.width > 0 ? rect.width : (container.clientWidth || 650);
-
-      canvas.width = Math.max(1, Math.round(cssWidth * dpr));
-      canvas.height = Math.max(1, Math.round(clampedHeight * dpr));
-      canvas.style.height = '100%';
-
+      const cssWidth = canvas.getBoundingClientRect().width || 650;
+      canvas.width = Math.round(cssWidth * dpr);
+      canvas.height = Math.round(clampedHeight * dpr);
       const ctx = canvas.getContext('2d');
       ctx.scale(dpr, dpr);
-      ctx.lineCap = 'round';
-      ctx.lineJoin = 'round';
+      ctx.lineCap = 'round'; ctx.lineJoin = 'round';
       state.ctx = ctx;
-
-      ctx.save();
-      ctx.setTransform(1, 0, 0, 1, 0, 0);
-      ctx.drawImage(offscreen, 0, 0);
-      ctx.restore();
-
+      ctx.save(); ctx.setTransform(1, 0, 0, 1, 0, 0); ctx.drawImage(offscreen, 0, 0); ctx.restore();
       savePadState(idx);
     }
 
     function adjustPadHeight(idx, delta) {
-      const textarea = document.getElementById(`textarea-${idx}`);
-      if (textarea && !textarea.classList.contains('hidden')) {
-        const currentH = textarea.offsetHeight;
-        textarea.style.height = `${Math.max(180, Math.min(1600, currentH + delta))}px`;
-        return;
-      }
-
       const container = document.getElementById(`stylus-container-${idx}`);
       if (!container) return;
-      const currentH = container.getBoundingClientRect().height;
-      resizePadCanvas(idx, currentH + delta);
+      resizePadCanvas(idx, container.clientHeight + delta);
     }
 
     function getCanvasPos(canvas, e) {
       const rect = canvas.getBoundingClientRect();
-      return {
-        x: e.clientX - rect.left,
-        y: e.clientY - rect.top
-      };
+      return { x: e.clientX - rect.left, y: e.clientY - rect.top };
     }
 
     function savePadState(idx) {
       const state = padState[idx];
-      if (!state || !state.canvas || state.canvas.width <= 0 || state.canvas.height <= 0) return;
+      if (!state || state.canvas.width <= 0) return;
       try {
         if (state.history.length > 20) state.history.shift();
         state.history.push(state.ctx.getImageData(0, 0, state.canvas.width, state.canvas.height));
@@ -1921,10 +1814,8 @@
       const state = padState[idx];
       if (!state || state.history.length <= 1) return;
       state.history.pop();
-      const previous = state.history[state.history.length - 1];
-      if (previous) {
-        state.ctx.putImageData(previous, 0, 0);
-      }
+      const prev = state.history[state.history.length - 1];
+      if (prev) state.ctx.putImageData(prev, 0, 0);
     }
 
     function clearPadCanvas(idx) {
@@ -1939,53 +1830,30 @@
       if (!state) return;
       state.color = color;
       state.isEraser = false;
-      const eraserBtn = document.getElementById(`pad-eraser-${idx}`);
-      if (eraserBtn) {
-        eraserBtn.classList.remove('bg-indigo-600', 'text-white');
-        eraserBtn.classList.add('bg-slate-100', 'text-slate-600');
-      }
     }
 
     function togglePadEraser(idx) {
       const state = padState[idx];
       if (!state) return;
       state.isEraser = !state.isEraser;
-      const eraserBtn = document.getElementById(`pad-eraser-${idx}`);
-      if (state.isEraser) {
-        if (eraserBtn) {
-          eraserBtn.classList.add('bg-indigo-600', 'text-white');
-          eraserBtn.classList.remove('bg-slate-100', 'text-slate-600');
-        }
-      } else {
-        if (eraserBtn) {
-          eraserBtn.classList.remove('bg-indigo-600', 'text-white');
-          eraserBtn.classList.add('bg-slate-100', 'text-slate-600');
-        }
-      }
     }
 
     function switchPadMode(idx, mode) {
       const canvasContainer = document.getElementById(`stylus-container-${idx}`);
       const textarea = document.getElementById(`textarea-${idx}`);
       const toolbar = document.getElementById(`pad-toolbar-${idx}`);
-      const penBtn = document.getElementById(`pad-btn-pen-${idx}`);
-      const textBtn = document.getElementById(`pad-btn-text-${idx}`);
-
       if (mode === 'pen') {
-        if (canvasContainer) canvasContainer.classList.remove('hidden');
-        if (textarea) textarea.classList.add('hidden');
-        if (toolbar) toolbar.classList.remove('hidden');
-        if (penBtn) penBtn.className = "px-2.5 py-1 rounded-lg text-xs font-bold bg-white text-blue-600 shadow-sm flex items-center gap-1 transition-all";
-        if (textBtn) textBtn.className = "px-2.5 py-1 rounded-lg text-xs font-bold text-slate-600 hover:text-slate-900 flex items-center gap-1 transition-all";
+        canvasContainer?.classList.remove('hidden');
+        textarea?.classList.add('hidden');
+        toolbar?.classList.remove('hidden');
       } else {
-        if (canvasContainer) canvasContainer.classList.add('hidden');
-        if (textarea) textarea.classList.remove('hidden');
-        if (toolbar) toolbar.classList.add('hidden');
-        if (penBtn) penBtn.className = "px-2.5 py-1 rounded-lg text-xs font-bold text-slate-600 hover:text-slate-900 flex items-center gap-1 transition-all";
-        if (textBtn) textBtn.className = "px-2.5 py-1 rounded-lg text-xs font-bold bg-white text-blue-600 shadow-sm flex items-center gap-1 transition-all";
+        canvasContainer?.classList.add('hidden');
+        textarea?.classList.remove('hidden');
+        toolbar?.classList.add('hidden');
       }
     }
 
+    /* Full-Screen iPad Screen Annotation Engine with Exact Coordinate Projection */
     let screenDrawActive = false;
     let screenCtx = null;
     let screenCanvas = null;
@@ -1993,86 +1861,73 @@
     let screenTool = 'pen';
     let screenHistory = [];
     let isScreenDrawing = false;
-    let screenLastX = 0, screenLastY = 0;
+
+    function getScreenCanvasPos(e) {
+      if (!screenCanvas) return { x: e.clientX, y: e.clientY };
+      const rect = screenCanvas.getBoundingClientRect();
+      const dpr = window.devicePixelRatio || 1;
+      const scaleX = (screenCanvas.width / dpr) / (rect.width || 1);
+      const scaleY = (screenCanvas.height / dpr) / (rect.height || 1);
+      return { x: (e.clientX - rect.left) * scaleX, y: (e.clientY - rect.top) * scaleY };
+    }
+
+    function resizeScreenCanvas() {
+      if (!screenCanvas || !screenCtx) return;
+      const dpr = window.devicePixelRatio || 1;
+      const rect = screenCanvas.getBoundingClientRect();
+      const w = rect.width > 0 ? rect.width : window.innerWidth;
+      const h = rect.height > 0 ? rect.height : window.innerHeight;
+      screenCanvas.width = Math.round(w * dpr);
+      screenCanvas.height = Math.round(h * dpr);
+      screenCtx.setTransform(1, 0, 0, 1, 0, 0);
+      screenCtx.scale(dpr, dpr);
+      screenCtx.lineCap = 'round';
+      screenCtx.lineJoin = 'round';
+    }
 
     function initScreenAnnotationSystem() {
       screenCanvas = document.getElementById('screen-draw-canvas');
       if (!screenCanvas) return;
-
-      const dpr = window.devicePixelRatio || 1;
-      const w = Math.max(1, window.innerWidth || document.documentElement.clientWidth || 1024);
-      const h = Math.max(1, window.innerHeight || document.documentElement.clientHeight || 768);
-      screenCanvas.width = Math.round(w * dpr);
-      screenCanvas.height = Math.round(h * dpr);
       screenCtx = screenCanvas.getContext('2d');
-      if (!screenCtx) return;
-      screenCtx.scale(dpr, dpr);
-      screenCtx.lineCap = 'round';
-      screenCtx.lineJoin = 'round';
+      resizeScreenCanvas();
 
-      const handleScreenTouch = (e) => {
-        if (screenDrawActive && e.cancelable) {
-          e.preventDefault();
-        }
-      };
-      screenCanvas.addEventListener('touchstart', handleScreenTouch, { passive: false });
-      screenCanvas.addEventListener('touchmove', handleScreenTouch, { passive: false });
-      screenCanvas.addEventListener('touchend', handleScreenTouch, { passive: false });
-
-      window.addEventListener('resize', () => {
-        if (!screenCanvas || !screenCtx) return;
-        const dpr = window.devicePixelRatio || 1;
-        const rw = Math.max(1, window.innerWidth || document.documentElement.clientWidth || 1024);
-        const rh = Math.max(1, window.innerHeight || document.documentElement.clientHeight || 768);
-        screenCanvas.width = Math.round(rw * dpr);
-        screenCanvas.height = Math.round(rh * dpr);
-        screenCtx.scale(dpr, dpr);
-        screenCtx.lineCap = 'round';
-        screenCtx.lineJoin = 'round';
-
-        Object.keys(padState).forEach(idx => {
-          const container = document.getElementById(`stylus-container-${idx}`);
-          if (container && container.clientHeight > 0) {
-            resizePadCanvas(idx, container.clientHeight);
-          }
-        });
-      });
+      window.addEventListener('resize', () => { if (screenDrawActive) resizeScreenCanvas(); });
 
       screenCanvas.addEventListener('pointerdown', (e) => {
         if (!screenDrawActive) return;
-        if (e.pointerType === 'touch') return;
+        const isStylus = e.pointerType === 'pen' || e.pointerType === 'mouse';
+        if (!isStylus) return; // Allow finger scrolling when overlay is active if desired
         if (e.cancelable) e.preventDefault();
         try { screenCanvas.setPointerCapture(e.pointerId); } catch (_) {}
         isScreenDrawing = true;
-        screenLastX = e.clientX;
-        screenLastY = e.clientY;
+        const pos = getScreenCanvasPos(e);
+        screenLastX = pos.x;
+        screenLastY = pos.y;
       });
 
       screenCanvas.addEventListener('pointermove', (e) => {
         if (!isScreenDrawing || !screenDrawActive || !screenCtx) return;
+        const isStylus = e.pointerType === 'pen' || e.pointerType === 'mouse';
+        if (!isStylus) return;
         if (e.cancelable) e.preventDefault();
-
+        const pos = getScreenCanvasPos(e);
         screenCtx.beginPath();
         screenCtx.moveTo(screenLastX, screenLastY);
-        screenCtx.lineTo(e.clientX, e.clientY);
-
+        screenCtx.lineTo(pos.x, pos.y);
         if (screenTool === 'eraser') {
           screenCtx.globalCompositeOperation = 'destination-out';
           screenCtx.lineWidth = 28;
         } else {
           screenCtx.globalCompositeOperation = 'source-over';
           screenCtx.strokeStyle = screenColor;
-          let w = 3.5;
-          if (e.pressure && e.pressure > 0) w = 3.5 * (0.6 + e.pressure * 1.3);
-          if (screenColor.includes('rgba')) w = 18;
-          screenCtx.lineWidth = w;
+          screenCtx.lineWidth = e.pressure && e.pressure > 0 ? 3.5 * (0.6 + e.pressure * 1.3) : 3.5;
         }
-
         screenCtx.stroke();
-        screenLastX = e.clientX;
-        screenLastY = e.clientY;
+        screenLastX = pos.x;
+        screenLastY = pos.y;
       });
 
+      let screenLastX = 0, screenLastY = 0;
       const stopScreenDraw = (e) => {
         if (isScreenDrawing) {
           isScreenDrawing = false;
@@ -2080,7 +1935,6 @@
           try { screenCanvas.releasePointerCapture(e.pointerId); } catch (_) {}
         }
       };
-
       screenCanvas.addEventListener('pointerup', stopScreenDraw);
       screenCanvas.addEventListener('pointercancel', stopScreenDraw);
     }
@@ -2089,81 +1943,43 @@
       const overlay = document.getElementById('screen-draw-overlay');
       const toggleBtn = document.getElementById('btn-screen-draw-toggle');
       screenDrawActive = !screenDrawActive;
-
       if (screenDrawActive) {
-        if (overlay) {
-          overlay.classList.remove('hidden', 'pointer-events-none');
-          overlay.classList.add('active');
-        }
-        if (toggleBtn) {
-          toggleBtn.classList.add('bg-indigo-600', 'text-white');
-          toggleBtn.classList.remove('bg-indigo-50', 'text-indigo-700');
-        }
+        overlay?.classList.remove('hidden', 'pointer-events-none');
+        overlay?.classList.add('active');
+        toggleBtn?.classList.add('bg-indigo-600', 'text-white');
+        toggleBtn?.classList.remove('bg-indigo-50', 'text-indigo-700');
+        setTimeout(resizeScreenCanvas, 50);
       } else {
-        if (overlay) {
-          overlay.classList.add('hidden', 'pointer-events-none');
-          overlay.classList.remove('active');
-        }
-        if (toggleBtn) {
-          toggleBtn.classList.remove('bg-indigo-600', 'text-white');
-          toggleBtn.classList.add('bg-indigo-50', 'text-indigo-700');
-        }
+        overlay?.classList.add('hidden', 'pointer-events-none');
+        overlay?.classList.remove('active');
+        toggleBtn?.classList.remove('bg-indigo-600', 'text-white');
+        toggleBtn?.classList.add('bg-indigo-50', 'text-indigo-700');
       }
     }
 
-    function setScreenColor(color) {
-      screenColor = color;
-      screenTool = 'pen';
-      const penBtn = document.getElementById('screen-tool-pen');
-      const eraserBtn = document.getElementById('screen-tool-eraser');
-      if (penBtn) penBtn.classList.add('bg-blue-600', 'text-white');
-      if (eraserBtn) eraserBtn.classList.remove('bg-blue-600', 'text-white');
-    }
-
-    function setScreenTool(tool) {
-      screenTool = tool;
-      const penBtn = document.getElementById('screen-tool-pen');
-      const eraserBtn = document.getElementById('screen-tool-eraser');
-      if (tool === 'eraser') {
-        if (eraserBtn) eraserBtn.classList.add('bg-blue-600', 'text-white');
-        if (penBtn) penBtn.classList.remove('bg-blue-600', 'text-white');
-      } else {
-        if (penBtn) penBtn.classList.add('bg-blue-600', 'text-white');
-        if (eraserBtn) eraserBtn.classList.remove('bg-blue-600', 'text-white');
-      }
-    }
-
+    function setScreenColor(color) { screenColor = color; screenTool = 'pen'; }
+    function setScreenTool(tool) { screenTool = tool; }
     function saveScreenState() {
-      if (!screenCtx || !screenCanvas || screenCanvas.width <= 0 || screenCanvas.height <= 0) return;
+      if (!screenCtx || !screenCanvas || screenCanvas.width <= 0) return;
       try {
         if (screenHistory.length > 20) screenHistory.shift();
         screenHistory.push(screenCtx.getImageData(0, 0, screenCanvas.width, screenCanvas.height));
       } catch (_) {}
     }
-
     function undoScreenDraw() {
-      if (!screenCtx || screenHistory.length <= 1) {
-        clearScreenDraw();
-        return;
-      }
+      if (!screenCtx || screenHistory.length <= 1) { clearScreenDraw(); return; }
       screenHistory.pop();
       const prev = screenHistory[screenHistory.length - 1];
-      if (prev) {
-        screenCtx.putImageData(prev, 0, 0);
-      }
+      if (prev) screenCtx.putImageData(prev, 0, 0);
     }
-
     function clearScreenDraw() {
       if (!screenCtx || !screenCanvas) return;
       screenCtx.clearRect(0, 0, screenCanvas.width, screenCanvas.height);
       screenHistory = [];
     }
 
-    function scrollToTop() {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
+    function scrollToTop() { window.scrollTo({ top: 0, behavior: 'smooth' }); }
 
-    /* Scroll listener for top-bar floating icon */
     window.addEventListener('scroll', () => {
       const scrollBtn = document.getElementById('scroll-to-top-btn');
       if (!scrollBtn) return;
@@ -2176,337 +1992,12 @@
       }
     });
 
-    /* DOM Ready Bootstrapper */
     window.addEventListener('DOMContentLoaded', () => {
       renderRevisionBank();
       renderQuiz();
       upgradeWorkspacesWithStylusSupport();
       initScreenAnnotationSystem();
     });
-
-    /* =========================================================================
-       GEMINI API INTEGRATION & AI TUTOR SYSTEM
-       ========================================================================= */
-    const GEMINI_SYSTEM_INSTRUCTION = `You are Mr Ahmed Abd El-Motaal's official AI Teaching Assistant for Egyptian Curriculum Math Prep 3 (First Term, Geometry Unit 3: Similarity of Polygons).
-Your role:
-- Guide students in clear, encouraging, pedagogically sound academic English.
-- Always use standard LaTeX math formatting for all formulas, ratios, and angles (e.g. $ABCD \\sim EFGH$, $k = \\frac{3}{2}$, $m(\\angle A) = 90^\\circ$).
-- Emphasize the two mandatory conditions for polygon similarity:
-  1) All corresponding angles must be congruent.
-  2) All corresponding side lengths must be proportional.
-- Explain special cases accurately: all squares are similar, regular polygons with the same number of sides are similar, rhombuses require one congruent angle pair, and rectangles require proportional dimension ratios.
-- Keep explanations structured, concise, and easy to read.`;
-
-    async function callGeminiApi(userPrompt, options = {}) {
-      const apiKey = ""; // Runtime automatically injects the Gemini API key
-      const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent?key=${apiKey}`;
-
-      const payload = {
-        contents: [{ parts: [{ text: userPrompt }] }],
-        systemInstruction: {
-          parts: [{ text: options.systemInstruction || GEMINI_SYSTEM_INSTRUCTION }]
-        }
-      };
-
-      if (options.generationConfig) {
-        payload.generationConfig = options.generationConfig;
-      }
-
-      const delays = [1000, 2000, 4000];
-      let lastError = null;
-
-      for (let attempt = 0; attempt <= delays.length; attempt++) {
-        try {
-          const response = await fetch(apiUrl, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(payload)
-          });
-
-          if (!response.ok) {
-            throw new Error(`HTTP ${response.status}: ${response.statusText}`);
-          }
-
-          const result = await response.json();
-          const candidate = result.candidates?.[0];
-          if (candidate?.content?.parts?.[0]?.text) {
-            return candidate.content.parts[0].text;
-          }
-          throw new Error("No response text generated.");
-        } catch (err) {
-          lastError = err;
-          if (attempt < delays.length) {
-            await new Promise(r => setTimeout(r, delays[attempt]));
-          }
-        }
-      }
-      throw lastError;
-    }
-
-    function toggleAiDrawer(show) {
-      const overlay = document.getElementById('ai-drawer-overlay');
-      if (!overlay) return;
-      if (show) {
-        overlay.classList.remove('hidden');
-        const input = document.getElementById('ai-chat-input');
-        if (input) setTimeout(() => input.focus(), 150);
-      } else {
-        overlay.classList.add('hidden');
-      }
-    }
-
-    function switchAiTab(tabName) {
-      const tabs = ['chat', 'generator', 'workspace'];
-      tabs.forEach(t => {
-        const view = document.getElementById(`ai-view-${t}`);
-        const btn = document.getElementById(`ai-tab-${t}`);
-        if (view) view.classList.add('hidden');
-        if (btn) {
-          btn.classList.remove('bg-white', 'text-blue-600', 'shadow-sm');
-          btn.classList.add('text-slate-600');
-        }
-      });
-
-      const activeView = document.getElementById(`ai-view-${tabName}`);
-      const activeBtn = document.getElementById(`ai-tab-${tabName}`);
-      if (activeView) activeView.classList.remove('hidden');
-      if (activeBtn) {
-        activeBtn.classList.add('bg-white', 'text-blue-600', 'shadow-sm');
-        activeBtn.classList.remove('text-slate-600');
-      }
-
-      if (window.MathJax && MathJax.typesetPromise) {
-        MathJax.typesetPromise();
-      }
-    }
-
-    function formatMarkdown(text) {
-      if (!text) return '';
-      let formatted = text
-        .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
-        .replace(/\*(.*?)\*/g, '<em>$1</em>')
-        .replace(/`([^`]+)`/g, '<code class="bg-slate-100 px-1 py-0.5 rounded font-mono text-xs">$1</code>')
-        .replace(/\n\n/g, '<br><br>')
-        .replace(/\n/g, '<br>');
-      return formatted;
-    }
-
-    async function handleAiChatSubmit(event) {
-      if (event) event.preventDefault();
-      const input = document.getElementById('ai-chat-input');
-      const sendBtn = document.getElementById('ai-chat-send-btn');
-      const container = document.getElementById('ai-chat-messages');
-      if (!input || !container) return;
-
-      const userQuery = input.value.trim();
-      if (!userQuery) return;
-
-      input.value = '';
-      if (sendBtn) sendBtn.disabled = true;
-
-      // Append user bubble
-      container.innerHTML += `
-        <div class="flex justify-end">
-          <div class="max-w-[85%] bg-blue-600 text-white p-3 rounded-2xl rounded-tr-none text-xs sm:text-sm shadow-sm">
-            ${userQuery}
-          </div>
-        </div>
-      `;
-
-      // Append typing indicator
-      const loaderId = 'ai-loader-' + Date.now();
-      container.innerHTML += `
-        <div id="${loaderId}" class="flex items-start gap-2.5">
-          <div class="w-7 h-7 rounded-xl bg-purple-100 text-purple-600 flex items-center justify-center text-xs flex-shrink-0 mt-1">
-            <i class="fa-solid fa-robot"></i>
-          </div>
-          <div class="bg-slate-100 p-3 rounded-2xl rounded-tl-none text-xs sm:text-sm text-slate-600 flex items-center gap-2">
-            <i class="fa-solid fa-circle-notch fa-spin text-purple-600"></i> Thinking & formulating answer...
-          </div>
-        </div>
-      `;
-      container.scrollTop = container.scrollHeight;
-
-      try {
-        const responseText = await callGeminiApi(userQuery);
-        const loader = document.getElementById(loaderId);
-        if (loader) loader.remove();
-
-        container.innerHTML += `
-          <div class="flex items-start gap-2.5">
-            <div class="w-7 h-7 rounded-xl bg-gradient-to-tr from-blue-600 to-indigo-600 text-white flex items-center justify-center text-xs flex-shrink-0 mt-1 shadow-sm">
-              <i class="fa-solid fa-sparkles"></i>
-            </div>
-            <div class="max-w-[90%] bg-slate-50 border border-slate-200/90 p-3.5 rounded-2xl rounded-tl-none text-xs sm:text-sm text-slate-800 space-y-2 leading-relaxed math-frame">
-              ${formatMarkdown(responseText)}
-            </div>
-          </div>
-        `;
-      } catch (err) {
-        const loader = document.getElementById(loaderId);
-        if (loader) loader.remove();
-        container.innerHTML += `
-          <div class="p-3 rounded-xl bg-rose-50 border border-rose-200 text-xs text-rose-700">
-            <i class="fa-solid fa-triangle-exclamation mr-1"></i> Unable to connect to Gemini API. Please try again.
-          </div>
-        `;
-      } finally {
-        if (sendBtn) sendBtn.disabled = false;
-        container.scrollTop = container.scrollHeight;
-        if (window.MathJax && MathJax.typesetPromise) {
-          MathJax.typesetPromise();
-        }
-      }
-    }
-
-    function sendQuickAiPrompt(promptText) {
-      const input = document.getElementById('ai-chat-input');
-      if (input) {
-        input.value = promptText;
-        handleAiChatSubmit();
-      }
-    }
-
-    async function generateAiProblem() {
-      const diff = document.getElementById('ai-gen-difficulty')?.value || 'standard';
-      const output = document.getElementById('ai-generated-output');
-      const btn = document.getElementById('ai-gen-btn');
-      if (!output || !btn) return;
-
-      btn.disabled = true;
-      btn.innerHTML = `<i class="fa-solid fa-circle-notch fa-spin"></i> Generating tailored problem...`;
-      output.classList.remove('hidden');
-      output.innerHTML = `
-        <div class="p-4 rounded-2xl bg-purple-50/50 border border-purple-200 text-xs text-purple-900 flex items-center gap-2">
-          <i class="fa-solid fa-wand-magic-sparkles fa-spin text-purple-600"></i> Mr Motaal AI is drafting a new Prep 3 question with step-by-step solution...
-        </div>
-      `;
-
-      const prompt = `Generate a brand-new practice geometry problem for Egyptian Prep 3 (Similarity of Polygons).
-Difficulty mode: ${diff}.
-Requirements:
-1. State the problem clearly with polygon names (e.g. $ABCD \\sim EFGH$), numerical side lengths, and angle measures.
-2. Ask 2 clear sub-questions (e.g., determine the scale factor $k$, find an unknown side length or variable $x$, or compute an angle).
-3. Include a detailed, complete step-by-step model solution.
-4. Format all math using LaTeX delimiters ($...$ for inline, $$...$$ for display).`;
-
-      try {
-        const generatedText = await callGeminiApi(prompt);
-        output.innerHTML = `
-          <div class="p-4 rounded-2xl bg-white border-2 border-purple-200 space-y-3 shadow-sm">
-            <div class="flex items-center justify-between border-b pb-2">
-              <span class="px-2.5 py-0.5 rounded-full bg-purple-100 text-purple-800 text-[11px] font-bold uppercase">
-                Generated Problem (${diff})
-              </span>
-              <span class="text-[10px] text-slate-400 font-mono">Gemini 3 Flash</span>
-            </div>
-            <div class="text-xs sm:text-sm text-slate-800 leading-relaxed math-frame space-y-2">
-              ${formatMarkdown(generatedText)}
-            </div>
-          </div>
-        `;
-      } catch (err) {
-        output.innerHTML = `
-          <div class="p-3 rounded-xl bg-rose-50 border border-rose-200 text-xs text-rose-700">
-            <i class="fa-solid fa-triangle-exclamation mr-1"></i> Failed to generate problem. Please try again.
-          </div>
-        `;
-      } finally {
-        btn.disabled = false;
-        btn.innerHTML = `<i class="fa-solid fa-sparkles"></i> <span>Generate New Problem</span>`;
-        if (window.MathJax && MathJax.typesetPromise) {
-          MathJax.typesetPromise();
-        }
-      }
-    }
-
-    function openAiWorkspaceHelper(idx) {
-      toggleAiDrawer(true);
-      switchAiTab('workspace');
-
-      const select = document.getElementById('ai-review-select');
-      if (select) {
-        if (idx === 0) select.value = '1.1';
-        else if (idx === 1) select.value = '1.2';
-        else if (idx === 2) select.value = '1.3';
-        else select.value = 'cinema';
-      }
-
-      // Check if student has typed notes in the corresponding textarea
-      const textarea = document.getElementById(`textarea-${idx}`);
-      const reviewNotes = document.getElementById('ai-review-notes');
-      if (textarea && textarea.value && reviewNotes) {
-        reviewNotes.value = textarea.value;
-      }
-    }
-
-    async function submitAiWorkspaceReview() {
-      const qVal = document.getElementById('ai-review-select')?.value || '1.1';
-      const notes = document.getElementById('ai-review-notes')?.value || '';
-      const output = document.getElementById('ai-review-output');
-      const btn = document.getElementById('ai-review-btn');
-      if (!output || !btn) return;
-
-      btn.disabled = true;
-      btn.innerHTML = `<i class="fa-solid fa-circle-notch fa-spin"></i> Reviewing work...`;
-      output.classList.remove('hidden');
-      output.innerHTML = `
-        <div class="p-3 rounded-2xl bg-emerald-50 border border-emerald-200 text-xs text-emerald-800 flex items-center gap-2">
-          <i class="fa-solid fa-circle-notch fa-spin text-emerald-600"></i> Checking your steps against Prep 3 geometry requirements...
-        </div>
-      `;
-
-      const prompt = `The student is solving Question ${qVal} in Similarity of Polygons.
-Student's working notes:
-"${notes || '(Student has not typed notes, please provide key tips and step-by-step checklist to solve Question ' + qVal + ')'}"
-
-Review instructions:
-1. Point out what is correct or missing in their logic (angle congruence verification and corresponding side length ratio calculation).
-2. Highlight the correct order of vertices to avoid inverted ratios.
-3. Provide a friendly pedagogical tip directly from Mr Ahmed Abd El-Motaal.
-4. Format all math formulas in LaTeX ($...$).`;
-
-      try {
-        const reviewText = await callGeminiApi(prompt);
-        output.innerHTML = `
-          <div class="p-4 rounded-2xl bg-white border-2 border-emerald-200 space-y-3 shadow-sm">
-            <div class="flex items-center gap-2 text-emerald-800 font-bold text-xs uppercase border-b pb-2">
-              <i class="fa-solid fa-check-double text-emerald-600"></i> Teacher Feedback & Analysis
-            </div>
-            <div class="text-xs sm:text-sm text-slate-800 leading-relaxed math-frame space-y-2">
-              ${formatMarkdown(reviewText)}
-            </div>
-          </div>
-        `;
-      } catch (err) {
-        output.innerHTML = `
-          <div class="p-3 rounded-xl bg-rose-50 border border-rose-200 text-xs text-rose-700">
-            <i class="fa-solid fa-triangle-exclamation mr-1"></i> Unable to complete review. Please try again.
-          </div>
-        `;
-      } finally {
-        btn.disabled = false;
-        btn.innerHTML = `<i class="fa-solid fa-magnifying-glass-chart"></i> <span>Analyze My Work</span>`;
-        if (window.MathJax && MathJax.typesetPromise) {
-          MathJax.typesetPromise();
-        }
-      }
-    }
-
-    function askAiAboutQuestion(qIdx, oIdx) {
-      const q = revisionQuestions[qIdx];
-      if (!q) return;
-      toggleAiDrawer(true);
-      switchAiTab('chat');
-
-      const userChoice = q.options[oIdx]?.text || '';
-      const prompt = `I was answering Revision Question ${qIdx + 1}:
-"${q.text}"
-I selected option (${q.options[oIdx]?.letter}): ${userChoice}.
-Can you please explain in simple terms why the correct answer is (${q.options[q.correctIndex].letter}) ${q.options[q.correctIndex].text}, and why my choice might be a common misconception in similarity of polygons?`;
-
-      sendQuickAiPrompt(prompt);
-    }
   </script>
 </body>
 </html>
