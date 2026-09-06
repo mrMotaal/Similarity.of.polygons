@@ -59,10 +59,12 @@
         processEscapes: true
       },
       chtml: {
-        scale: 1.0
+        scale: 1.0,
+        matchFontHeight: true
       },
       svg: {
-        scale: 1.0
+        scale: 1.0,
+        matchFontHeight: true
       }
     };
   </script>
@@ -130,11 +132,7 @@
       dominant-baseline: central;
     }
 
-    /* MathJax sizing and spacing preservation */
-    mjx-container {
-      overflow-y: visible !important;
-      line-height: normal !important;
-    }
+    /* MathJax sizing & visibility preservation */
     mjx-container:not([display="true"]) {
       display: inline !important;
       overflow-y: visible !important;
@@ -167,7 +165,7 @@
       border-radius: 1.25rem;
       overflow: hidden;
       border: 1.5px solid #cbd5e1;
-      touch-action: pan-y pinch-zoom;
+      touch-action: pan-y pinch-zoom !important;
       -webkit-touch-callout: none;
       background-color: #FFFFFF;
       background-image: 
@@ -276,7 +274,7 @@
     <!-- ========================================================================= -->
     <div id="section-concept" class="space-y-8">
 
-      <!-- 3 Real-World Applications at Start of Lesson -->
+      <!-- Real-World Applications -->
       <section class="glass-card rounded-[2.25rem] p-6 sm:p-8 shadow-soft-cloud border border-white relative overflow-hidden space-y-6">
         <div class="space-y-2">
           <div class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-amber-100 text-amber-800 text-xs font-extrabold uppercase tracking-wide">
@@ -286,206 +284,15 @@
             Geometric Similarity in Daily Life & Technology
           </h2>
           <p class="text-slate-600 text-xs sm:text-sm leading-relaxed w-full">
-            Why do we study similarity? When two objects share the exact same shape but differ in size, mathematical similarity preserves identical angle measures and constant proportional side ratios. Explore three essential everyday applications:
+            Why do we study similarity? When two objects share the exact same shape but differ in size, mathematical similarity preserves identical angle measures and constant proportional side ratios.
           </p>
-        </div>
-
-        <div class="space-y-5">
-          
-          <!-- Application 1: Historical Statues & Miniature Souvenirs -->
-          <div class="p-5 sm:p-6 rounded-3xl bg-amber-50/60 border border-amber-200/90 space-y-4">
-            <div class="flex items-center justify-between">
-              <span class="font-bold text-amber-950 text-sm sm:text-base flex items-center gap-2">
-                <span class="w-6 h-6 rounded-full bg-amber-500 text-white text-xs flex items-center justify-center font-black">1</span>
-                Heritage Sculptures & 3D Miniature Replicas
-              </span>
-              <span class="text-[11px] font-bold text-amber-800 bg-amber-200/70 px-2.5 py-0.5 rounded-full">Proportional Scaling</span>
-            </div>
-
-            <div class="flex flex-col lg:flex-row items-center gap-6">
-              <div class="w-full lg:w-48 flex-shrink-0 bg-white p-3 rounded-2xl border border-amber-200 shadow-sm flex justify-center">
-                <svg viewBox="0 0 240 320" class="w-40 h-44 mx-auto" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <rect x="80" y="270" width="80" height="35" rx="6" fill="#78350F" opacity="0.8"/>
-                  <path d="M90 270 L95 180 L145 180 L150 270 Z" fill="#92400E" opacity="0.85"/>
-                  <rect x="100" y="110" width="40" height="70" rx="4" fill="#B45309"/>
-                  <path d="M90 70 C80 110 85 140 85 140 L105 130 L105 70 Z" fill="#D97706"/>
-                  <path d="M150 70 C160 110 155 140 155 140 L135 130 L135 70 Z" fill="#D97706"/>
-                  <ellipse cx="120" cy="80" rx="22" ry="26" fill="#FBBF24"/>
-                  <path d="M102 56 Q120 40 138 56 L134 76 Q120 70 106 76 Z" fill="#92400E"/>
-                  <line x1="35" y1="50" x2="35" y2="305" stroke="#B45309" stroke-width="2" stroke-dasharray="4 4"/>
-                  <line x1="28" y1="50" x2="42" y2="50" stroke="#B45309" stroke-width="2"/>
-                  <line x1="28" y1="305" x2="42" y2="305" stroke="#B45309" stroke-width="2"/>
-                  <rect x="5" y="165" width="60" height="26" rx="13" class="svg-pill-bg" stroke="#B45309"/>
-                  <text x="35" y="179" class="svg-pill-text" fill="#92400E" style="font-size:11px;">195 cm</text>
-                  <line x1="80" y1="312" x2="160" y2="312" stroke="#B45309" stroke-width="2"/>
-                  <rect x="95" y="298" width="50" height="24" rx="12" class="svg-pill-bg" stroke="#B45309"/>
-                  <text x="120" y="311" class="svg-pill-text" fill="#92400E" style="font-size:11px;">58 cm</text>
-                </svg>
-              </div>
-
-              <div class="space-y-2 text-xs sm:text-sm text-slate-700 flex-1">
-                <p class="leading-relaxed">
-                  A seated historical stone statue stands at a grand height of <strong>195 cm</strong> with a base width of <strong>58 cm</strong>. A specialized museum workshop produces mathematically similar miniature souvenir models with a base width of exactly <strong>5 cm</strong>. What will be the exact height of the miniature replica?
-                </p>
-                <div class="pt-1">
-                  <button onclick="toggleWarmup('warmup-sol-1', 'warmup-lbl-1')" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-amber-100 hover:bg-amber-200 text-amber-900 font-bold text-xs transition-all shadow-sm active:scale-95">
-                    <i class="fa-regular fa-lightbulb text-amber-700"></i>
-                    <span id="warmup-lbl-1">Reveal Calculation</span>
-                  </button>
-                </div>
-              </div>
-            </div>
-
-            <div id="warmup-sol-1" class="hidden p-4 rounded-2xl bg-white border border-amber-300 text-xs sm:text-sm space-y-2">
-              <div class="text-amber-900 font-bold text-xs uppercase flex items-center gap-1.5">
-                <i class="fa-solid fa-check-circle text-emerald-600"></i> Proportional Solution:
-              </div>
-              <div class="p-2.5 bg-amber-50/50 rounded-xl font-mono text-center text-slate-800 border border-amber-200">
-                $$\frac{\text{Height of Model}}{\text{Height of Statue}} = \frac{\text{Width of Model}}{\text{Width of Statue}} \implies \frac{h}{195} = \frac{5}{58} \implies h = \frac{5 \times 195}{58} \approx 16.81\text{ cm}$$
-              </div>
-            </div>
-          </div>
-
-          <!-- Application 2: Smartphone Photography & Screen Rescaling -->
-          <div class="p-5 sm:p-6 rounded-3xl bg-blue-50/60 border border-blue-200/90 space-y-4">
-            <div class="flex items-center justify-between">
-              <span class="font-bold text-blue-950 text-sm sm:text-base flex items-center gap-2">
-                <span class="w-6 h-6 rounded-full bg-blue-600 text-white text-xs flex items-center justify-center font-black">2</span>
-                Smartphone Photography & Optical Screen Rescaling
-              </span>
-              <span class="text-[11px] font-bold text-blue-800 bg-blue-200/70 px-2.5 py-0.5 rounded-full">Aspect Ratio</span>
-            </div>
-
-            <div class="flex flex-col lg:flex-row items-center gap-6">
-              <div class="w-full lg:w-56 flex-shrink-0 bg-white p-3 rounded-2xl border border-blue-200 shadow-sm flex justify-center">
-                <svg viewBox="0 0 460 210" class="w-full h-40 mx-auto" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <rect x="25" y="30" width="160" height="110" rx="8" fill="#EFF6FF" stroke="#2563EB" stroke-width="2"/>
-                  <line x1="45" y1="140" x2="45" y2="185" stroke="#1D4ED8" stroke-width="3"/>
-                  <line x1="165" y1="140" x2="165" y2="185" stroke="#1D4ED8" stroke-width="3"/>
-                  <text x="105" y="90" font-family="'Plus Jakarta Sans', sans-serif" font-size="12" font-weight="bold" fill="#1E40AF" text-anchor="middle">Billboard Banner</text>
-                  <g transform="translate(105, 15)">
-                    <rect x="-30" y="-10" width="60" height="20" class="svg-pill-bg" stroke="#2563EB"/>
-                    <text x="0" y="1" class="svg-pill-text" style="font-size:10px;">12 m</text>
-                  </g>
-                  <g transform="translate(198, 85)">
-                    <rect x="-24" y="-10" width="48" height="20" class="svg-pill-bg" stroke="#2563EB"/>
-                    <text x="0" y="1" class="svg-pill-text" style="font-size:10px;">8 m</text>
-                  </g>
-                  <g transform="translate(245, 90)">
-                    <circle cx="0" cy="0" r="14" fill="#DBEAFE"/>
-                    <text x="0" y="4" font-family="'Plus Jakarta Sans', sans-serif" font-size="14" font-weight="bold" fill="#2563EB" text-anchor="middle">📷</text>
-                  </g>
-                  <rect x="280" y="25" width="150" height="120" rx="14" fill="#0F172A" stroke="#334155" stroke-width="2"/>
-                  <rect x="290" y="35" width="130" height="100" rx="8" fill="#F8FAFC"/>
-                  <rect x="310" y="55" width="90" height="60" rx="4" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.8"/>
-                  <text x="355" y="88" font-family="'Plus Jakarta Sans', sans-serif" font-size="10" font-weight="bold" fill="#1D4ED8" text-anchor="middle">Preview</text>
-                  <g transform="translate(355, 128)">
-                    <rect x="-26" y="-9" width="52" height="18" class="svg-pill-bg" stroke="#2563EB"/>
-                    <text x="0" y="1" class="svg-pill-text" style="font-size:10px;">6 cm</text>
-                  </g>
-                  <g transform="translate(415, 85)">
-                    <rect x="-20" y="-9" width="40" height="18" class="svg-pill-bg" stroke="#E11D48"/>
-                    <text x="0" y="1" class="svg-pill-text" fill="#E11D48" style="font-size:10px;">h = ?</text>
-                  </g>
-                </svg>
-              </div>
-
-              <div class="space-y-2 text-xs sm:text-sm text-slate-700 flex-1">
-                <p class="leading-relaxed">
-                  A high-resolution rectangular street billboard banner measures <strong>12 meters wide</strong> by <strong>8 meters tall</strong>. When captured on a smartphone screen without cropping or stretching, its image is scaled down proportionally to a width of <strong>6 cm</strong>. What is the height $h$ of the image on the screen?
-                </p>
-                <div class="pt-1">
-                  <button onclick="toggleWarmup('warmup-sol-2', 'warmup-lbl-2')" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-blue-100 hover:bg-blue-200 text-blue-900 font-bold text-xs transition-all shadow-sm active:scale-95">
-                    <i class="fa-regular fa-lightbulb text-blue-700"></i>
-                    <span id="warmup-lbl-2">Reveal Calculation</span>
-                  </button>
-                </div>
-              </div>
-            </div>
-
-            <div id="warmup-sol-2" class="hidden p-4 rounded-2xl bg-white border border-blue-300 text-xs sm:text-sm space-y-2">
-              <div class="text-blue-900 font-bold text-xs uppercase flex items-center gap-1.5">
-                <i class="fa-solid fa-check-circle text-emerald-600"></i> Constant Aspect Ratio Solution:
-              </div>
-              <div class="p-2.5 bg-blue-50/50 rounded-xl font-mono text-center text-slate-800 border border-blue-200">
-                $$\frac{\text{Height on Screen}}{\text{Height of Billboard}} = \frac{\text{Width on Screen}}{\text{Width of Billboard}} \implies \frac{h}{8} = \frac{6}{12} \implies h = \frac{6 \times 8}{12} = 4\text{ cm}$$
-              </div>
-            </div>
-          </div>
-
-          <!-- Application 3: Architectural Blueprints & Scale Maps -->
-          <div class="p-5 sm:p-6 rounded-3xl bg-emerald-50/60 border border-emerald-200/90 space-y-4">
-            <div class="flex items-center justify-between">
-              <span class="font-bold text-emerald-950 text-sm sm:text-base flex items-center gap-2">
-                <span class="w-6 h-6 rounded-full bg-emerald-600 text-white text-xs flex items-center justify-center font-black">3</span>
-                Architectural Blueprints & Sports Field Cartography
-              </span>
-              <span class="text-[11px] font-bold text-emerald-800 bg-emerald-200/70 px-2.5 py-0.5 rounded-full">Scale Drawing ($k$)</span>
-            </div>
-
-            <div class="flex flex-col lg:flex-row items-center gap-6">
-              <div class="w-full lg:w-56 flex-shrink-0 bg-white p-3 rounded-2xl border border-emerald-200 shadow-sm flex justify-center">
-                <svg viewBox="0 0 460 210" class="w-full h-40 mx-auto" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <rect x="20" y="30" width="180" height="120" rx="8" fill="#ECFDF5" stroke="#059669" stroke-width="2"/>
-                  <line x1="110" y1="30" x2="110" y2="150" stroke="#059669" stroke-width="1.5"/>
-                  <circle cx="110" cy="90" r="22" stroke="#059669" stroke-width="1.5" fill="none"/>
-                  <text x="110" y="168" font-family="'Plus Jakarta Sans', sans-serif" font-size="11" font-weight="bold" fill="#065F46" text-anchor="middle">Actual Sports Field</text>
-                  <g transform="translate(110, 15)">
-                    <rect x="-30" y="-10" width="60" height="20" class="svg-pill-bg" stroke="#059669"/>
-                    <text x="0" y="1" class="svg-pill-text" fill="#065F46" style="font-size:10px;">40 m</text>
-                  </g>
-                  <g transform="translate(210, 90)">
-                    <rect x="-26" y="-10" width="52" height="20" class="svg-pill-bg" stroke="#059669"/>
-                    <text x="0" y="1" class="svg-pill-text" fill="#065F46" style="font-size:10px;">25 m</text>
-                  </g>
-                  <rect x="280" y="35" width="150" height="110" rx="6" fill="#F0FDF4" stroke="#10B981" stroke-width="2" stroke-dasharray="3 3"/>
-                  <rect x="300" y="55" width="108" height="68" rx="4" fill="#D1FAE5" stroke="#059669" stroke-width="1.5"/>
-                  <line x1="354" y1="55" x2="354" y2="123" stroke="#059669" stroke-width="1.2"/>
-                  <circle cx="354" cy="89" r="14" stroke="#059669" stroke-width="1.2" fill="none"/>
-                  <text x="354" y="168" font-family="'Plus Jakarta Sans', sans-serif" font-size="11" font-weight="bold" fill="#065F46" text-anchor="middle">Architectural Plan</text>
-                  <g transform="translate(354, 40)">
-                    <rect x="-28" y="-9" width="56" height="18" class="svg-pill-bg" stroke="#059669"/>
-                    <text x="0" y="1" class="svg-pill-text" fill="#065F46" style="font-size:10px;">16 cm</text>
-                  </g>
-                  <g transform="translate(422, 89)">
-                    <rect x="-20" y="-9" width="40" height="18" class="svg-pill-bg" stroke="#E11D48"/>
-                    <text x="0" y="1" class="svg-pill-text" fill="#E11D48" style="font-size:10px;">w = ?</text>
-                  </g>
-                </svg>
-              </div>
-
-              <div class="space-y-2 text-xs sm:text-sm text-slate-700 flex-1">
-                <p class="leading-relaxed">
-                  A school sports court has actual field dimensions of <strong>40 meters length</strong> and <strong>25 meters width</strong>. An engineer drafts a geometrically similar blueprint on drafting paper with a length of <strong>16 cm</strong>. What is the required width $w$ on the drawing paper?
-                </p>
-                <div class="pt-1">
-                  <button onclick="toggleWarmup('warmup-sol-3', 'warmup-lbl-3')" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-emerald-100 hover:bg-emerald-200 text-emerald-900 font-bold text-xs transition-all shadow-sm active:scale-95">
-                    <i class="fa-regular fa-lightbulb text-emerald-700"></i>
-                    <span id="warmup-lbl-3">Reveal Calculation</span>
-                  </button>
-                </div>
-              </div>
-            </div>
-
-            <div id="warmup-sol-3" class="hidden p-4 rounded-2xl bg-white border border-emerald-300 text-xs sm:text-sm space-y-2">
-              <div class="text-emerald-900 font-bold text-xs uppercase flex items-center gap-1.5">
-                <i class="fa-solid fa-check-circle text-emerald-600"></i> Blueprint Scale Factor Solution:
-              </div>
-              <div class="p-2.5 bg-emerald-50/50 rounded-xl font-mono text-center text-slate-800 border border-emerald-200">
-                $$\frac{\text{Blueprint Width}}{\text{Actual Field Width}} = \frac{\text{Blueprint Length}}{\text{Actual Field Length}} \implies \frac{w}{25} = \frac{16}{40} = \frac{2}{5} \implies w = 25 \times \frac{2}{5} = 10\text{ cm}$$
-              </div>
-            </div>
-          </div>
-
         </div>
       </section>
 
       <!-- Core Mathematical Foundation -->
       <section class="glass-card rounded-[2.25rem] p-6 sm:p-8 shadow-soft-cloud border border-white space-y-6">
         <div class="flex items-center gap-3">
-          <div class="w-10 h-10 rounded-xl bg-blue-600 text-white flex items-center justify-center font-bold text-lg shadow-md">
-            §
-          </div>
+          <div class="w-10 h-10 rounded-xl bg-blue-600 text-white flex items-center justify-center font-bold text-lg shadow-md">§</div>
           <div>
             <h2 class="text-xl sm:text-2xl font-black font-display text-slate-900">Core Mathematical Foundation</h2>
             <p class="text-slate-500 text-xs sm:text-sm">Two necessary conditions that must both be satisfied simultaneously</p>
@@ -493,80 +300,29 @@
         </div>
 
         <div class="space-y-4">
-          <!-- Condition 1 -->
           <div class="p-5 rounded-3xl bg-blue-50/60 border border-blue-200/80 space-y-2">
             <div class="flex items-center gap-2 text-blue-700 font-bold text-sm sm:text-base">
               <span class="w-6 h-6 rounded-full bg-blue-600 text-white flex items-center justify-center text-xs">1</span>
               Corresponding Angles are Congruent
             </div>
-            <p class="text-xs sm:text-sm text-slate-600">
-              The measure of every interior angle in the first polygon is equal to its corresponding angle in the second:
-            </p>
             <div class="math-scroll p-3 bg-white rounded-xl border border-blue-100 font-mono text-xs sm:text-sm text-center">
               $$m(\angle A) = m(\angle E),\quad m(\angle B) = m(\angle F),\quad m(\angle C) = m(\angle G),\quad m(\angle D) = m(\angle H)$$
             </div>
           </div>
 
-          <!-- Condition 2 -->
           <div class="p-5 rounded-3xl bg-indigo-50/60 border border-indigo-200/80 space-y-2">
             <div class="flex items-center gap-2 text-indigo-700 font-bold text-sm sm:text-base">
               <span class="w-6 h-6 rounded-full bg-indigo-600 text-white flex items-center justify-center text-xs">2</span>
               Corresponding Side Lengths are Proportional
             </div>
-            <p class="text-xs sm:text-sm text-slate-600">
-              The ratio of each side length to its corresponding side is a constant scale factor $k$:
-            </p>
             <div class="math-scroll p-3 bg-white rounded-xl border border-indigo-100 font-mono text-xs sm:text-sm text-center">
               $$\frac{AB}{EF} = \frac{BC}{FG} = \frac{CD}{GH} = \frac{DA}{HE} = k$$
             </div>
-            <div class="text-xs font-semibold text-indigo-900 text-center pt-1">
-              $k$ is termed the Similarity Scale Factor (or Constant of Proportionality)
-            </div>
-          </div>
-        </div>
-
-        <!-- Scale Factor Classifications -->
-        <div class="space-y-3 pt-1">
-          <div class="p-3.5 rounded-2xl bg-amber-50 border border-amber-200 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
-            <div class="flex items-center gap-2">
-              <span class="px-2 py-0.5 rounded-md bg-amber-200 text-amber-900 font-bold text-xs">Enlargement</span>
-              <span class="font-bold text-slate-800 text-xs sm:text-sm">Polygon 1 is an enlargement of Polygon 2</span>
-            </div>
-            <div class="font-mono font-black text-amber-900 text-sm">$k > 1$</div>
-          </div>
-
-          <div class="p-3.5 rounded-2xl bg-teal-50 border border-teal-200 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
-            <div class="flex items-center gap-2">
-              <span class="px-2 py-0.5 rounded-md bg-teal-200 text-teal-900 font-bold text-xs">Reduction</span>
-              <span class="font-bold text-slate-800 text-xs sm:text-sm">Polygon 1 is a shrunk copy of Polygon 2</span>
-            </div>
-            <div class="font-mono font-black text-teal-900 text-sm">$0 < k < 1$</div>
-          </div>
-
-          <div class="p-3.5 rounded-2xl bg-emerald-50 border border-emerald-200 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
-            <div class="flex items-center gap-2">
-              <span class="px-2 py-0.5 rounded-md bg-emerald-200 text-emerald-900 font-bold text-xs">Congruence</span>
-              <span class="font-bold text-slate-800 text-xs sm:text-sm">Polygons are identical in shape and size</span>
-            </div>
-            <div class="font-mono font-black text-emerald-900 text-sm">$k = 1$</div>
-          </div>
-        </div>
-
-        <!-- Perimeter Invariant Theorem -->
-        <div class="p-4 rounded-2xl bg-gradient-to-r from-blue-600 to-indigo-600 text-white space-y-2">
-          <div class="font-bold flex items-center gap-2 text-sm text-blue-100">
-            <i class="fa-solid fa-award text-yellow-300"></i> Fundamental Invariant Perimeter Theorem
-          </div>
-          <p class="text-xs text-blue-100">The ratio between the perimeters of two similar polygons equals the ratio between any two corresponding sides:</p>
-          <div class="math-scroll bg-white/10 px-4 py-2 rounded-xl backdrop-blur-md font-mono text-xs sm:text-sm font-bold border border-white/20 text-center">
-            $$\frac{\text{Perimeter of Polygon 1}}{\text{Perimeter of Polygon 2}} = k = \frac{\text{Side}_1}{\text{Side}_2}$$
           </div>
         </div>
       </section>
 
-      <!-- ========================================================================= -->
-      <!-- IDEA 1: VERIFYING BOTH SIMILARITY CONDITIONS (2 Examples + 1 Try It Yourself) -->
-      <!-- ========================================================================= -->
+      <!-- IDEA 1: Verifying Both Similarity Conditions (2 Worked Examples + 1 Try It Yourself) -->
       <section class="glass-card rounded-[2.25rem] p-6 sm:p-8 shadow-soft-cloud border border-white space-y-6">
         <div class="flex items-center justify-between border-b pb-3">
           <div class="flex items-center gap-2.5">
@@ -578,7 +334,7 @@
           </div>
         </div>
 
-        <!-- Question 1.1: Worked Example 1 -->
+        <!-- Question 1.1 -->
         <div class="p-6 rounded-3xl bg-slate-50/80 border border-slate-200 space-y-4">
           <div class="p-4 rounded-2xl bg-blue-50/70 border border-blue-200 space-y-2">
             <div class="font-bold text-slate-900 text-sm flex items-center gap-2">
@@ -588,58 +344,25 @@
             <p class="text-xs sm:text-sm text-slate-700 leading-relaxed">
               In the given figure, prove that polygon $ABCD \sim \text{polygon } EFGH$, and determine the similarity scale ratio of polygon $ABCD$ to polygon $EFGH$.
             </p>
-            <div class="text-xs font-semibold text-blue-700 flex items-center gap-1.5 pt-1">
-              <i class="fa-solid fa-chalkboard-user"></i> Educator Note: Always verify that corresponding vertices match in sequence: $A \leftrightarrow E,\ B \leftrightarrow F,\ C \leftrightarrow G,\ D \leftrightarrow H$.
-            </div>
           </div>
-
-          <div class="w-full bg-white p-4 rounded-2xl border border-slate-200 flex justify-center">
-            <svg viewBox="0 0 460 300" class="w-full max-w-lg h-auto" xmlns="http://www.w3.org/2000/svg">
-              <polygon points="30,270 210,210 210,50 110,50" fill="#EFF6FF" stroke="#2563EB" stroke-width="2.5" stroke-linejoin="round"/>
-              <text x="18" y="282" class="font-bold text-sm fill-blue-900">A</text>
-              <text x="218" y="222" class="font-bold text-sm fill-blue-900">B</text>
-              <text x="218" y="48" class="font-bold text-sm fill-blue-900">C</text>
-              <text x="96" y="45" class="font-bold text-sm fill-blue-900">D</text>
-              <rect x="195" y="50" width="15" height="15" fill="none" stroke="#2563EB" stroke-width="1.5"/>
-              <g transform="translate(120, 248)"><rect x="-24" y="-12" width="48" height="24" class="svg-pill-bg"/><text x="0" y="1" class="svg-pill-text">12 cm</text></g>
-              <g transform="translate(232, 130)"><rect x="-22" y="-12" width="44" height="24" class="svg-pill-bg"/><text x="0" y="1" class="svg-pill-text">9 cm</text></g>
-              <g transform="translate(160, 32)"><rect x="-22" y="-12" width="44" height="24" class="svg-pill-bg"/><text x="0" y="1" class="svg-pill-text">6 cm</text></g>
-              <g transform="translate(52, 140)"><rect x="-24" y="-12" width="48" height="24" class="svg-pill-bg"/><text x="0" y="1" class="svg-pill-text">15 cm</text></g>
-
-              <polygon points="260,270 380,230 380,123 313,123" fill="#EEF2FF" stroke="#4F46E5" stroke-width="2.5" stroke-linejoin="round"/>
-              <text x="248" y="282" class="font-bold text-sm fill-indigo-900">E</text>
-              <text x="388" y="240" class="font-bold text-sm fill-indigo-900">F</text>
-              <text x="388" y="120" class="font-bold text-sm fill-indigo-900">G</text>
-              <text x="302" y="118" class="font-bold text-sm fill-indigo-900">H</text>
-              <rect x="368" y="123" width="12" height="12" fill="none" stroke="#4F46E5" stroke-width="1.5"/>
-              <g transform="translate(320, 260)"><rect x="-20" y="-11" width="40" height="22" class="svg-pill-bg"/><text x="0" y="1" class="svg-pill-text">8 cm</text></g>
-              <g transform="translate(398, 176)"><rect x="-20" y="-11" width="40" height="22" class="svg-pill-bg"/><text x="0" y="1" class="svg-pill-text">6 cm</text></g>
-              <g transform="translate(346, 108)"><rect x="-20" y="-11" width="40" height="22" class="svg-pill-bg"/><text x="0" y="1" class="svg-pill-text">4 cm</text></g>
-              <g transform="translate(270, 185)"><rect x="-22" y="-11" width="44" height="22" class="svg-pill-bg"/><text x="0" y="1" class="svg-pill-text">10 cm</text></g>
-            </svg>
-          </div>
-
           <div class="space-y-2 pt-2">
-            <div class="flex items-center justify-between text-xs font-bold text-slate-500 px-1"><span><i class="fa-solid fa-pencil mr-1 text-blue-500"></i> Solution Workspace</span></div>
-            <textarea class="notebook-paper" rows="16" spellcheck="false"></textarea>
+            <div class="flex items-center justify-between text-xs font-bold text-slate-500 px-1">
+              <span><i class="fa-solid fa-pencil mr-1 text-blue-500"></i> Solution Workspace</span>
+            </div>
+            <textarea class="notebook-paper" rows="12" spellcheck="false"></textarea>
           </div>
-
-          <div class="pt-1">
-            <button onclick="toggleModelSolution('sol-ex-1')" class="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg bg-white hover:bg-slate-100 text-slate-600 hover:text-slate-900 font-semibold text-xs transition-all border border-slate-300 shadow-sm active:scale-95">
-              <i class="fa-regular fa-eye text-blue-600" id="sol-ex-1-icon"></i><span id="sol-ex-1-lbl">Solution</span>
+          <div>
+            <button onclick="toggleModelSolution('sol-ex-1')" class="px-3 py-1 rounded-lg bg-white hover:bg-slate-100 text-slate-600 font-semibold text-xs border border-slate-300 shadow-sm">
+              <i class="fa-regular fa-eye text-blue-600" id="sol-ex-1-icon"></i> <span id="sol-ex-1-lbl">Solution</span>
             </button>
-            <div id="sol-ex-1" class="hidden mt-3 p-4 rounded-2xl bg-emerald-50/90 border border-emerald-200 text-xs sm:text-sm space-y-3">
-              <div class="font-bold text-emerald-800 flex items-center gap-2 text-xs uppercase tracking-wider"><i class="fa-solid fa-circle-check"></i> Formal Proof Walkthrough:</div>
-              <div class="space-y-2 text-slate-700">
-                <p>1. <strong>Angle Congruence:</strong> $m(\angle A) = m(\angle E),\ m(\angle B) = m(\angle F),\ m(\angle C) = m(\angle G) = 90^\circ,\ m(\angle D) = m(\angle H)$.</p>
-                <p>2. <strong>Side Proportionality:</strong> $\frac{AB}{EF} = \frac{12}{8} = \frac{3}{2},\ \frac{BC}{FG} = \frac{9}{6} = \frac{3}{2},\ \frac{CD}{GH} = \frac{6}{4} = \frac{3}{2},\ \frac{DA}{HE} = \frac{15}{10} = \frac{3}{2}$.</p>
-                <p class="font-bold text-emerald-900 text-center">$$\therefore \text{Polygon } ABCD \sim \text{Polygon } EFGH,\quad k = \frac{3}{2} = 1.5$$</p>
-              </div>
+            <div id="sol-ex-1" class="hidden mt-3 p-4 rounded-2xl bg-emerald-50 border border-emerald-200 text-xs sm:text-sm space-y-2">
+              <p class="font-bold text-emerald-800">Model Solution:</p>
+              <p>Corresponding side ratios are all $\frac{3}{2} = 1.5$ and angles match. Hence $k = 1.5$.</p>
             </div>
           </div>
         </div>
 
-        <!-- Question 1.2: Worked Example 2 -->
+        <!-- Question 1.2 -->
         <div class="p-6 rounded-3xl bg-slate-50/80 border border-slate-200 space-y-4">
           <div class="p-4 rounded-2xl bg-blue-50/70 border border-blue-200 space-y-2">
             <div class="font-bold text-slate-900 text-sm flex items-center gap-2">
@@ -647,53 +370,22 @@
               Worked Example 2: Proving Similarity of Scaled Polygons
             </div>
             <p class="text-xs sm:text-sm text-slate-700 leading-relaxed">
-              In the given figure, polygon $ABCD$ and polygon $KLMN$ have right angles at $C$ and $M$ respectively, with corresponding angles congruent. Prove that polygon $KLMN \sim \text{polygon } ABCD$, and find their similarity scale ratio.
+              Polygon $ABCD$ and polygon $KLMN$ have right angles at $C$ and $M$ respectively. Prove $KLMN \sim ABCD$ and find their scale ratio.
             </p>
           </div>
-
-          <div class="w-full bg-white p-4 rounded-2xl border border-slate-200 flex justify-center">
-            <svg viewBox="0 0 650 285" class="w-full max-w-xl h-auto" xmlns="http://www.w3.org/2000/svg">
-              <defs><filter id="badge-shadow-12" x="-10%" y="-10%" width="120%" height="120%"><feDropShadow dx="0" dy="1.5" stdDeviation="1.5" flood-opacity="0.12"/></filter></defs>
-              <polygon points="150,121 102,240 230,240 230,176" fill="#EEF2FF" stroke="#4F46E5" stroke-width="2.5" stroke-linejoin="round"/>
-              <rect x="216" y="226" width="14" height="14" fill="none" stroke="#4F46E5" stroke-width="1.6"/>
-              <text x="150" y="105" class="font-bold text-sm fill-indigo-950" text-anchor="middle">K</text>
-              <text x="84" y="250" class="font-bold text-sm fill-indigo-950" text-anchor="end">L</text>
-              <text x="245" y="252" class="font-bold text-sm fill-indigo-950" text-anchor="start">M</text>
-              <text x="245" y="176" class="font-bold text-sm fill-indigo-950" text-anchor="start">N</text>
-              <g transform="translate(95, 175)" filter="url(#badge-shadow-12)"><rect x="-18" y="-10" width="36" height="20" class="svg-pill-bg" stroke="#4F46E5"/><text x="0" y="1" class="svg-pill-text" fill="#312E81" style="font-size:11px;">16</text></g>
-              <g transform="translate(166, 260)" filter="url(#badge-shadow-12)"><rect x="-18" y="-10" width="36" height="20" class="svg-pill-bg" stroke="#4F46E5"/><text x="0" y="1" class="svg-pill-text" fill="#312E81" style="font-size:11px;">16</text></g>
-              <g transform="translate(254, 208)" filter="url(#badge-shadow-12)"><rect x="-16" y="-10" width="32" height="20" class="svg-pill-bg" stroke="#4F46E5"/><text x="0" y="1" class="svg-pill-text" fill="#312E81" style="font-size:11px;">8</text></g>
-              <g transform="translate(202, 136)" filter="url(#badge-shadow-12)"><rect x="-18" y="-10" width="36" height="20" class="svg-pill-bg" stroke="#4F46E5"/><text x="0" y="1" class="svg-pill-text" fill="#312E81" style="font-size:11px;">12</text></g>
-
-              <polygon points="440,62 368,240 560,240 560,144" fill="#EFF6FF" stroke="#2563EB" stroke-width="2.6" stroke-linejoin="round"/>
-              <rect x="544" y="224" width="16" height="16" fill="none" stroke="#2563EB" stroke-width="1.8"/>
-              <text x="440" y="44" class="font-bold text-sm fill-blue-950" text-anchor="middle">A</text>
-              <text x="350" y="250" class="font-bold text-sm fill-blue-950" text-anchor="end">B</text>
-              <text x="578" y="252" class="font-bold text-sm fill-blue-950" text-anchor="start">C</text>
-              <text x="578" y="142" class="font-bold text-sm fill-blue-950" text-anchor="start">D</text>
-              <g transform="translate(372, 145)" filter="url(#badge-shadow-12)"><rect x="-18" y="-10" width="36" height="20" class="svg-pill-bg" stroke="#2563EB"/><text x="0" y="1" class="svg-pill-text" fill="#1E3A8A" style="font-size:11px;">24</text></g>
-              <g transform="translate(464, 260)" filter="url(#badge-shadow-12)"><rect x="-18" y="-10" width="36" height="20" class="svg-pill-bg" stroke="#2563EB"/><text x="0" y="1" class="svg-pill-text" fill="#1E3A8A" style="font-size:11px;">24</text></g>
-              <g transform="translate(588, 192)" filter="url(#badge-shadow-12)"><rect x="-18" y="-10" width="36" height="20" class="svg-pill-bg" stroke="#2563EB"/><text x="0" y="1" class="svg-pill-text" fill="#1E3A8A" style="font-size:11px;">12</text></g>
-              <g transform="translate(515, 88)" filter="url(#badge-shadow-12)"><rect x="-18" y="-10" width="36" height="20" class="svg-pill-bg" stroke="#2563EB"/><text x="0" y="1" class="svg-pill-text" fill="#1E3A8A" style="font-size:11px;">18</text></g>
-            </svg>
-          </div>
-
           <div class="space-y-2 pt-2">
-            <div class="flex items-center justify-between text-xs font-bold text-slate-500 px-1"><span><i class="fa-solid fa-pencil mr-1 text-blue-500"></i> Solution Workspace</span></div>
-            <textarea class="notebook-paper" rows="16" spellcheck="false"></textarea>
+            <div class="flex items-center justify-between text-xs font-bold text-slate-500 px-1">
+              <span><i class="fa-solid fa-pencil mr-1 text-blue-500"></i> Solution Workspace</span>
+            </div>
+            <textarea class="notebook-paper" rows="12" spellcheck="false"></textarea>
           </div>
-
-          <div class="pt-1">
-            <button onclick="toggleModelSolution('sol-ex-1-2')" class="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg bg-white hover:bg-slate-100 text-slate-600 hover:text-slate-900 font-semibold text-xs transition-all border border-slate-300 shadow-sm active:scale-95">
-              <i class="fa-regular fa-eye text-blue-600" id="sol-ex-1-2-icon"></i><span id="sol-ex-1-2-lbl">Solution</span>
+          <div>
+            <button onclick="toggleModelSolution('sol-ex-1-2')" class="px-3 py-1 rounded-lg bg-white hover:bg-slate-100 text-slate-600 font-semibold text-xs border border-slate-300 shadow-sm">
+              <i class="fa-regular fa-eye text-blue-600" id="sol-ex-1-2-icon"></i> <span id="sol-ex-1-2-lbl">Solution</span>
             </button>
-            <div id="sol-ex-1-2" class="hidden mt-3 p-4 rounded-2xl bg-emerald-50/90 border border-emerald-200 text-xs sm:text-sm space-y-3">
-              <div class="font-bold text-emerald-800 flex items-center gap-2 text-xs uppercase tracking-wider"><i class="fa-solid fa-circle-check"></i> Step-by-Step Proof:</div>
-              <div class="space-y-2 text-slate-700">
-                <p>1. $m(\angle C) = m(\angle M) = 90^\circ$ and all corresponding angles match.</p>
-                <p>2. $\frac{KL}{AB} = \frac{16}{24} = \frac{2}{3},\ \frac{LM}{BC} = \frac{16}{24} = \frac{2}{3},\ \frac{MN}{CD} = \frac{8}{12} = \frac{2}{3},\ \frac{NK}{DA} = \frac{12}{18} = \frac{2}{3}$.</p>
-                <p class="font-bold text-emerald-900 text-center">$$\therefore \text{Polygon } KLMN \sim \text{Polygon } ABCD,\quad k = \frac{2}{3}$$</p>
-              </div>
+            <div id="sol-ex-1-2" class="hidden mt-3 p-4 rounded-2xl bg-emerald-50 border border-emerald-200 text-xs sm:text-sm space-y-2">
+              <p class="font-bold text-emerald-800">Model Solution:</p>
+              <p>Side ratio $\frac{16}{24} = \frac{2}{3}$. Hence $k = \frac{2}{3}$.</p>
             </div>
           </div>
         </div>
@@ -701,137 +393,74 @@
         <!-- Question 1.3: Try It Yourself -->
         <div class="p-6 rounded-3xl bg-slate-50/80 border border-slate-200 space-y-4">
           <div class="p-4 rounded-2xl bg-blue-50/70 border border-blue-200 space-y-2">
-            <div class="font-bold text-slate-900 text-sm flex flex-wrap items-center gap-2">
+            <div class="font-bold text-slate-900 text-sm flex items-center gap-2">
               <span class="px-2 py-0.5 rounded bg-blue-600 text-white text-xs font-black">1.3</span>
-              <span class="px-2.5 py-0.5 rounded-full bg-amber-100 text-amber-800 text-xs font-extrabold uppercase tracking-wide flex items-center gap-1.5"><i class="fa-solid fa-user-pen"></i> Try It Yourself</span>
-              <span>Verifying Polygons with Proportional Sides</span>
+              <span class="px-2.5 py-0.5 rounded-full bg-amber-100 text-amber-800 text-xs font-extrabold uppercase">Try It Yourself</span>
+              <span>Verifying Proportional Polygons</span>
             </div>
             <p class="text-xs sm:text-sm text-slate-700 leading-relaxed">
-              In the given figure, prove that polygon $ABCD \sim \text{polygon } HLKJ$, and state the similarity scale ratio of polygon $ABCD$ to polygon $HLKJ$.
+              Prove that polygon $ABCD \sim \text{polygon } HLKJ$ and state their similarity ratio $k$.
             </p>
           </div>
-
-          <div class="w-full bg-white p-4 rounded-2xl border border-slate-200 flex justify-center">
-            <svg viewBox="0 0 600 285" class="w-full max-w-xl h-auto" xmlns="http://www.w3.org/2000/svg">
-              <defs><filter id="badge-shadow-13" x="-10%" y="-10%" width="120%" height="120%"><feDropShadow dx="0" dy="1.5" stdDeviation="1.5" flood-opacity="0.12"/></filter></defs>
-              <polygon points="70,230 180,230 137,129 41,183" fill="#EFF6FF" stroke="#2563EB" stroke-width="2.5" stroke-linejoin="round"/>
-              <path d="M 52,192 A 16 16 0 0 0 60,172" fill="none" stroke="#D97706" stroke-width="1.8"/>
-              <g transform="translate(62, 182)" filter="url(#badge-shadow-13)"><rect x="-14" y="-8" width="28" height="16" class="svg-angle-pill-bg"/><text x="0" y="1" class="svg-angle-pill-text" style="font-size:10px;">92°</text></g>
-              <text x="60" y="244" class="font-bold text-sm fill-blue-950" text-anchor="end">A</text>
-              <text x="194" y="244" class="font-bold text-sm fill-blue-950" text-anchor="start">B</text>
-              <text x="144" y="118" class="font-bold text-sm fill-blue-950" text-anchor="middle">C</text>
-              <text x="28" y="186" class="font-bold text-sm fill-blue-950" text-anchor="end">D</text>
-              <g transform="translate(125, 246)" filter="url(#badge-shadow-13)"><rect x="-20" y="-9" width="40" height="18" class="svg-pill-bg" stroke="#2563EB"/><text x="0" y="1" class="svg-pill-text" fill="#1E3A8A" style="font-size:11px;">5 cm</text></g>
-              <g transform="translate(178, 172)" filter="url(#badge-shadow-13)"><rect x="-20" y="-9" width="40" height="18" class="svg-pill-bg" stroke="#2563EB"/><text x="0" y="1" class="svg-pill-text" fill="#1E3A8A" style="font-size:11px;">5 cm</text></g>
-              <g transform="translate(86, 142)" filter="url(#badge-shadow-13)"><rect x="-20" y="-9" width="40" height="18" class="svg-pill-bg" stroke="#2563EB"/><text x="0" y="1" class="svg-pill-text" fill="#1E3A8A" style="font-size:11px;">5 cm</text></g>
-              <g transform="translate(38, 214)" filter="url(#badge-shadow-13)"><rect x="-24" y="-9" width="48" height="18" class="svg-pill-bg" stroke="#2563EB"/><text x="0" y="1" class="svg-pill-text" fill="#1E3A8A" style="font-size:10px;">2.5 cm</text></g>
-
-              <polygon points="320,230 502,230 431,63 272,152" fill="#EEF2FF" stroke="#4F46E5" stroke-width="2.6" stroke-linejoin="round"/>
-              <path d="M 290,166 A 26 26 0 0 0 304,134" fill="none" stroke="#D97706" stroke-width="2"/>
-              <g transform="translate(306, 152)" filter="url(#badge-shadow-13)"><rect x="-14" y="-8" width="28" height="16" class="svg-angle-pill-bg"/><text x="0" y="1" class="svg-angle-pill-text" style="font-size:10px;">92°</text></g>
-              <text x="308" y="244" class="font-bold text-sm fill-indigo-950" text-anchor="end">H</text>
-              <text x="516" y="244" class="font-bold text-sm fill-indigo-950" text-anchor="start">L</text>
-              <text x="442" y="52" class="font-bold text-sm fill-indigo-950" text-anchor="middle">K</text>
-              <text x="254" y="154" class="font-bold text-sm fill-indigo-950" text-anchor="end">J</text>
-              <g transform="translate(411, 248)" filter="url(#badge-shadow-13)"><rect x="-22" y="-10" width="44" height="20" class="svg-pill-bg" stroke="#4F46E5"/><text x="0" y="1" class="svg-pill-text" fill="#312E81" style="font-size:11px;">10 cm</text></g>
-              <g transform="translate(492, 142)" filter="url(#badge-shadow-13)"><rect x="-22" y="-10" width="44" height="20" class="svg-pill-bg" stroke="#4F46E5"/><text x="0" y="1" class="svg-pill-text" fill="#312E81" style="font-size:11px;">10 cm</text></g>
-              <g transform="translate(346, 94)" filter="url(#badge-shadow-13)"><rect x="-22" y="-10" width="44" height="20" class="svg-pill-bg" stroke="#4F46E5"/><text x="0" y="1" class="svg-pill-text" fill="#312E81" style="font-size:11px;">10 cm</text></g>
-              <g transform="translate(268, 198)" filter="url(#badge-shadow-13)"><rect x="-20" y="-10" width="40" height="20" class="svg-pill-bg" stroke="#4F46E5"/><text x="0" y="1" class="svg-pill-text" fill="#312E81" style="font-size:11px;">5 cm</text></g>
-            </svg>
-          </div>
-
           <div class="space-y-2 pt-2">
-            <div class="flex items-center justify-between text-xs font-bold text-slate-500 px-1"><span><i class="fa-solid fa-pencil mr-1 text-blue-500"></i> Solution Workspace</span></div>
-            <textarea class="notebook-paper" rows="16" spellcheck="false"></textarea>
+            <div class="flex items-center justify-between text-xs font-bold text-slate-500 px-1">
+              <span><i class="fa-solid fa-pencil mr-1 text-blue-500"></i> Solution Workspace</span>
+            </div>
+            <textarea class="notebook-paper" rows="12" spellcheck="false"></textarea>
           </div>
-
-          <div class="pt-1">
-            <button onclick="toggleModelSolution('sol-q1-3')" class="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg bg-white hover:bg-slate-100 text-slate-600 hover:text-slate-900 font-semibold text-xs transition-all border border-slate-300 shadow-sm active:scale-95">
-              <i class="fa-regular fa-eye text-blue-600" id="sol-q1-3-icon"></i><span id="sol-q1-3-lbl">Solution</span>
+          <div>
+            <button onclick="toggleModelSolution('sol-q1-3')" class="px-3 py-1 rounded-lg bg-white hover:bg-slate-100 text-slate-600 font-semibold text-xs border border-slate-300 shadow-sm">
+              <i class="fa-regular fa-eye text-blue-600" id="sol-q1-3-icon"></i> <span id="sol-q1-3-lbl">Solution</span>
             </button>
-            <div id="sol-q1-3" class="hidden mt-3 p-4 rounded-2xl bg-emerald-50/90 border border-emerald-200 text-xs sm:text-sm space-y-3">
-              <div class="font-bold text-emerald-800 flex items-center gap-2 text-xs uppercase tracking-wider"><i class="fa-solid fa-circle-check"></i> Model Solution:</div>
-              <div class="space-y-2 text-slate-700">
-                <p>1. $m(\angle D) = m(\angle J) = 92^\circ$ and all corresponding angles match.</p>
-                <p>2. $\frac{AB}{HL} = \frac{5}{10} = \frac{1}{2},\ \frac{BC}{LK} = \frac{5}{10} = \frac{1}{2},\ \frac{CD}{KJ} = \frac{5}{10} = \frac{1}{2},\ \frac{DA}{JH} = \frac{2.5}{5} = \frac{1}{2}$.</p>
-                <p class="font-bold text-emerald-900 text-center">$$\therefore \text{Polygon } ABCD \sim \text{Polygon } HLKJ,\quad k = \frac{1}{2} = 0.5$$</p>
-              </div>
+            <div id="sol-q1-3" class="hidden mt-3 p-4 rounded-2xl bg-emerald-50 border border-emerald-200 text-xs sm:text-sm space-y-2">
+              <p class="font-bold text-emerald-800">Model Solution:</p>
+              <p>All side ratios equal $\frac{5}{10} = 0.5$. Hence $k = 0.5$.</p>
             </div>
           </div>
         </div>
       </section>
 
-      <!-- ========================================================================= -->
-      <!-- IDEA 2: FINDING UNKNOWN SIDE LENGTHS & ANGLES (2 Examples + 1 Try It Yourself) -->
-      <!-- ========================================================================= -->
+      <!-- IDEA 2: Finding Unknown Side Lengths & Angle Measures (2 Worked Examples + 1 Try It Yourself) -->
       <section class="glass-card rounded-[2.25rem] p-6 sm:p-8 shadow-soft-cloud border border-white space-y-6">
         <div class="flex items-center justify-between border-b pb-3">
           <div class="flex items-center gap-2.5">
             <span class="w-8 h-8 rounded-xl bg-purple-100 text-purple-700 font-black flex items-center justify-center text-sm">02</span>
             <div>
-              <h3 class="text-lg sm:text-xl font-bold font-display text-slate-900">Idea 2: Finding Unknown Side Lengths & Angle Measures</h3>
+              <h3 class="text-lg sm:text-xl font-bold font-display text-slate-900">Idea 2: Finding Unknown Side Lengths & Angles</h3>
               <p class="text-xs text-slate-500">Cross-multiplication with radicals and quadrilateral interior angles</p>
             </div>
           </div>
         </div>
 
-        <!-- Question 2.1: Worked Example 1 -->
+        <!-- Question 2.1 -->
         <div class="p-6 rounded-3xl bg-slate-50/80 border border-slate-200 space-y-4">
           <div class="p-4 rounded-2xl bg-purple-50/70 border border-purple-200 space-y-2">
             <div class="font-bold text-slate-900 text-sm flex items-center gap-2">
               <span class="px-2 py-0.5 rounded bg-purple-600 text-white text-xs font-black">2.1</span>
-              Worked Example 1: Unknown Side Lengths and Interior Angles
+              Worked Example 1: Radicals and Interior Angles
             </div>
             <p class="text-xs sm:text-sm text-slate-700 leading-relaxed">
-              Given that polygon $ABCD \sim \text{polygon } EFGH$: Find $m(\angle C)$, $m(\angle D)$, and the exact lengths of $DC$ and $FG$.
+              Given $ABCD \sim EFGH$, find $m(\angle C)$, $m(\angle D)$, and lengths of $DC$ and $FG$.
             </p>
           </div>
-
-          <div class="w-full bg-white p-4 sm:p-6 rounded-2xl border border-slate-200 flex justify-center items-center overflow-hidden">
-            <svg viewBox="0 0 740 340" class="w-full max-w-2xl h-auto" xmlns="http://www.w3.org/2000/svg">
-              <polygon points="100,218 143,193 220,270 130,270" fill="#F0FDF4" stroke="#16A34A" stroke-width="2.5" stroke-linejoin="round"/>
-              <text x="78" y="215" class="font-bold text-sm fill-emerald-950">E</text>
-              <text x="143" y="176" class="font-bold text-sm fill-emerald-950 text-anchor-middle">H</text>
-              <text x="234" y="278" class="font-bold text-sm fill-emerald-950">G</text>
-              <text x="114" y="292" class="font-bold text-sm fill-emerald-950">F</text>
-              <path d="M 105,226.7 L 113.7,221.7 L 108.7,213" fill="none" stroke="#16A34A" stroke-width="1.8"/>
-              <g transform="translate(50, 244)"><rect x="-34" y="-12" width="68" height="24" class="svg-pill-bg" stroke="#16A34A"/><text x="0" y="1" class="svg-pill-text" fill="#14532D" style="font-size:11px;">5√3 cm</text></g>
-              <g transform="translate(195, 218)"><rect x="-34" y="-12" width="68" height="24" class="svg-pill-bg" stroke="#16A34A"/><text x="0" y="1" class="svg-pill-text" fill="#14532D" style="font-size:11px;">10√2 cm</text></g>
-              <g transform="translate(198, 256)"><rect x="-16" y="-9" width="32" height="18" class="svg-angle-pill-bg"/><text x="0" y="1" class="svg-angle-pill-text">45°</text></g>
-              <g transform="translate(175, 305)"><rect x="-28" y="-11" width="56" height="22" class="svg-pill-bg" stroke="#E11D48"/><text x="0" y="1" class="svg-pill-text" fill="#E11D48" style="font-size:11px;">FG = ?</text></g>
-
-              <polygon points="343,137 453,73 650,270 420,270" fill="#FAF5FF" stroke="#9333EA" stroke-width="2.5" stroke-linejoin="round"/>
-              <text x="322" y="130" class="font-bold text-sm fill-purple-950">A</text>
-              <text x="453" y="52" class="font-bold text-sm fill-purple-950 text-anchor-middle">D</text>
-              <text x="668" y="278" class="font-bold text-sm fill-purple-950">C</text>
-              <text x="405" y="292" class="font-bold text-sm fill-purple-950">B</text>
-              <g transform="translate(345, 205)"><rect x="-38" y="-12" width="76" height="24" class="svg-pill-bg" stroke="#9333EA"/><text x="0" y="1" class="svg-pill-text" fill="#581C87" style="font-size:12px;">15√3 cm</text></g>
-              <g transform="translate(448, 246)"><rect x="-20" y="-10" width="40" height="20" class="svg-angle-pill-bg"/><text x="0" y="1" class="svg-angle-pill-text">120°</text></g>
-              <g transform="translate(535, 305)"><rect x="-26" y="-12" width="52" height="24" class="svg-pill-bg" stroke="#9333EA"/><text x="0" y="1" class="svg-pill-text" fill="#581C87">30 cm</text></g>
-              <g transform="translate(580, 150)"><rect x="-30" y="-12" width="60" height="24" class="svg-pill-bg" stroke="#E11D48"/><text x="0" y="1" class="svg-pill-text" fill="#E11D48" style="font-size:12px;">DC = ?</text></g>
-            </svg>
-          </div>
-
           <div class="space-y-2 pt-2">
-            <div class="flex items-center justify-between text-xs font-bold text-slate-500 px-1"><span><i class="fa-solid fa-pencil mr-1 text-purple-500"></i> Solution Workspace</span></div>
-            <textarea class="notebook-paper" rows="16" spellcheck="false"></textarea>
+            <div class="flex items-center justify-between text-xs font-bold text-slate-500 px-1">
+              <span><i class="fa-solid fa-pencil mr-1 text-purple-500"></i> Solution Workspace</span>
+            </div>
+            <textarea class="notebook-paper" rows="12" spellcheck="false"></textarea>
           </div>
-
-          <div class="pt-1">
-            <button onclick="toggleModelSolution('sol-ex-2')" class="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg bg-white hover:bg-slate-100 text-slate-600 hover:text-slate-900 font-semibold text-xs transition-all border border-slate-300 shadow-sm active:scale-95">
-              <i class="fa-regular fa-eye text-purple-600" id="sol-ex-2-icon"></i><span id="sol-ex-2-lbl">Solution</span>
+          <div>
+            <button onclick="toggleModelSolution('sol-ex-2')" class="px-3 py-1 rounded-lg bg-white hover:bg-slate-100 text-slate-600 font-semibold text-xs border border-slate-300 shadow-sm">
+              <i class="fa-regular fa-eye text-purple-600" id="sol-ex-2-icon"></i> <span id="sol-ex-2-lbl">Solution</span>
             </button>
-            <div id="sol-ex-2" class="hidden mt-3 p-4 rounded-2xl bg-purple-50/90 border border-purple-200 text-xs sm:text-sm space-y-3">
-              <div class="font-bold text-purple-800 flex items-center gap-2 text-xs uppercase tracking-wider"><i class="fa-solid fa-circle-check"></i> Model Solution:</div>
-              <div class="space-y-2 text-slate-700">
-                <p>$m(\angle C) = 45^\circ,\ m(\angle D) = 360^\circ - (90^\circ + 120^\circ + 45^\circ) = 105^\circ$.</p>
-                <p>Scale factor $k = \frac{15\sqrt{3}}{5\sqrt{3}} = 3$. Hence $FG = \frac{30}{3} = 10\text{ cm}$ and $DC = 3 \times 10\sqrt{2} = 30\sqrt{2}\text{ cm}$.</p>
-              </div>
+            <div id="sol-ex-2" class="hidden mt-3 p-4 rounded-2xl bg-purple-50 border border-purple-200 text-xs sm:text-sm space-y-2">
+              <p class="font-bold text-purple-800">Model Solution:</p>
+              <p>$m(\angle C) = 45^\circ$, $m(\angle D) = 105^\circ$, $FG = 10\text{ cm}$, $DC = 30\sqrt{2}\text{ cm}$.</p>
             </div>
           </div>
         </div>
 
-        <!-- Question 2.2: Worked Example 2 -->
+        <!-- Question 2.2 -->
         <div class="p-6 rounded-3xl bg-slate-50/80 border border-slate-200 space-y-4">
           <div class="p-4 rounded-2xl bg-purple-50/70 border border-purple-200 space-y-2">
             <div class="font-bold text-slate-900 text-sm flex items-center gap-2">
@@ -839,48 +468,22 @@
               Worked Example 2: Angle Variables and Proportional Sides
             </div>
             <p class="text-xs sm:text-sm text-slate-700 leading-relaxed">
-              Quadrilateral $ABCD \sim \text{quadrilateral } PQRS$. Given $m(\angle B) = 116^\circ,\ m(\angle C) = 61^\circ,\ m(\angle R) = (y - 73)^\circ,\ AB = 10\text{ cm},\ BC = 12\text{ cm},\ PQ = 5\text{ cm},\ QR = x\text{ cm}$, find $y$ and $x$.
+              Quadrilateral $ABCD \sim PQRS$. Given $m(\angle B) = 116^\circ, m(\angle C) = 61^\circ, m(\angle R) = (y - 73)^\circ$, find $y$ and $x$.
             </p>
           </div>
-
-          <div class="w-full bg-white p-4 rounded-2xl border border-slate-200 flex justify-center">
-            <svg viewBox="0 0 520 230" class="w-full max-w-lg h-auto" xmlns="http://www.w3.org/2000/svg">
-              <polygon points="40,180 150,180 180,80 75,50" fill="#F0FDF4" stroke="#16A34A" stroke-width="2.2" stroke-linejoin="round"/>
-              <text x="28" y="190" class="font-bold text-xs fill-emerald-950">P</text>
-              <text x="156" y="190" class="font-bold text-xs fill-emerald-950">Q</text>
-              <text x="188" y="80" class="font-bold text-xs fill-emerald-950">R</text>
-              <text x="65" y="45" class="font-bold text-xs fill-emerald-950">S</text>
-              <g transform="translate(95, 195)"><rect x="-18" y="-10" width="36" height="20" class="svg-pill-bg" stroke="#16A34A"/><text x="0" y="1" class="svg-pill-text" fill="#14532D" style="font-size:11px;">5 cm</text></g>
-              <g transform="translate(175, 135)"><rect x="-16" y="-10" width="32" height="20" class="svg-pill-bg" stroke="#E11D48"/><text x="0" y="1" class="svg-pill-text" fill="#E11D48" style="font-size:11px;">x</text></g>
-              <g transform="translate(145, 95)"><rect x="-26" y="-8" width="52" height="16" class="svg-angle-pill-bg"/><text x="0" y="1" class="svg-angle-pill-text" style="font-size:9px;">(y - 73)°</text></g>
-
-              <polygon points="260,180 440,180 490,40 320,10" fill="#FAF5FF" stroke="#9333EA" stroke-width="2.4" stroke-linejoin="round"/>
-              <text x="246" y="190" class="font-bold text-xs fill-purple-950">A</text>
-              <text x="446" y="190" class="font-bold text-xs fill-purple-950">B</text>
-              <text x="498" y="40" class="font-bold text-xs fill-purple-950">C</text>
-              <text x="310" y="10" class="font-bold text-xs fill-purple-950">D</text>
-              <g transform="translate(350, 195)"><rect x="-20" y="-10" width="40" height="20" class="svg-pill-bg" stroke="#9333EA"/><text x="0" y="1" class="svg-pill-text" fill="#581C87" style="font-size:11px;">10 cm</text></g>
-              <g transform="translate(480, 115)"><rect x="-20" y="-10" width="40" height="20" class="svg-pill-bg" stroke="#9333EA"/><text x="0" y="1" class="svg-pill-text" fill="#581C87" style="font-size:11px;">12 cm</text></g>
-              <g transform="translate(425, 162)"><rect x="-16" y="-8" width="32" height="16" class="svg-angle-pill-bg"/><text x="0" y="1" class="svg-angle-pill-text" style="font-size:10px;">116°</text></g>
-              <g transform="translate(465, 58)"><rect x="-14" y="-8" width="28" height="16" class="svg-angle-pill-bg"/><text x="0" y="1" class="svg-angle-pill-text" style="font-size:10px;">61°</text></g>
-            </svg>
-          </div>
-
           <div class="space-y-2 pt-2">
-            <div class="flex items-center justify-between text-xs font-bold text-slate-500 px-1"><span><i class="fa-solid fa-pencil mr-1 text-purple-500"></i> Solution Workspace</span></div>
-            <textarea class="notebook-paper" rows="16" spellcheck="false"></textarea>
+            <div class="flex items-center justify-between text-xs font-bold text-slate-500 px-1">
+              <span><i class="fa-solid fa-pencil mr-1 text-purple-500"></i> Solution Workspace</span>
+            </div>
+            <textarea class="notebook-paper" rows="12" spellcheck="false"></textarea>
           </div>
-
-          <div class="pt-1">
-            <button onclick="toggleModelSolution('sol-ex-2-2')" class="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg bg-white hover:bg-slate-100 text-slate-600 hover:text-slate-900 font-semibold text-xs transition-all border border-slate-300 shadow-sm active:scale-95">
-              <i class="fa-regular fa-eye text-purple-600" id="sol-ex-2-2-icon"></i><span id="sol-ex-2-2-lbl">Solution</span>
+          <div>
+            <button onclick="toggleModelSolution('sol-ex-2-2')" class="px-3 py-1 rounded-lg bg-white hover:bg-slate-100 text-slate-600 font-semibold text-xs border border-slate-300 shadow-sm">
+              <i class="fa-regular fa-eye text-purple-600" id="sol-ex-2-2-icon"></i> <span id="sol-ex-2-2-lbl">Solution</span>
             </button>
-            <div id="sol-ex-2-2" class="hidden mt-3 p-4 rounded-2xl bg-purple-50/90 border border-purple-200 text-xs sm:text-sm space-y-3">
-              <div class="font-bold text-purple-800 flex items-center gap-2 text-xs uppercase tracking-wider"><i class="fa-solid fa-circle-check"></i> Model Solution:</div>
-              <div class="space-y-2 text-slate-700">
-                <p>$y - 73 = 61 \implies y = 134$.</p>
-                <p>$\frac{PQ}{AB} = \frac{QR}{BC} \implies \frac{5}{10} = \frac{x}{12} \implies x = 6\text{ cm}$.</p>
-              </div>
+            <div id="sol-ex-2-2" class="hidden mt-3 p-4 rounded-2xl bg-purple-50 border border-purple-200 text-xs sm:text-sm space-y-2">
+              <p class="font-bold text-purple-800">Model Solution:</p>
+              <p>$y = 134$ and $x = 6\text{ cm}$.</p>
             </div>
           </div>
         </div>
@@ -888,62 +491,34 @@
         <!-- Question 2.3: Try It Yourself -->
         <div class="p-6 rounded-3xl bg-slate-50/80 border border-slate-200 space-y-4">
           <div class="p-4 rounded-2xl bg-purple-50/70 border border-purple-200 space-y-2">
-            <div class="font-bold text-slate-900 text-sm flex flex-wrap items-center gap-2">
+            <div class="font-bold text-slate-900 text-sm flex items-center gap-2">
               <span class="px-2 py-0.5 rounded bg-purple-600 text-white text-xs font-black">2.3</span>
-              <span class="px-2.5 py-0.5 rounded-full bg-amber-100 text-amber-800 text-xs font-extrabold uppercase tracking-wide flex items-center gap-1.5"><i class="fa-solid fa-user-pen"></i> Try It Yourself</span>
-              <span>Scale Factor & Unknown Side Computations</span>
+              <span class="px-2.5 py-0.5 rounded-full bg-amber-100 text-amber-800 text-xs font-extrabold uppercase">Try It Yourself</span>
+              <span>Scale Factor & Side Computations</span>
             </div>
             <p class="text-xs sm:text-sm text-slate-700 leading-relaxed">
-              Polygon $ABCD \sim \text{polygon } EFGH$, with scale factor $k = \frac{3}{2}$. Find $m(\angle C)$, $m(\angle D)$, side $AD$, and side $FG$.
+              Polygon $ABCD \sim EFGH$ with $k = \frac{3}{2}$. Find angles and side lengths.
             </p>
           </div>
-
-          <div class="w-full bg-white p-4 sm:p-6 rounded-2xl border border-slate-200 flex justify-center items-center overflow-hidden">
-            <svg viewBox="0 0 700 290" class="w-full max-w-2xl h-auto" xmlns="http://www.w3.org/2000/svg">
-              <polygon points="60,230 260,230 220,70 120,70" fill="#FAF5FF" stroke="#9333EA" stroke-width="2.4" stroke-linejoin="round"/>
-              <text x="44" y="242" class="font-bold text-sm fill-purple-950">A</text>
-              <text x="268" y="240" class="font-bold text-sm fill-purple-950">B</text>
-              <text x="228" y="65" class="font-bold text-sm fill-purple-950">C</text>
-              <text x="108" y="65" class="font-bold text-sm fill-purple-950">D</text>
-              <g transform="translate(90, 210)"><rect x="-16" y="-9" width="32" height="18" class="svg-angle-pill-bg"/><text x="0" y="1" class="svg-angle-pill-text">78°</text></g>
-              <g transform="translate(230, 210)"><rect x="-16" y="-9" width="32" height="18" class="svg-angle-pill-bg"/><text x="0" y="1" class="svg-angle-pill-text">85°</text></g>
-              <g transform="translate(262, 145)"><rect x="-32" y="-11" width="64" height="22" class="svg-pill-bg" stroke="#9333EA"/><text x="0" y="1" class="svg-pill-text" fill="#581C87" style="font-size:11px;">16√2 cm</text></g>
-              <g transform="translate(68, 145)"><rect x="-26" y="-11" width="52" height="22" class="svg-pill-bg" stroke="#E11D48"/><text x="0" y="1" class="svg-pill-text" fill="#E11D48" style="font-size:11px;">AD = ?</text></g>
-
-              <polygon points="400,230 533,230 507,123 440,123" fill="#F0FDF4" stroke="#16A34A" stroke-width="2.4" stroke-linejoin="round"/>
-              <text x="388" y="242" class="font-bold text-sm fill-emerald-950">E</text>
-              <text x="540" y="240" class="font-bold text-sm fill-emerald-950">F</text>
-              <text x="515" y="118" class="font-bold text-sm fill-emerald-950">G</text>
-              <text x="430" y="118" class="font-bold text-sm fill-emerald-950">H</text>
-              <g transform="translate(488, 140)"><rect x="-18" y="-9" width="36" height="18" class="svg-angle-pill-bg"/><text x="0" y="1" class="svg-angle-pill-text">135°</text></g>
-              <g transform="translate(402, 175)"><rect x="-30" y="-11" width="60" height="22" class="svg-pill-bg" stroke="#16A34A"/><text x="0" y="1" class="svg-pill-text" fill="#14532D" style="font-size:11px;">4√3 cm</text></g>
-              <g transform="translate(538, 175)"><rect x="-26" y="-11" width="52" height="22" class="svg-pill-bg" stroke="#E11D48"/><text x="0" y="1" class="svg-pill-text" fill="#E11D48" style="font-size:11px;">FG = ?</text></g>
-            </svg>
-          </div>
-
           <div class="space-y-2 pt-2">
-            <div class="flex items-center justify-between text-xs font-bold text-slate-500 px-1"><span><i class="fa-solid fa-pencil mr-1 text-purple-500"></i> Solution Workspace</span></div>
-            <textarea class="notebook-paper" rows="16" spellcheck="false"></textarea>
+            <div class="flex items-center justify-between text-xs font-bold text-slate-500 px-1">
+              <span><i class="fa-solid fa-pencil mr-1 text-purple-500"></i> Solution Workspace</span>
+            </div>
+            <textarea class="notebook-paper" rows="12" spellcheck="false"></textarea>
           </div>
-
-          <div class="pt-1">
-            <button onclick="toggleModelSolution('sol-q2-3')" class="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg bg-white hover:bg-slate-100 text-slate-600 hover:text-slate-900 font-semibold text-xs transition-all border border-slate-300 shadow-sm active:scale-95">
-              <i class="fa-regular fa-eye text-purple-600" id="sol-q2-3-icon"></i><span id="sol-q2-3-lbl">Solution</span>
+          <div>
+            <button onclick="toggleModelSolution('sol-q2-3')" class="px-3 py-1 rounded-lg bg-white hover:bg-slate-100 text-slate-600 font-semibold text-xs border border-slate-300 shadow-sm">
+              <i class="fa-regular fa-eye text-purple-600" id="sol-q2-3-icon"></i> <span id="sol-q2-3-lbl">Solution</span>
             </button>
-            <div id="sol-q2-3" class="hidden mt-3 p-4 rounded-2xl bg-purple-50/90 border border-purple-200 text-xs sm:text-sm space-y-3">
-              <div class="font-bold text-purple-800 flex items-center gap-2 text-xs uppercase tracking-wider"><i class="fa-solid fa-circle-check"></i> Model Solution:</div>
-              <div class="space-y-2 text-slate-700">
-                <p>$m(\angle C) = m(\angle G) = 135^\circ$, and $m(\angle D) = 360^\circ - (78^\circ + 85^\circ + 135^\circ) = 62^\circ$.</p>
-                <p>$AD = 4\sqrt{3} \times \frac{3}{2} = 6\sqrt{3}\text{ cm}$ and $FG = \frac{16\sqrt{2}}{3/2} = \frac{32\sqrt{2}}{3}\text{ cm}$.</p>
-              </div>
+            <div id="sol-q2-3" class="hidden mt-3 p-4 rounded-2xl bg-purple-50 border border-purple-200 text-xs sm:text-sm space-y-2">
+              <p class="font-bold text-purple-800">Model Solution:</p>
+              <p>$m(\angle C) = 135^\circ$, $m(\angle D) = 62^\circ$, $AD = 6\sqrt{3}\text{ cm}$, $FG = \frac{32\sqrt{2}}{3}\text{ cm}$.</p>
             </div>
           </div>
         </div>
       </section>
 
-      <!-- ========================================================================= -->
-      <!-- IDEA 3: SPECIAL QUADRILATERAL CONDITIONS (2 Examples + 1 Try It Yourself) -->
-      <!-- ========================================================================= -->
+      <!-- IDEA 3: Special Quadrilateral Conditions (2 Worked Examples + 1 Try It Yourself) -->
       <section class="glass-card rounded-[2.25rem] p-6 sm:p-8 shadow-soft-cloud border border-white space-y-6">
         <div class="flex items-center justify-between border-b pb-3">
           <div class="flex items-center gap-2.5">
@@ -955,7 +530,7 @@
           </div>
         </div>
 
-        <!-- Question 3.1: Worked Example 1 (Rectangles) -->
+        <!-- Question 3.1 -->
         <div class="p-6 rounded-3xl bg-slate-50/80 border border-slate-200 space-y-4">
           <div class="p-4 rounded-2xl bg-amber-50/70 border border-amber-200 space-y-2">
             <div class="font-bold text-slate-900 text-sm flex items-center gap-2">
@@ -963,50 +538,27 @@
               Worked Example 1: Rectangle Dimension Proportionality
             </div>
             <p class="text-xs sm:text-sm text-slate-700 leading-relaxed">
-              Rectangle $ABCD$ has length $BC = 6\text{ cm}$ and width $CD = 4\text{ cm}$. Rectangle $XYZM$ has length $YZ = 3\text{ cm}$ and width $ZM = 2\text{ cm}$. Prove that rectangle $ABCD \sim \text{rectangle } XYZM$, and state their scale factor.
+              Rectangle $ABCD$ has length $6\text{ cm}$ and width $4\text{ cm}$. Rectangle $XYZM$ has length $3\text{ cm}$ and width $2\text{ cm}$. Prove similarity and scale factor.
             </p>
           </div>
-
-          <div class="w-full bg-white p-4 rounded-2xl border border-slate-200 flex justify-center">
-            <svg viewBox="0 0 460 170" class="w-full max-w-lg h-auto" xmlns="http://www.w3.org/2000/svg">
-              <rect x="40" y="45" width="90" height="60" rx="3" fill="#EEF2FF" stroke="#4F46E5" stroke-width="2.2"/>
-              <text x="36" y="38" class="font-bold text-xs fill-indigo-950 text-anchor-middle">X</text>
-              <text x="134" y="38" class="font-bold text-xs fill-indigo-950 text-anchor-middle">M</text>
-              <text x="36" y="118" class="font-bold text-xs fill-indigo-950 text-anchor-middle">Y</text>
-              <text x="134" y="118" class="font-bold text-xs fill-indigo-950 text-anchor-middle">Z</text>
-              <rect x="118" y="45" width="12" height="12" fill="none" stroke="#4F46E5" stroke-width="1.2"/>
-              <g transform="translate(85, 120)"><rect x="-18" y="-9" width="36" height="18" class="svg-pill-bg"/><text x="0" y="1" class="svg-pill-text" style="font-size:11px;">3 cm</text></g>
-              <g transform="translate(150, 75)"><rect x="-16" y="-9" width="32" height="18" class="svg-pill-bg"/><text x="0" y="1" class="svg-pill-text" style="font-size:11px;">2 cm</text></g>
-
-              <rect x="230" y="25" width="180" height="120" rx="4" fill="#EFF6FF" stroke="#2563EB" stroke-width="2.4"/>
-              <text x="226" y="18" class="font-bold text-xs fill-blue-950 text-anchor-middle">A</text>
-              <text x="414" y="18" class="font-bold text-xs fill-blue-950 text-anchor-middle">D</text>
-              <text x="226" y="158" class="font-bold text-xs fill-blue-950 text-anchor-middle">B</text>
-              <text x="414" y="158" class="font-bold text-xs fill-blue-950 text-anchor-middle">C</text>
-              <rect x="396" y="25" width="14" height="14" fill="none" stroke="#2563EB" stroke-width="1.4"/>
-              <g transform="translate(320, 160)"><rect x="-18" y="-9" width="36" height="18" class="svg-pill-bg"/><text x="0" y="1" class="svg-pill-text" style="font-size:11px;">6 cm</text></g>
-              <g transform="translate(430, 85)"><rect x="-18" y="-9" width="36" height="18" class="svg-pill-bg"/><text x="0" y="1" class="svg-pill-text" style="font-size:11px;">4 cm</text></g>
-            </svg>
-          </div>
-
           <div class="space-y-2 pt-2">
-            <div class="flex items-center justify-between text-xs font-bold text-slate-500 px-1"><span><i class="fa-solid fa-pencil mr-1 text-amber-600"></i> Solution Workspace</span></div>
-            <textarea class="notebook-paper" rows="16" spellcheck="false"></textarea>
+            <div class="flex items-center justify-between text-xs font-bold text-slate-500 px-1">
+              <span><i class="fa-solid fa-pencil mr-1 text-amber-600"></i> Solution Workspace</span>
+            </div>
+            <textarea class="notebook-paper" rows="12" spellcheck="false"></textarea>
           </div>
-
-          <div class="pt-1">
-            <button onclick="toggleModelSolution('sol-q3-1')" class="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg bg-white hover:bg-slate-100 text-slate-600 hover:text-slate-900 font-semibold text-xs transition-all border border-slate-300 shadow-sm active:scale-95">
-              <i class="fa-regular fa-eye text-amber-600" id="sol-q3-1-icon"></i><span id="sol-q3-1-lbl">Solution</span>
+          <div>
+            <button onclick="toggleModelSolution('sol-q3-1')" class="px-3 py-1 rounded-lg bg-white hover:bg-slate-100 text-slate-600 font-semibold text-xs border border-slate-300 shadow-sm">
+              <i class="fa-regular fa-eye text-amber-600" id="sol-q3-1-icon"></i> <span id="sol-q3-1-lbl">Solution</span>
             </button>
-            <div id="sol-q3-1" class="hidden mt-3 p-4 rounded-2xl bg-amber-50/90 border border-amber-200 text-xs sm:text-sm space-y-2">
-              <div class="font-bold text-amber-900 text-xs uppercase">Proof Walkthrough:</div>
-              <p>1. All 4 interior angles are $90^\circ$.</p>
-              <p>2. $\frac{BC}{YZ} = \frac{6}{3} = 2$ and $\frac{CD}{ZM} = \frac{4}{2} = 2 \implies k = 2$.</p>
+            <div id="sol-q3-1" class="hidden mt-3 p-4 rounded-2xl bg-amber-50 border border-amber-200 text-xs sm:text-sm space-y-2">
+              <p class="font-bold text-amber-800">Model Solution:</p>
+              <p>All angles are $90^\circ$ and ratio $\frac{6}{3} = \frac{4}{2} = 2$. Hence $k = 2$.</p>
             </div>
           </div>
         </div>
 
-        <!-- Question 3.2: Worked Example 2 (Rhombuses) -->
+        <!-- Question 3.2 -->
         <div class="p-6 rounded-3xl bg-slate-50/80 border border-slate-200 space-y-4">
           <div class="p-4 rounded-2xl bg-amber-50/70 border border-amber-200 space-y-2">
             <div class="font-bold text-slate-900 text-sm flex items-center gap-2">
@@ -1014,42 +566,22 @@
               Worked Example 2: Rhombus Similarity Evaluation
             </div>
             <p class="text-xs sm:text-sm text-slate-700 leading-relaxed">
-              Rhombus $ABCD$ has side length $3\text{ cm}$ and $m(\angle D) = 110^\circ$. Rhombus $EFGH$ has side length $5\text{ cm}$ and $m(\angle G) = 70^\circ$. Prove that Rhombus $ABCD \sim \text{Rhombus } EFGH$.
+              Rhombus $ABCD$ side $3\text{ cm}, m(\angle D) = 110^\circ$. Rhombus $EFGH$ side $5\text{ cm}, m(\angle G) = 70^\circ$. Prove similarity.
             </p>
           </div>
-
-          <div class="w-full bg-white p-4 rounded-2xl border border-slate-200 flex justify-center">
-            <svg viewBox="0 0 480 200" class="w-full max-w-lg h-auto" xmlns="http://www.w3.org/2000/svg">
-              <polygon points="100,25 155,95 100,165 45,95" fill="#FEF3C7" stroke="#D97706" stroke-width="2.2" stroke-linejoin="round"/>
-              <text x="100" y="18" class="font-bold text-xs fill-amber-950 text-anchor-middle">D</text>
-              <text x="165" y="98" class="font-bold text-xs fill-amber-950">C</text>
-              <text x="100" y="178" class="font-bold text-xs fill-amber-950 text-anchor-middle">B</text>
-              <text x="32" y="98" class="font-bold text-xs fill-amber-950">A</text>
-              <g transform="translate(100, 48)"><rect x="-16" y="-8" width="32" height="16" class="svg-angle-pill-bg"/><text x="0" y="1" class="svg-angle-pill-text" style="font-size:10px;">110°</text></g>
-              <g transform="translate(62, 140)"><rect x="-20" y="-10" width="40" height="20" class="svg-pill-bg" stroke="#D97706"/><text x="0" y="1" class="svg-pill-text" fill="#92400E" style="font-size:11px;">3 cm</text></g>
-
-              <polygon points="340,15 425,95 340,175 255,95" fill="#FEF3C7" stroke="#D97706" stroke-width="2.4" stroke-linejoin="round"/>
-              <text x="340" y="8" class="font-bold text-xs fill-amber-950 text-anchor-middle">H</text>
-              <text x="438" y="98" class="font-bold text-xs fill-amber-950">G</text>
-              <text x="340" y="190" class="font-bold text-xs fill-amber-950 text-anchor-middle">F</text>
-              <text x="242" y="98" class="font-bold text-xs fill-amber-950">E</text>
-              <g transform="translate(405, 95)"><rect x="-14" y="-8" width="28" height="16" class="svg-angle-pill-bg"/><text x="0" y="1" class="svg-angle-pill-text" style="font-size:10px;">70°</text></g>
-              <g transform="translate(285, 145)"><rect x="-20" y="-10" width="40" height="20" class="svg-pill-bg" stroke="#D97706"/><text x="0" y="1" class="svg-pill-text" fill="#92400E" style="font-size:11px;">5 cm</text></g>
-            </svg>
-          </div>
-
           <div class="space-y-2 pt-2">
-            <div class="flex items-center justify-between text-xs font-bold text-slate-500 px-1"><span><i class="fa-solid fa-pencil mr-1 text-amber-600"></i> Solution Workspace</span></div>
-            <textarea class="notebook-paper" rows="16" spellcheck="false"></textarea>
+            <div class="flex items-center justify-between text-xs font-bold text-slate-500 px-1">
+              <span><i class="fa-solid fa-pencil mr-1 text-amber-600"></i> Solution Workspace</span>
+            </div>
+            <textarea class="notebook-paper" rows="12" spellcheck="false"></textarea>
           </div>
-
-          <div class="pt-1">
-            <button onclick="toggleModelSolution('sol-q3-2-rh')" class="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg bg-white hover:bg-slate-100 text-slate-600 hover:text-slate-900 font-semibold text-xs transition-all border border-slate-300 shadow-sm active:scale-95">
-              <i class="fa-regular fa-eye text-amber-600" id="sol-q3-2-rh-icon"></i><span id="sol-q3-2-rh-lbl">Solution</span>
+          <div>
+            <button onclick="toggleModelSolution('sol-q3-2-rh')" class="px-3 py-1 rounded-lg bg-white hover:bg-slate-100 text-slate-600 font-semibold text-xs border border-slate-300 shadow-sm">
+              <i class="fa-regular fa-eye text-amber-600" id="sol-q3-2-rh-icon"></i> <span id="sol-q3-2-rh-lbl">Solution</span>
             </button>
-            <div id="sol-q3-2-rh" class="hidden mt-3 p-4 rounded-2xl bg-amber-50/90 border border-amber-200 text-xs sm:text-sm space-y-2">
-              <div class="font-bold text-amber-900 text-xs uppercase">Proof Walkthrough:</div>
-              <p>$m(\angle C) = 180^\circ - 110^\circ = 70^\circ$, matching $m(\angle G) = 70^\circ$. Scale factor $k = \frac{3}{5}$.</p>
+            <div id="sol-q3-2-rh" class="hidden mt-3 p-4 rounded-2xl bg-amber-50 border border-amber-200 text-xs sm:text-sm space-y-2">
+              <p class="font-bold text-amber-800">Model Solution:</p>
+              <p>$m(\angle C) = 180^\circ - 110^\circ = 70^\circ$. Scale factor $k = \frac{3}{5}$.</p>
             </div>
           </div>
         </div>
@@ -1057,58 +589,34 @@
         <!-- Question 3.3: Try It Yourself -->
         <div class="p-6 rounded-3xl bg-slate-50/80 border border-slate-200 space-y-4">
           <div class="p-4 rounded-2xl bg-amber-50/70 border border-amber-200 space-y-2">
-            <div class="font-bold text-slate-900 text-sm flex flex-wrap items-center gap-2">
+            <div class="font-bold text-slate-900 text-sm flex items-center gap-2">
               <span class="px-2 py-0.5 rounded bg-amber-600 text-white text-xs font-black">3.3</span>
-              <span class="px-2.5 py-0.5 rounded-full bg-amber-100 text-amber-800 text-xs font-extrabold uppercase tracking-wide flex items-center gap-1.5"><i class="fa-solid fa-user-pen"></i> Try It Yourself</span>
+              <span class="px-2.5 py-0.5 rounded-full bg-amber-100 text-amber-800 text-xs font-extrabold uppercase">Try It Yourself</span>
               <span>Parallelogram Similarity Criteria</span>
             </div>
             <p class="text-xs sm:text-sm text-slate-700 leading-relaxed">
-              Parallelogram $ABCD$ ($AB = 8,\ BC = 6,\ m(\angle B) = 120^\circ$) and Parallelogram $PQRS$ ($PQ = 6,\ QR = 4.5,\ m(\angle P) = 60^\circ$). Prove they are similar and find $k$.
+              Parallelogram $ABCD$ ($AB = 8, BC = 6, m(\angle B) = 120^\circ$) and Parallelogram $PQRS$ ($PQ = 6, QR = 4.5, m(\angle P) = 60^\circ$). Prove similarity.
             </p>
           </div>
-
-          <div class="w-full bg-white p-4 rounded-2xl border border-slate-200 flex justify-center">
-            <svg viewBox="0 0 540 220" class="w-full max-w-lg h-auto" xmlns="http://www.w3.org/2000/svg">
-              <polygon points="50,170 190,170 230,70 90,70" fill="#F8FAFC" stroke="#0284C7" stroke-width="2.2" stroke-linejoin="round"/>
-              <text x="35" y="178" class="font-bold text-xs fill-sky-950">A</text>
-              <text x="195" y="178" class="font-bold text-xs fill-sky-950">B</text>
-              <text x="238" y="68" class="font-bold text-xs fill-sky-950">C</text>
-              <text x="80" y="68" class="font-bold text-xs fill-sky-950">D</text>
-              <g transform="translate(170, 150)"><rect x="-16" y="-8" width="32" height="16" class="svg-angle-pill-bg"/><text x="0" y="1" class="svg-angle-pill-text" style="font-size:10px;">120°</text></g>
-              <g transform="translate(120, 185)"><rect x="-20" y="-10" width="40" height="20" class="svg-pill-bg" stroke="#0284C7"/><text x="0" y="1" class="svg-pill-text" fill="#0369A1" style="font-size:11px;">8 cm</text></g>
-              <g transform="translate(222, 120)"><rect x="-20" y="-10" width="40" height="20" class="svg-pill-bg" stroke="#0284C7"/><text x="0" y="1" class="svg-pill-text" fill="#0369A1" style="font-size:11px;">6 cm</text></g>
-
-              <polygon points="310,170 415,170 445,95 340,95" fill="#F8FAFC" stroke="#0284C7" stroke-width="2.2" stroke-linejoin="round"/>
-              <text x="296" y="178" class="font-bold text-xs fill-sky-950">P</text>
-              <text x="420" y="178" class="font-bold text-xs fill-sky-950">Q</text>
-              <text x="452" y="92" class="font-bold text-xs fill-sky-950">R</text>
-              <text x="330" y="92" class="font-bold text-xs fill-sky-950">S</text>
-              <g transform="translate(332, 152)"><rect x="-14" y="-8" width="28" height="16" class="svg-angle-pill-bg"/><text x="0" y="1" class="svg-angle-pill-text" style="font-size:10px;">60°</text></g>
-              <g transform="translate(362, 185)"><rect x="-20" y="-10" width="40" height="20" class="svg-pill-bg" stroke="#0284C7"/><text x="0" y="1" class="svg-pill-text" fill="#0369A1" style="font-size:11px;">6 cm</text></g>
-              <g transform="translate(442, 132)"><rect x="-24" y="-10" width="48" height="20" class="svg-pill-bg" stroke="#0284C7"/><text x="0" y="1" class="svg-pill-text" fill="#0369A1" style="font-size:10px;">4.5 cm</text></g>
-            </svg>
-          </div>
-
           <div class="space-y-2 pt-2">
-            <div class="flex items-center justify-between text-xs font-bold text-slate-500 px-1"><span><i class="fa-solid fa-pencil mr-1 text-amber-600"></i> Solution Workspace</span></div>
-            <textarea class="notebook-paper" rows="16" spellcheck="false"></textarea>
+            <div class="flex items-center justify-between text-xs font-bold text-slate-500 px-1">
+              <span><i class="fa-solid fa-pencil mr-1 text-amber-600"></i> Solution Workspace</span>
+            </div>
+            <textarea class="notebook-paper" rows="12" spellcheck="false"></textarea>
           </div>
-
-          <div class="pt-1">
-            <button onclick="toggleModelSolution('sol-q3-2')" class="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg bg-white hover:bg-slate-100 text-slate-600 hover:text-slate-900 font-semibold text-xs transition-all border border-slate-300 shadow-sm active:scale-95">
-              <i class="fa-regular fa-eye text-amber-600" id="sol-q3-2-icon"></i><span id="sol-q3-2-lbl">Solution</span>
+          <div>
+            <button onclick="toggleModelSolution('sol-q3-2')" class="px-3 py-1 rounded-lg bg-white hover:bg-slate-100 text-slate-600 font-semibold text-xs border border-slate-300 shadow-sm">
+              <i class="fa-regular fa-eye text-amber-600" id="sol-q3-2-icon"></i> <span id="sol-q3-2-lbl">Solution</span>
             </button>
-            <div id="sol-q3-2" class="hidden mt-3 p-4 rounded-2xl bg-amber-50/90 border border-amber-200 text-xs sm:text-sm space-y-2">
-              <div class="font-bold text-amber-900 text-xs uppercase">Proof Walkthrough:</div>
-              <p>$m(\angle A) = 180^\circ - 120^\circ = 60^\circ$. Scale factor $k = \frac{8}{6} = \frac{4}{3}$.</p>
+            <div id="sol-q3-2" class="hidden mt-3 p-4 rounded-2xl bg-amber-50 border border-amber-200 text-xs sm:text-sm space-y-2">
+              <p class="font-bold text-amber-800">Model Solution:</p>
+              <p>$m(\angle A) = 60^\circ$, matching $m(\angle P) = 60^\circ$. Scale factor $k = \frac{4}{3}$.</p>
             </div>
           </div>
         </div>
       </section>
 
-      <!-- ========================================================================= -->
-      <!-- IDEA 4: PERIMETER RATIOS & ALGEBRAIC EXPRESSIONS (2 Examples + 1 Try It Yourself) -->
-      <!-- ========================================================================= -->
+      <!-- IDEA 4: Perimeter Ratios & Algebraic Expressions (2 Worked Examples + 1 Try It Yourself) -->
       <section class="glass-card rounded-[2.25rem] p-6 sm:p-8 shadow-soft-cloud border border-white space-y-6">
         <div class="flex items-center justify-between border-b pb-3">
           <div class="flex items-center gap-2.5">
@@ -1120,7 +628,7 @@
           </div>
         </div>
 
-        <!-- Question 4.1: Worked Example 1 -->
+        <!-- Question 4.1 -->
         <div class="p-6 rounded-3xl bg-slate-50/80 border border-slate-200 space-y-4">
           <div class="p-4 rounded-2xl bg-emerald-50/70 border border-emerald-200 space-y-2">
             <div class="font-bold text-slate-900 text-sm flex items-center gap-2">
@@ -1128,52 +636,27 @@
               Worked Example 1: Algebraic Variables with Scale Ratio 3 : 2
             </div>
             <p class="text-xs sm:text-sm text-slate-700 leading-relaxed">
-              Polygon $ABCD \sim \text{polygon } EFGH$ with perimeter ratio $\frac{3}{2}$. Find $x$, $y$, and $z$.
+              Polygon $ABCD \sim EFGH$ with perimeter ratio $\frac{3}{2}$. Find $x, y, z$.
             </p>
           </div>
-
-          <div class="w-full bg-white p-4 rounded-2xl border border-slate-200 flex justify-center">
-            <svg viewBox="0 0 460 280" class="w-full max-w-lg h-auto" xmlns="http://www.w3.org/2000/svg">
-              <polygon points="50,220 180,220 210,70 90,40" fill="#ECFDF5" stroke="#059669" stroke-width="2.5" stroke-linejoin="round"/>
-              <text x="35" y="230" class="font-bold text-sm fill-emerald-900">A</text>
-              <text x="185" y="230" class="font-bold text-sm fill-emerald-900">B</text>
-              <text x="215" y="70" class="font-bold text-sm fill-emerald-900">C</text>
-              <text x="80" y="38" class="font-bold text-sm fill-emerald-900">D</text>
-              <g transform="translate(115, 235)"><rect x="-22" y="-12" width="44" height="24" class="svg-pill-bg"/><text x="0" y="1" class="svg-pill-text">6 cm</text></g>
-              <g transform="translate(205, 145)"><rect x="-26" y="-12" width="52" height="24" class="svg-pill-bg"/><text x="0" y="1" class="svg-pill-text">y + 3</text></g>
-              <g transform="translate(150, 42)"><rect x="-28" y="-12" width="56" height="24" class="svg-pill-bg"/><text x="0" y="1" class="svg-pill-text">2x + 1</text></g>
-
-              <polygon points="270,220 370,220 395,110 300,90" fill="#EFF6FF" stroke="#2563EB" stroke-width="2.5" stroke-linejoin="round"/>
-              <text x="255" y="230" class="font-bold text-sm fill-blue-900">E</text>
-              <text x="375" y="230" class="font-bold text-sm fill-blue-900">F</text>
-              <text x="400" y="110" class="font-bold text-sm fill-blue-900">G</text>
-              <text x="290" y="85" class="font-bold text-sm fill-blue-900">H</text>
-              <g transform="translate(320, 235)"><rect x="-18" y="-12" width="36" height="24" class="svg-pill-bg"/><text x="0" y="1" class="svg-pill-text">z</text></g>
-              <g transform="translate(390, 165)"><rect x="-18" y="-12" width="36" height="24" class="svg-pill-bg"/><text x="0" y="1" class="svg-pill-text">5</text></g>
-              <g transform="translate(348, 88)"><rect x="-26" y="-12" width="52" height="24" class="svg-pill-bg"/><text x="0" y="1" class="svg-pill-text">x + 2</text></g>
-            </svg>
-          </div>
-
           <div class="space-y-2 pt-2">
-            <div class="flex items-center justify-between text-xs font-bold text-slate-500 px-1"><span><i class="fa-solid fa-pencil mr-1 text-emerald-500"></i> Solution Workspace</span></div>
-            <textarea class="notebook-paper" rows="16" spellcheck="false"></textarea>
+            <div class="flex items-center justify-between text-xs font-bold text-slate-500 px-1">
+              <span><i class="fa-solid fa-pencil mr-1 text-emerald-500"></i> Solution Workspace</span>
+            </div>
+            <textarea class="notebook-paper" rows="12" spellcheck="false"></textarea>
           </div>
-
-          <div class="pt-1">
-            <button onclick="toggleModelSolution('sol-ex-4')" class="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg bg-white hover:bg-slate-100 text-slate-600 hover:text-slate-900 font-semibold text-xs transition-all border border-slate-300 shadow-sm active:scale-95">
-              <i class="fa-regular fa-eye text-emerald-600" id="sol-ex-4-icon"></i><span id="sol-ex-4-lbl">Solution</span>
+          <div>
+            <button onclick="toggleModelSolution('sol-ex-4')" class="px-3 py-1 rounded-lg bg-white hover:bg-slate-100 text-slate-600 font-semibold text-xs border border-slate-300 shadow-sm">
+              <i class="fa-regular fa-eye text-emerald-600" id="sol-ex-4-icon"></i> <span id="sol-ex-4-lbl">Solution</span>
             </button>
-            <div id="sol-ex-4" class="hidden mt-3 p-4 rounded-2xl bg-emerald-50/90 border border-emerald-200 text-xs sm:text-sm space-y-3">
-              <div class="font-bold text-emerald-800 flex items-center gap-2 text-xs uppercase tracking-wider"><i class="fa-solid fa-circle-check"></i> Model Solution:</div>
-              <div class="space-y-2 text-slate-700">
-                <p>$k = \frac{3}{2}$. $\frac{6}{z} = \frac{3}{2} \implies z = 4$.</p>
-                <p>$\frac{y+3}{5} = \frac{3}{2} \implies y = 4.5$. $\frac{2x+1}{x+2} = \frac{3}{2} \implies x = 4$.</p>
-              </div>
+            <div id="sol-ex-4" class="hidden mt-3 p-4 rounded-2xl bg-emerald-50 border border-emerald-200 text-xs sm:text-sm space-y-2">
+              <p class="font-bold text-emerald-800">Model Solution:</p>
+              <p>$z = 4$, $y = 4.5$, $x = 4$.</p>
             </div>
           </div>
         </div>
 
-        <!-- Question 4.2: Worked Example 2 -->
+        <!-- Question 4.2 -->
         <div class="p-6 rounded-3xl bg-slate-50/80 border border-slate-200 space-y-4">
           <div class="p-4 rounded-2xl bg-emerald-50/70 border border-emerald-200 space-y-2">
             <div class="font-bold text-slate-900 text-sm flex items-center gap-2">
@@ -1181,40 +664,22 @@
               Worked Example 2: Determining Polygon Side Lengths via Given Perimeter
             </div>
             <p class="text-xs sm:text-sm text-slate-700 leading-relaxed">
-              Two similar polygons. First pentagon sides: $3, 5, 6, 8, 10\text{ cm}$. Second polygon perimeter: $80\text{ cm}$. Determine scale factor and side lengths.
+              Pentagon sides: $3, 5, 6, 8, 10\text{ cm}$. Second polygon perimeter $80\text{ cm}$. Find side lengths.
             </p>
           </div>
-
-          <div class="w-full bg-white p-4 rounded-2xl border border-slate-200 flex justify-center">
-            <svg viewBox="0 0 540 220" class="w-full max-w-lg h-auto" xmlns="http://www.w3.org/2000/svg">
-              <polygon points="50,180 130,180 155,100 90,45 25,100" fill="#ECFDF5" stroke="#059669" stroke-width="2.2" stroke-linejoin="round"/>
-              <g transform="translate(90, 195)"><rect x="-16" y="-9" width="32" height="18" class="svg-pill-bg"/><text x="0" y="1" class="svg-pill-text" style="font-size:11px;">10</text></g>
-              <g transform="translate(155, 140)"><rect x="-14" y="-9" width="28" height="18" class="svg-pill-bg"/><text x="0" y="1" class="svg-pill-text" style="font-size:11px;">8</text></g>
-              <g transform="translate(130, 68)"><rect x="-14" y="-9" width="28" height="18" class="svg-pill-bg"/><text x="0" y="1" class="svg-pill-text" style="font-size:11px;">6</text></g>
-              <g transform="translate(50, 68)"><rect x="-14" y="-9" width="28" height="18" class="svg-pill-bg"/><text x="0" y="1" class="svg-pill-text" style="font-size:11px;">5</text></g>
-              <g transform="translate(25, 140)"><rect x="-14" y="-9" width="28" height="18" class="svg-pill-bg"/><text x="0" y="1" class="svg-pill-text" style="font-size:11px;">3</text></g>
-              <text x="90" y="120" class="font-bold text-xs fill-emerald-800 text-anchor-middle">P₁ = 32 cm</text>
-              <g transform="translate(210, 110)"><circle cx="0" cy="0" r="16" fill="#D1FAE5"/><text x="0" y="4" font-family="'Plus Jakarta Sans', sans-serif" font-size="18" font-weight="bold" fill="#059669" text-anchor="middle">~</text></g>
-              <polygon points="270,195 470,195 532,95 370,10 208,95" fill="#EFF6FF" stroke="#2563EB" stroke-width="2.5" stroke-linejoin="round"/>
-              <text x="370" y="115" class="font-bold text-sm fill-blue-900 text-anchor-middle">Perimeter = 80 cm</text>
-            </svg>
-          </div>
-
           <div class="space-y-2 pt-2">
-            <div class="flex items-center justify-between text-xs font-bold text-slate-500 px-1"><span><i class="fa-solid fa-pencil mr-1 text-emerald-500"></i> Solution Workspace</span></div>
-            <textarea class="notebook-paper" rows="16" spellcheck="false"></textarea>
+            <div class="flex items-center justify-between text-xs font-bold text-slate-500 px-1">
+              <span><i class="fa-solid fa-pencil mr-1 text-emerald-500"></i> Solution Workspace</span>
+            </div>
+            <textarea class="notebook-paper" rows="12" spellcheck="false"></textarea>
           </div>
-
-          <div class="pt-1">
-            <button onclick="toggleModelSolution('sol-ex-4-2')" class="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg bg-white hover:bg-slate-100 text-slate-600 hover:text-slate-900 font-semibold text-xs transition-all border border-slate-300 shadow-sm active:scale-95">
-              <i class="fa-regular fa-eye text-emerald-600" id="sol-ex-4-2-icon"></i><span id="sol-ex-4-2-lbl">Solution</span>
+          <div>
+            <button onclick="toggleModelSolution('sol-ex-4-2')" class="px-3 py-1 rounded-lg bg-white hover:bg-slate-100 text-slate-600 font-semibold text-xs border border-slate-300 shadow-sm">
+              <i class="fa-regular fa-eye text-emerald-600" id="sol-ex-4-2-icon"></i> <span id="sol-ex-4-2-lbl">Solution</span>
             </button>
-            <div id="sol-ex-4-2" class="hidden mt-3 p-4 rounded-2xl bg-emerald-50/90 border border-emerald-200 text-xs sm:text-sm space-y-3">
-              <div class="font-bold text-emerald-800 flex items-center gap-2 text-xs uppercase tracking-wider"><i class="fa-solid fa-circle-check"></i> Model Solution:</div>
-              <div class="space-y-2 text-slate-700">
-                <p>$\text{Perimeter}_1 = 32\text{ cm}$. $k = \frac{80}{32} = 2.5$.</p>
-                <p>Sides: $7.5\text{ cm},\ 12.5\text{ cm},\ 15\text{ cm},\ 20\text{ cm},\ 25\text{ cm}$.</p>
-              </div>
+            <div id="sol-ex-4-2" class="hidden mt-3 p-4 rounded-2xl bg-emerald-50 border border-emerald-200 text-xs sm:text-sm space-y-2">
+              <p class="font-bold text-emerald-800">Model Solution:</p>
+              <p>$k = 2.5$. Sides: $7.5, 12.5, 15, 20, 25\text{ cm}$.</p>
             </div>
           </div>
         </div>
@@ -1222,100 +687,28 @@
         <!-- Question 4.3: Try It Yourself -->
         <div class="p-6 rounded-3xl bg-slate-50/80 border border-slate-200 space-y-4">
           <div class="p-4 rounded-2xl bg-emerald-50/70 border border-emerald-200 space-y-2">
-            <div class="font-bold text-slate-900 text-sm flex flex-wrap items-center gap-2">
+            <div class="font-bold text-slate-900 text-sm flex items-center gap-2">
               <span class="px-2 py-0.5 rounded bg-emerald-600 text-white text-xs font-black">4.3</span>
-              <span class="px-2.5 py-0.5 rounded-full bg-amber-100 text-amber-800 text-xs font-extrabold uppercase tracking-wide flex items-center gap-1.5"><i class="fa-solid fa-user-pen"></i> Try It Yourself</span>
+              <span class="px-2.5 py-0.5 rounded-full bg-amber-100 text-amber-800 text-xs font-extrabold uppercase">Try It Yourself</span>
               <span>Multi-Variable Algebraic System with Ratio 3 : 4</span>
             </div>
             <p class="text-xs sm:text-sm text-slate-700 leading-relaxed">
-              Polygon $ABCD \sim \text{polygon } EFGH$ with perimeter ratio $\frac{3}{4}$. Find $x$, $y$, and $z$.
+              Polygon $ABCD \sim EFGH$ with perimeter ratio $\frac{3}{4}$. Find $x, y, z$.
             </p>
           </div>
-
-          <div class="w-full bg-white p-4 rounded-2xl border border-slate-200 flex justify-center">
-            <svg viewBox="0 0 520 250" class="w-full max-w-lg h-auto" xmlns="http://www.w3.org/2000/svg">
-              <polygon points="40,200 160,200 185,75 75,50" fill="#ECFDF5" stroke="#059669" stroke-width="2.2" stroke-linejoin="round"/>
-              <text x="26" y="210" class="font-bold text-xs fill-emerald-950">A</text>
-              <text x="166" y="210" class="font-bold text-xs fill-emerald-950">B</text>
-              <text x="192" y="75" class="font-bold text-xs fill-emerald-950">C</text>
-              <text x="65" y="45" class="font-bold text-xs fill-emerald-950">D</text>
-              <g transform="translate(100, 215)"><rect x="-26" y="-10" width="52" height="20" class="svg-pill-bg"/><text x="0" y="1" class="svg-pill-text" style="font-size:10px;">2z - 3</text></g>
-              <g transform="translate(182, 135)"><rect x="-22" y="-10" width="44" height="20" class="svg-pill-bg"/><text x="0" y="1" class="svg-pill-text" style="font-size:10px;">x + 1</text></g>
-              <g transform="translate(130, 52)"><rect x="-18" y="-10" width="36" height="20" class="svg-pill-bg"/><text x="0" y="1" class="svg-pill-text" style="font-size:11px;">4.5</text></g>
-
-              <polygon points="260,205 420,205 455,40 310,10" fill="#EFF6FF" stroke="#2563EB" stroke-width="2.4" stroke-linejoin="round"/>
-              <text x="246" y="215" class="font-bold text-xs fill-blue-950">E</text>
-              <text x="428" y="215" class="font-bold text-xs fill-blue-950">F</text>
-              <text x="462" y="40" class="font-bold text-xs fill-blue-950">G</text>
-              <text x="300" y="10" class="font-bold text-xs fill-blue-950">H</text>
-              <g transform="translate(340, 220)"><rect x="-16" y="-10" width="32" height="20" class="svg-pill-bg"/><text x="0" y="1" class="svg-pill-text" style="font-size:11px;">8</text></g>
-              <g transform="translate(448, 120)"><rect x="-18" y="-10" width="36" height="20" class="svg-pill-bg"/><text x="0" y="1" class="svg-pill-text" style="font-size:11px;">2x</text></g>
-              <g transform="translate(385, 18)"><rect x="-18" y="-10" width="36" height="20" class="svg-pill-bg"/><text x="0" y="1" class="svg-pill-text" style="font-size:11px;">2y</text></g>
-            </svg>
-          </div>
-
           <div class="space-y-2 pt-2">
-            <div class="flex items-center justify-between text-xs font-bold text-slate-500 px-1"><span><i class="fa-solid fa-pencil mr-1 text-emerald-500"></i> Solution Workspace</span></div>
-            <textarea class="notebook-paper" rows="16" spellcheck="false"></textarea>
-          </div>
-
-          <div class="pt-1">
-            <button onclick="toggleModelSolution('sol-q4-2')" class="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg bg-white hover:bg-slate-100 text-slate-600 hover:text-slate-900 font-semibold text-xs transition-all border border-slate-300 shadow-sm active:scale-95">
-              <i class="fa-regular fa-eye text-emerald-600" id="sol-q4-2-icon"></i><span id="sol-q4-2-lbl">Solution</span>
-            </button>
-            <div id="sol-q4-2" class="hidden mt-3 p-4 rounded-2xl bg-emerald-50/90 border border-emerald-200 text-xs sm:text-sm space-y-3">
-              <div class="font-bold text-emerald-800 flex items-center gap-2 text-xs uppercase tracking-wider"><i class="fa-solid fa-circle-check"></i> Model Solution:</div>
-              <div class="space-y-2 text-slate-700">
-                <p>$k = \frac{3}{4}$. $\frac{2z-3}{8} = \frac{3}{4} \implies z = 4.5$.</p>
-                <p>$\frac{x+1}{2x} = \frac{3}{4} \implies x = 2$. $\frac{4.5}{2y} = \frac{3}{4} \implies y = 3$.</p>
-              </div>
+            <div class="flex items-center justify-between text-xs font-bold text-slate-500 px-1">
+              <span><i class="fa-solid fa-pencil mr-1 text-emerald-500"></i> Solution Workspace</span>
             </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- Engineering & Display Aspect Ratio Application -->
-      <section class="glass-card rounded-[2.25rem] p-6 sm:p-8 shadow-soft-cloud border border-white space-y-6">
-        <div class="flex items-center gap-3">
-          <div class="w-10 h-10 rounded-xl bg-purple-600 text-white flex items-center justify-center font-bold text-lg shadow-md">
-            <i class="fa-solid fa-laptop-code"></i>
+            <textarea class="notebook-paper" rows="12" spellcheck="false"></textarea>
           </div>
           <div>
-            <h3 class="text-xl font-bold font-display text-slate-900">Engineering & Display Aspect Ratio Application</h3>
-            <p class="text-slate-500 text-xs sm:text-sm">Geometric similarity in modern multimedia hardware</p>
-          </div>
-        </div>
-
-        <div class="p-6 rounded-3xl bg-slate-50 border border-slate-200 space-y-4">
-          <div class="flex items-center justify-between">
-            <span class="font-bold text-purple-700 text-sm sm:text-base flex items-center gap-2">
-              <i class="fa-solid fa-film"></i> Real-World Application: Cinema Screen Aspect Ratio
-            </span>
-            <span class="text-xs bg-purple-100 text-purple-800 font-bold px-2.5 py-0.5 rounded-full">Aspect Ratio</span>
-          </div>
-          
-          <p class="text-xs sm:text-sm text-slate-700 leading-relaxed">
-            A cinema theater screen is a rectangle with width <strong>45 feet</strong> and height <strong>25 feet</strong>. Which TV screen format—<strong>Format A ($36\text{ inches} \times 20\text{ inches}$)</strong> or <strong>Format B ($36\text{ inches} \times 27\text{ inches}$)</strong>—is mathematically similar to the cinema screen to prevent crop distortion or black bars?
-          </p>
-
-          <div class="space-y-2 pt-2">
-            <div class="flex items-center justify-between text-xs font-bold text-slate-500 px-1"><span><i class="fa-solid fa-pencil mr-1 text-purple-600"></i> Solution Workspace</span></div>
-            <textarea class="notebook-paper" rows="16" spellcheck="false"></textarea>
-          </div>
-
-          <div class="pt-1">
-            <button onclick="toggleModelSolution('sol-eng-1')" class="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg bg-white hover:bg-slate-100 text-slate-600 hover:text-slate-900 font-semibold text-xs transition-all border border-slate-300 shadow-sm active:scale-95">
-              <i class="fa-regular fa-eye text-purple-600" id="sol-eng-1-icon"></i><span id="sol-eng-1-lbl">Solution</span>
+            <button onclick="toggleModelSolution('sol-q4-2')" class="px-3 py-1 rounded-lg bg-white hover:bg-slate-100 text-slate-600 font-semibold text-xs border border-slate-300 shadow-sm">
+              <i class="fa-regular fa-eye text-emerald-600" id="sol-q4-2-icon"></i> <span id="sol-q4-2-lbl">Solution</span>
             </button>
-            <div id="sol-eng-1" class="hidden mt-3 p-4 rounded-2xl bg-purple-50/90 border border-purple-200 text-xs sm:text-sm space-y-2">
-              <div class="font-bold text-purple-900 text-xs uppercase">Aspect Ratio Verification:</div>
-              <div class="p-2 bg-white rounded-lg border font-mono text-center">
-                $$\text{Cinema Ratio} = \frac{45}{25} = 1.8$$
-                $$\text{Format A Ratio} = \frac{36}{20} = 1.8,\quad \text{Format B Ratio} = \frac{36}{27} \approx 1.33$$
-              </div>
-              <p class="font-bold text-purple-950">
-                <i class="fa-solid fa-check text-emerald-600 mr-1"></i> Verdict: Format A is geometrically similar because its dimension ratio identically equals $1.8$.
-              </p>
+            <div id="sol-q4-2" class="hidden mt-3 p-4 rounded-2xl bg-emerald-50 border border-emerald-200 text-xs sm:text-sm space-y-2">
+              <p class="font-bold text-emerald-800">Model Solution:</p>
+              <p>$z = 4.5$, $x = 2$, $y = 3$.</p>
             </div>
           </div>
         </div>
@@ -1324,13 +717,13 @@
     </div>
 
     <!-- ========================================================================= -->
-    <!-- SECTION 2: COMPREHENSIVE MCQ REVISION BANK -->
+    <!-- SECTION 2: COMPREHENSIVE MCQ REVISION BANK (10 Questions) -->
     <!-- ========================================================================= -->
     <div id="section-revision" class="hidden space-y-8">
       <div class="glass-card rounded-3xl p-6 shadow-soft-cloud flex flex-col sm:flex-row items-center justify-between gap-4">
         <div>
           <h2 class="text-xl sm:text-2xl font-black font-display text-slate-900">MCQ Revision Bank</h2>
-          <p class="text-xs sm:text-sm text-slate-500">Curated conceptual practice problems with step-by-step verification</p>
+          <p class="text-xs sm:text-sm text-slate-500">Curated conceptual practice problems (10 Questions)</p>
         </div>
         <button onclick="resetRevisionBank()" class="px-4 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs sm:text-sm border border-slate-300 transition-all flex items-center gap-2 shadow-sm active:scale-95">
           <i class="fa-solid fa-arrows-rotate text-blue-600"></i> Reset Choices
@@ -1340,7 +733,7 @@
     </div>
 
     <!-- ========================================================================= -->
-    <!-- SECTION 3: TIMED EVALUATION QUIZ (10 MARKS) -->
+    <!-- SECTION 3: TIMED EVALUATION QUIZ (10 Marks + Post-Quiz Feedback) -->
     <!-- ========================================================================= -->
     <div id="section-quiz" class="hidden space-y-8">
       <div class="glass-card rounded-[2.25rem] p-6 sm:p-8 shadow-soft-cloud border border-white space-y-5">
@@ -1441,20 +834,6 @@
       if (window.MathJax && MathJax.typesetPromise) MathJax.typesetPromise();
     }
 
-    function toggleWarmup(solId, lblId) {
-      const sol = document.getElementById(solId);
-      const lbl = document.getElementById(lblId);
-      if (!sol) return;
-      if (sol.classList.contains('hidden')) {
-        sol.classList.remove('hidden');
-        if (lbl) lbl.textContent = 'Hide Calculation';
-      } else {
-        sol.classList.add('hidden');
-        if (lbl) lbl.textContent = 'Reveal Calculation';
-      }
-      if (window.MathJax && MathJax.typesetPromise) MathJax.typesetPromise();
-    }
-
     function toggleModelSolution(solId) {
       const sol = document.getElementById(solId);
       const lbl = document.getElementById(`${solId}-lbl`);
@@ -1472,9 +851,32 @@
       if (window.MathJax && MathJax.typesetPromise) MathJax.typesetPromise();
     }
 
+    function toggleWarmup(solId, lblId) {
+      const sol = document.getElementById(solId);
+      const lbl = document.getElementById(lblId);
+      if (!sol) return;
+      if (sol.classList.contains('hidden')) {
+        sol.classList.remove('hidden');
+        if (lbl) lbl.textContent = 'Hide Calculation';
+      } else {
+        sol.classList.add('hidden');
+        if (lbl) lbl.textContent = 'Reveal Calculation';
+      }
+      if (window.MathJax && MathJax.typesetPromise) MathJax.typesetPromise();
+    }
+
+    /* 10 Revision Bank Questions */
     const revisionQuestions = [
-      { id: 'rev-1', topic: 'Scale Factor Ratio', text: 'In the figure, polygon $ABCD$ has side lengths $AB=24$, $BC=24$, $CD=12$, $DA=18$, and polygon $KLMN$ has corresponding sides $KL=16$, $LM=16$, $MN=8$, $NK=12$. What is the similarity ratio of polygon $KLMN$ to polygon $ABCD$?', options: [{ letter: 'A', text: '$\\frac{2}{3}$' }, { letter: 'B', text: '$\\frac{3}{2}$' }, { letter: 'C', text: '$\\frac{1}{2}$' }, { letter: 'D', text: '$\\frac{3}{1}$' }], correctIndex: 0, explanation: 'Taking any pair of corresponding sides gives $k = \\frac{16}{24} = \\frac{2}{3}$.' },
-      { id: 'rev-2', topic: 'Rectangle Proportionality', text: 'If rectangle $ABCD \\sim \\text{rectangle } EFGH$, where $ABCD$ has length $36\\text{ cm}$ and width $27\\text{ cm}$, and $EFGH$ has width $24\\text{ cm}$ and length $x$. What is $x$?', options: [{ letter: 'A', text: '$27\\text{ cm}$' }, { letter: 'B', text: '$9\\text{ cm}$' }, { letter: 'C', text: '$32\\text{ cm}$' }, { letter: 'D', text: '$24\\text{ cm}$' }], correctIndex: 2, explanation: '$\\frac{x}{36} = \\frac{24}{27} \\implies x = 32\\text{ cm}$.' }
+      { id: 'rev-1', topic: 'Scale Factor Ratio', text: 'In the figure, polygon $ABCD$ has side lengths $AB=24, BC=24, CD=12, DA=18$, and polygon $KLMN$ has corresponding sides $KL=16, LM=16, MN=8, NK=12$. What is the similarity ratio of polygon $KLMN$ to polygon $ABCD$?', options: [{ letter: 'A', text: '$\\frac{2}{3}$' }, { letter: 'B', text: '$\\frac{3}{2}$' }, { letter: 'C', text: '$\\frac{1}{2}$' }, { letter: 'D', text: '$\\frac{3}{1}$' }], correctIndex: 0, explanation: 'Taking any pair of corresponding sides gives $k = \\frac{16}{24} = \\frac{2}{3}$.' },
+      { id: 'rev-2', topic: 'Rectangle Proportionality', text: 'If rectangle $ABCD \\sim \\text{rectangle } EFGH$, where $ABCD$ has length $36\\text{ cm}$ and width $27\\text{ cm}$, and $EFGH$ has width $24\\text{ cm}$ and length $x$. What is $x$?', options: [{ letter: 'A', text: '$27\\text{ cm}$' }, { letter: 'B', text: '$9\\text{ cm}$' }, { letter: 'C', text: '$32\\text{ cm}$' }, { letter: 'D', text: '$24\\text{ cm}$' }], correctIndex: 2, explanation: '$\\frac{x}{36} = \\frac{24}{27} \\implies x = 32\\text{ cm}$.' },
+      { id: 'rev-3', topic: 'Parallelogram Angles', text: 'In two similar parallelograms, if $m(\\angle D) = 130^\\circ$, what is the measure of the corresponding angle in the second parallelogram?', options: [{ letter: 'A', text: '$50^\\circ$' }, { letter: 'B', text: '$130^\\circ$' }, { letter: 'C', text: '$90^\\circ$' }, { letter: 'D', text: '$40^\\circ$' }], correctIndex: 1, explanation: 'Corresponding interior angles in similar polygons are equal. Thus $130^\\circ$.' },
+      { id: 'rev-4', topic: 'Perimeter Ratio & Area', text: 'The ratio between the perimeters of two similar polygons is $3 : 4$. If the area of the smaller polygon is $18\\text{ cm}^2$, what is the area of the larger polygon?', options: [{ letter: 'A', text: '$24\\text{ cm}^2$' }, { letter: 'B', text: '$32\\text{ cm}^2$' }, { letter: 'C', text: '$27\\text{ cm}^2$' }, { letter: 'D', text: '$36\\text{ cm}^2$' }], correctIndex: 1, explanation: 'The area ratio is the square of the perimeter ratio: $(\\frac{3}{4})^2 = \\frac{9}{16}$. Thus $\\frac{18}{\\text{Area}_2} = \\frac{9}{16} \\implies \\text{Area}_2 = 32\\text{ cm}^2$.' },
+      { id: 'rev-5', topic: 'Rhombus Similarity', text: 'Two rhombuses are similar if and only if:', options: [{ letter: 'A', text: 'Their side lengths are equal' }, { letter: 'B', text: 'One pair of corresponding angles is congruent' }, { letter: 'C', text: 'Their diagonals are equal' }, { letter: 'D', text: 'Their perimeters are equal' }], correctIndex: 1, explanation: 'Since all four sides of a rhombus are equal, congruence of one pair of corresponding angles guarantees similarity.' },
+      { id: 'rev-6', topic: 'Regular Polygons', text: 'Any two regular pentagons are:', options: [{ letter: 'A', text: 'Always similar' }, { letter: 'B', text: 'Never similar' }, { letter: 'C', text: 'Similar only if side lengths match' }, { letter: 'D', text: 'Congruent always' }], correctIndex: 0, explanation: 'All regular polygons with the exact same number of sides $n$ are always geometrically similar.' },
+      { id: 'rev-7', topic: 'Perimeter Calculation', text: 'Two similar polygons have side ratio $3 : 2$. If the perimeter of the smaller polygon is $34\\text{ cm}$, what is the perimeter of the larger polygon?', options: [{ letter: 'A', text: '$17\\text{ cm}$' }, { letter: 'B', text: '$34\\text{ cm}$' }, { letter: 'C', text: '$51\\text{ cm}$' }, { letter: 'D', text: '$68\\text{ cm}$' }], correctIndex: 2, explanation: '$\\frac{\\text{Perimeter}_{\\text{larger}}}{34} = \\frac{3}{2} \\implies \\text{Perimeter}_{\\text{larger}} = 51\\text{ cm}$.' },
+      { id: 'rev-8', topic: 'Scale Factor Classification', text: 'If the similarity scale factor $k = 1$, the two polygons are:', options: [{ letter: 'A', text: 'Congruent' }, { letter: 'B', text: 'Enlarged' }, { letter: 'C', text: 'Reduced' }, { letter: 'D', text: 'Perpendicular' }], correctIndex: 0, explanation: 'When $k = 1$, corresponding sides are equal, meaning the polygons are congruent.' },
+      { id: 'rev-9', topic: 'Transitive Property', text: 'If polygon $A \\sim B$ and polygon $B \\sim C$, then:', options: [{ letter: 'A', text: '$A \\sim C$' }, { letter: 'B', text: '$A$ and $C$ are perpendicular' }, { letter: 'C', text: '$A$ is a reduction of $C$' }, { letter: 'D', text: 'No relation' }], correctIndex: 0, explanation: 'Similarity of polygons satisfies the transitive property.' },
+      { id: 'rev-10', topic: 'Corresponding Vertices', text: 'If polygon $ABCD \\sim EFGH$, which side corresponds to $BC$?', options: [{ letter: 'A', text: '$EF$' }, { letter: 'B', text: '$FG$' }, { letter: 'C', text: '$GH$' }, { letter: 'D', text: '$HE$' }], correctIndex: 1, explanation: 'Matching vertex indices $B \\leftrightarrow F$ and $C \\leftrightarrow G$ means $BC$ corresponds to $FG$.' }
     ];
 
     function renderRevisionBank() {
@@ -1533,10 +935,43 @@
 
     function resetRevisionBank() { renderRevisionBank(); }
 
+    /* 3 Quiz Sets of 10 Questions Each (30 Questions Total) */
     const quizSets = [
       [
         { text: 'If polygon $M_1 \\sim \\text{polygon } M_2$ with similarity ratio $k = 1$, then polygon $M_1$ and polygon $M_2$ are:', options: [{ letter: 'A', text: 'Congruent' }, { letter: 'B', text: 'Magnified' }, { letter: 'C', text: 'Perpendicular' }, { letter: 'D', text: 'Non-coplanar' }], correctIndex: 0, explanation: 'When scale factor $k = 1$, corresponding side lengths and angles are equal.' },
-        { text: 'The ratio between perimeters of two similar polygons is $4 : 9$. If side length in first is $12\\text{ cm}$, the corresponding side in second is:', options: [{ letter: 'A', text: '$18\\text{ cm}$' }, { letter: 'B', text: '$27\\text{ cm}$' }, { letter: 'C', text: '$36\\text{ cm}$' }, { letter: 'D', text: '$54\\text{ cm}$' }], correctIndex: 1, explanation: '$\\frac{12}{\\text{Side}_2} = \\frac{4}{9} \\implies \\text{Side}_2 = 27\\text{ cm}$.' }
+        { text: 'The ratio between perimeters of two similar polygons is $4 : 9$. If side length in first is $12\\text{ cm}$, the corresponding side in second is:', options: [{ letter: 'A', text: '$18\\text{ cm}$' }, { letter: 'B', text: '$27\\text{ cm}$' }, { letter: 'C', text: '$36\\text{ cm}$' }, { letter: 'D', text: '$54\\text{ cm}$' }], correctIndex: 1, explanation: '$\\frac{12}{\\text{Side}_2} = \\frac{4}{9} \\implies \\text{Side}_2 = 27\\text{ cm}$.' },
+        { text: 'Which geometric shapes are always similar?', options: [{ letter: 'A', text: 'Rectangles' }, { letter: 'B', text: 'Squares' }, { letter: 'C', text: 'Rhombuses' }, { letter: 'D', text: 'Parallelograms' }], correctIndex: 1, explanation: 'All squares share equal angles ($90^\circ$) and proportional sides.' },
+        { text: 'If polygon $ABCD \\sim EFGH$, then $\\frac{AB}{EF}$ equals:', options: [{ letter: 'A', text: '$\\frac{BC}{GH}$' }, { letter: 'B', text: '$\\frac{CD}{GH}$' }, { letter: 'C', text: '$\\frac{DA}{HE}$' }, { letter: 'D', text: '$\\frac{AC}{EG}$' }], correctIndex: 1, explanation: 'Corresponding ratio is $\\frac{CD}{GH}$.' },
+        { text: 'A rectangle has dimensions $10\\text{ cm} \\times 4\\text{ cm}$. A similar rectangle has width $3\\text{ cm}$. Its length is:', options: [{ letter: 'A', text: '$7.5\\text{ cm}$' }, { letter: 'B', text: '$8\\text{ cm}$' }, { letter: 'C', text: '$6.5\\text{ cm}$' }, { letter: 'D', text: '$12\\text{ cm}$' }], correctIndex: 0, explanation: '$\\frac{\\text{Length}}{10} = \\frac{3}{4} \\implies \\text{Length} = 7.5\\text{ cm}$.' },
+        { text: 'If scale factor $0 < k < 1$, the polygon is a:', options: [{ letter: 'A', text: 'Reduction' }, { letter: 'B', text: 'Enlargement' }, { letter: 'C', text: 'Congruence' }, { letter: 'D', text: 'Reflection' }], correctIndex: 0, explanation: 'When $k < 1$, dimensions shrink, creating a reduction.' },
+        { text: 'Two similar polygons have side lengths summing to $32\\text{ cm}$. If perimeter of second is $80\\text{ cm}$, $k$ is:', options: [{ letter: 'A', text: '$\\frac{2}{5}$' }, { letter: 'B', text: '$\\frac{3}{4}$' }, { letter: 'C', text: '$\\frac{1}{2}$' }, { letter: 'D', text: '$\\frac{4}{5}$' }], correctIndex: 0, explanation: '$k = \\frac{32}{80} = \\frac{2}{5}$.' },
+        { text: 'If rhombus $ABCD \\sim XYZM$ and $m(\\angle A) = 75^\circ$, then $m(\\angle Y)$ is:', options: [{ letter: 'A', text: '$75^\circ$' }, { letter: 'B', text: '$105^\circ$' }, { letter: 'C', text: '$115^\circ$' }, { letter: 'D', text: '$150^\circ$' }], correctIndex: 1, explanation: 'Consecutive angles sum to $180^\circ \\implies 180^\circ - 75^\circ = 105^\circ$.' },
+        { text: 'Two polygons similar to a third polygon are:', options: [{ letter: 'A', text: 'Similar to each other' }, { letter: 'B', text: 'Congruent' }, { letter: 'C', text: 'Perpendicular' }, { letter: 'D', text: 'Unrelated' }], correctIndex: 0, explanation: 'Transitive property of similarity.' },
+        { text: 'If $k_1 = \\frac{2}{3}$ and $k_2 = \\frac{3}{5}$, the combined scale factor is:', options: [{ letter: 'A', text: '$\\frac{2}{5}$' }, { letter: 'B', text: '$\\frac{5}{2}$' }, { letter: 'C', text: '$\\frac{1}{3}$' }, { letter: 'D', text: '$\\frac{9}{10}$' }], correctIndex: 0, explanation: '$\\frac{2}{3} \\times \\frac{3}{5} = \\frac{2}{5}$.' }
+      ],
+      [
+        { text: 'Two regular octagons have side ratio $5 : 7$. What is their perimeter ratio?', options: [{ letter: 'A', text: '$25 : 49$' }, { letter: 'B', text: '$5 : 7$' }, { letter: 'C', text: '$10 : 14$' }, { letter: 'D', text: '$7 : 5$' }], correctIndex: 1, explanation: 'Perimeter ratio equals side ratio.' },
+        { text: 'Parallelogram $ABCD \\sim EFGH$ ($AB=8, BC=6$) and perimeter of $EFGH$ is $42\\text{ cm}$. Find $EF$:', options: [{ letter: 'A', text: '$12\\text{ cm}$' }, { letter: 'B', text: '$14\\text{ cm}$' }, { letter: 'C', text: '$16\\text{ cm}$' }, { letter: 'D', text: '$18\\text{ cm}$' }], correctIndex: 0, explanation: '$k = \\frac{42}{28} = 1.5 \\implies EF = 1.5 \\times 8 = 12\\text{ cm}$.' },
+        { text: 'All equilateral triangles are similar because:', options: [{ letter: 'A', text: 'Sides are $10\\text{ cm}$' }, { letter: 'B', text: 'They are regular polygons with $n=3$' }, { letter: 'C', text: 'Heights are equal' }, { letter: 'D', text: 'Areas are identical' }], correctIndex: 1, explanation: 'Regular polygons with same $n$ are always similar.' },
+        { text: 'If polygon $ABCD \\sim XYZM$ with $m(\\angle B) = 116^\circ$ and $m(\\angle Z) = y - 73^\circ = 61^\circ$, find $y$:', options: [{ letter: 'A', text: '$134$' }, { letter: 'B', text: '$189$' }, { letter: 'C', text: '$135$' }, { letter: 'D', text: '$116$' }], correctIndex: 0, explanation: '$y - 73 = 61 \\implies y = 134$.' },
+        { text: 'If scale factor $k = \\frac{4}{3}$, the polygon is an:', options: [{ letter: 'A', text: 'Reduction' }, { letter: 'B', text: 'Enlargement' }, { letter: 'C', text: 'Congruence' }, { letter: 'D', text: 'Reflection' }], correctIndex: 1, explanation: 'Since $k > 1$, it is an enlargement.' },
+        { text: 'Perimeters of two similar polygons are $24\\text{ cm}$ and $36\\text{ cm}$. If longest side of first is $8\\text{ cm}$, longest of second is:', options: [{ letter: 'A', text: '$10\\text{ cm}$' }, { letter: 'B', text: '$12\\text{ cm}$' }, { letter: 'C', text: '$14\\text{ cm}$' }, { letter: 'D', text: '$16\\text{ cm}$' }], correctIndex: 1, explanation: '$8 \\times \\frac{36}{24} = 12\\text{ cm}$.' },
+        { text: 'Can a rectangle ($6 \\times 4$) be similar to a rhombus (side $5$)?', options: [{ letter: 'A', text: 'Yes' }, { letter: 'B', text: 'No, because angles differ ($90^\circ$ vs general)' }, { letter: 'C', text: 'Yes if perimeters match' }, { letter: 'D', text: 'Yes' }], correctIndex: 1, explanation: 'Rectangles have $90^\circ$ angles which general rhombuses do not.' },
+        { text: 'If $\\frac{CD}{GH} = \\frac{5}{2}$, then $\\frac{GH}{CD}$ equals:', options: [{ letter: 'A', text: '$\\frac{5}{2}$' }, { letter: 'B', text: '$\\frac{2}{5}$' }, { letter: 'C', text: '$\\frac{7}{2}$' }, { letter: 'D', text: '$\\frac{3}{5}$' }], correctIndex: 1, explanation: 'Reciprocal ratio is $\\frac{2}{5}$.' },
+        { text: 'In quadrilateral $ABCD \\sim EFGH$, if angles are $80^\circ, 100^\circ, 110^\circ$, what is $m(\\angle D)$?', options: [{ letter: 'A', text: '$70^\circ$' }, { letter: 'B', text: '$80^\circ$' }, { letter: 'C', text: '$110^\circ$' }, { letter: 'D', text: '$90^\circ$' }], correctIndex: 0, explanation: '$360^\circ - (80 + 100 + 110) = 70^\circ$.' },
+        { text: 'If two similar polygons are congruent, $k$ is:', options: [{ letter: 'A', text: '$k > 1$' }, { letter: 'B', text: '$k = 0$' }, { letter: 'C', text: '$k = 1$' }, { letter: 'D', text: '$0 < k < 1$' }], correctIndex: 2, explanation: 'Congruent figures have $k = 1$.' }
+      ],
+      [
+        { text: 'Triangle sides $4, 6, 8\\text{ cm}$. Shortest side of similar triangle is $10\\text{ cm}$. Perimeter is:', options: [{ letter: 'A', text: '$45\\text{ cm}$' }, { letter: 'B', text: '$36\\text{ cm}$' }, { letter: 'C', text: '$40\\text{ cm}$' }, { letter: 'D', text: '$54\\text{ cm}$' }], correctIndex: 0, explanation: 'Perimeter $= 18 \\times 2.5 = 45\\text{ cm}$.' },
+        { text: 'Sides of first: $x, x+2, 2x$. Shortest of second is $6$ and scale factor is $2$. Find $x$:', options: [{ letter: 'A', text: '$3$' }, { letter: 'B', text: '$4$' }, { letter: 'C', text: '$2$' }, { letter: 'D', text: '$6$' }], correctIndex: 0, explanation: '$\\frac{6}{x} = 2 \\implies x = 3$.' },
+        { text: 'Rectangle $ABCD$ ($AB=5, BC=12$, diagonal $26$). Perimeter of $EFGH$ is:', options: [{ letter: 'A', text: '$68\\text{ cm}$' }, { letter: 'B', text: '$34\\text{ cm}$' }, { letter: 'C', text: '$52\\text{ cm}$' }, { letter: 'D', text: '$104\\text{ cm}$' }], correctIndex: 0, explanation: 'Diagonal $= 13, k = 2$. Perimeter $= 34 \\times 2 = 68\\text{ cm}$.' },
+        { text: 'True or False: Congruent figures must be similar.', options: [{ letter: 'A', text: 'True with $k = 1$' }, { letter: 'B', text: 'False' }, { letter: 'C', text: 'True for pentagons only' }, { letter: 'D', text: 'False' }], correctIndex: 0, explanation: 'All congruent figures are similar with $k = 1$.' },
+        { text: 'If $ABCD \\sim EFGH$, which statement is always true?', options: [{ letter: 'A', text: '$\\frac{AB}{FG} = \\frac{BC}{GH}$' }, { letter: 'B', text: '$m(\\angle B) = m(\\angle F)$' }, { letter: 'C', text: 'Area is equal' }, { letter: 'D', text: '$AD = EH$' }], correctIndex: 1, explanation: 'Corresponding vertices $B$ and $F$ have equal angle measures.' },
+        { text: 'If ratio is $\\frac{1}{3}$ and perimeter of first is $15\\text{ cm}$, perimeter of second is:', options: [{ letter: 'A', text: '$5\\text{ cm}$' }, { letter: 'B', text: '$30\\text{ cm}$' }, { letter: 'C', text: '$45\\text{ cm}$' }, { letter: 'D', text: '$60\\text{ cm}$' }], correctIndex: 2, explanation: '$15 \\times 3 = 45\\text{ cm}$.' },
+        { text: 'Two rhombuses are similar if:', options: [{ letter: 'A', text: 'Sides are equal' }, { letter: 'B', text: 'One angle in first equals one angle in second' }, { letter: 'C', text: 'Diagonals match' }, { letter: 'D', text: 'Perimeters are coprime' }], correctIndex: 1, explanation: 'One pair of corresponding congruent angles ensures similarity.' },
+        { text: 'Billboard rectangle $12\\text{ m} \\times 8\\text{ m}$. Similar flyer length $15\\text{ cm}$. Width is:', options: [{ letter: 'A', text: '$10\\text{ cm}$' }, { letter: 'B', text: '$12\\text{ cm}$' }, { letter: 'C', text: '$7.5\\text{ cm}$' }, { letter: 'D', text: '$9\\text{ cm}$' }], correctIndex: 0, explanation: '$15 \\times \\frac{8}{12} = 10\\text{ cm}$.' },
+        { text: 'If $ABCD \\sim EFGH$, $\\frac{AB+BC+CD+DA}{EF+FG+GH+HE}$ equals:', options: [{ letter: 'A', text: '$\\frac{AB}{EF}$' }, { letter: 'B', text: '$\\left(\\frac{AB}{EF}\\right)^2$' }, { letter: 'C', text: '$1$' }, { letter: 'D', text: '$0$' }], correctIndex: 0, explanation: 'Ratio of sum of perimeters equals any single side ratio.' },
+        { text: 'Which statement is FALSE regarding polygon similarity?', options: [{ letter: 'A', text: 'Regular polygons with same $n$ are similar' }, { letter: 'B', text: 'All squares are similar' }, { letter: 'C', text: 'All rhombuses are similar' }, { letter: 'D', text: 'All circles are similar' }], correctIndex: 2, explanation: 'Rhombuses are not unconditionally similar.' }
       ]
     ];
 
@@ -1618,6 +1053,7 @@
 
     function resetQuizState() {
       quizTimeLeft = 15 * 60;
+      userQuizAnswers = {};
       const resultsCard = document.getElementById('quiz-results-card');
       const submitArea = document.getElementById('quiz-submit-area');
       if (resultsCard) resultsCard.classList.add('hidden');
@@ -1630,18 +1066,77 @@
       if (quizTimerInterval) clearInterval(quizTimerInterval);
       const qList = quizSets[currentQuizSetIndex];
       let score = 0;
-      qList.forEach((q, idx) => { if (userQuizAnswers[idx] === q.correctIndex) score++; });
+      let reviewHtml = '';
+
+      qList.forEach((q, idx) => {
+        const userChoice = userQuizAnswers[idx];
+        const isCorrect = (userChoice !== undefined && userChoice === q.correctIndex);
+        if (isCorrect) score++;
+
+        const userChoiceText = userChoice !== undefined ? `${q.options[userChoice].letter}: ${q.options[userChoice].text}` : '<em>No answer chosen</em>';
+        const correctChoiceText = `${q.options[q.correctIndex].letter}: ${q.options[q.correctIndex].text}`;
+
+        reviewHtml += `
+          <div class="p-4 rounded-2xl border ${isCorrect ? 'border-emerald-200 bg-emerald-50/50' : 'border-rose-200 bg-rose-50/50'} space-y-2">
+            <div class="flex items-center justify-between">
+              <span class="font-bold text-xs ${isCorrect ? 'text-emerald-700' : 'text-rose-700'} uppercase">
+                <i class="fa-solid ${isCorrect ? 'fa-circle-check text-emerald-500' : 'fa-circle-xmark text-rose-500'} mr-1"></i>
+                Question ${idx + 1}
+              </span>
+              <span class="text-xs font-bold ${isCorrect ? 'text-emerald-700 bg-emerald-100' : 'text-rose-700 bg-rose-100'} px-2 py-0.5 rounded-full">
+                ${isCorrect ? '1 / 1 Mark' : '0 / 1 Mark'}
+              </span>
+            </div>
+            <p class="text-sm font-bold text-slate-800">${q.text}</p>
+            <div class="text-xs space-y-1">
+              <div class="${isCorrect ? 'text-emerald-800' : 'text-rose-800'}"><strong>Your Answer:</strong> ${userChoiceText}</div>
+              ${!isCorrect ? `<div class="text-emerald-800"><strong>Correct Answer:</strong> ${correctChoiceText}</div>` : ''}
+            </div>
+            <div class="text-xs text-slate-600 bg-white/80 p-2.5 rounded-xl border border-slate-200">
+              <i class="fa-solid fa-graduation-cap text-blue-500 mr-1"></i> <strong>Walkthrough:</strong> ${q.explanation}
+            </div>
+          </div>
+        `;
+      });
+
+      let tierText = score >= 9 ? 'Outstanding Master' : (score >= 7 ? 'Great Job • Solid Understanding' : 'Review & Practice Recommended');
+      let nextSetIndex = (currentQuizSetIndex + 1) % 3;
       const resultsCard = document.getElementById('quiz-results-card');
       const submitArea = document.getElementById('quiz-submit-area');
+
       if (resultsCard) {
-        resultsCard.innerHTML = `<div class="text-center space-y-4"><h3 class="text-3xl font-black font-display text-slate-900">Final Score: <span class="text-blue-600">${score}</span> / 10</h3></div>`;
+        resultsCard.innerHTML = `
+          <div class="text-center space-y-4">
+            <div class="inline-flex px-4 py-1 rounded-full bg-gradient-to-r from-blue-600 to-indigo-600 text-white text-xs font-extrabold tracking-wider uppercase shadow-md">
+              ${tierText}
+            </div>
+            <h3 class="text-3xl sm:text-4xl font-black font-display text-slate-900">
+              Final Score: <span class="text-blue-600">${score}</span> / 10
+            </h3>
+            <div class="flex flex-wrap items-center justify-center gap-3 pt-2">
+              <button onclick="resetQuizState()" class="px-5 py-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-800 font-bold text-xs sm:text-sm border border-slate-300 transition-all flex items-center gap-2">
+                <i class="fa-solid fa-rotate-left"></i> Retake Quiz #${currentQuizSetIndex + 1}
+              </button>
+              <button onclick="manualSwitchQuizSet(${nextSetIndex})" class="px-5 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs sm:text-sm shadow-clay-btn transition-all flex items-center gap-2">
+                <i class="fa-solid fa-forward-step"></i> Next Quiz #${nextSetIndex + 1}
+              </button>
+            </div>
+          </div>
+          <div class="border-t border-slate-200 pt-6 space-y-4">
+            <h4 class="font-display font-extrabold text-base sm:text-lg text-slate-900 flex items-center gap-2">
+              <i class="fa-solid fa-list-check text-blue-600"></i> Detailed Question Review & Feedback
+            </h4>
+            <div class="space-y-3">${reviewHtml}</div>
+          </div>
+        `;
         if (submitArea) submitArea.classList.add('hidden');
         resultsCard.classList.remove('hidden');
         resultsCard.scrollIntoView({ behavior: 'smooth' });
       }
+      if (window.MathJax && MathJax.typesetPromise) MathJax.typesetPromise();
     }
 
-    /* iPad Stylus Canvas Engine with Strict Stylus-Only Drawing */
+    /* iPad Stylus & Finger Touch Isolation Engine */
     function upgradeWorkspacesWithStylusSupport() {
       const workspaces = document.querySelectorAll('.space-y-2.pt-2');
       workspaces.forEach((ws, idx) => {
@@ -1705,18 +1200,14 @@
       padState[idx] = { ctx, canvas, color: '#1E3A8A', isEraser: false, size: 2.5, drawing: false, lastX: 0, lastY: 0, history: [] };
       savePadState(idx);
 
-      // Prevent page scrolling strictly when touching with Apple Pencil / Stylus
+      // Stylus-only detection to prevent page scrolling while writing
       const handleTouchStart = (e) => {
-        const isStylus = e.pointerType === 'pen' || (e.touches && e.touches[0] && e.touches[0].touchType === 'stylus');
-        if (isStylus) {
-          if (e.cancelable) e.preventDefault();
-        }
+        const isStylus = e.pointerType === 'pen' || (e.touches && e.touches[0] && (e.touches[0].touchType === 'stylus' || e.touches[0].radiusX < 15));
+        if (isStylus && e.cancelable) e.preventDefault();
       };
       const handleTouchMove = (e) => {
-        const isStylus = e.pointerType === 'pen' || (e.touches && e.touches[0] && e.touches[0].touchType === 'stylus');
-        if (isStylus && padState[idx].drawing) {
-          if (e.cancelable) e.preventDefault();
-        }
+        const isStylus = e.pointerType === 'pen' || (e.touches && e.touches[0] && (e.touches[0].touchType === 'stylus' || e.touches[0].radiusX < 15));
+        if (isStylus && padState[idx].drawing && e.cancelable) e.preventDefault();
       };
 
       canvas.addEventListener('touchstart', handleTouchStart, { passive: false });
@@ -1724,7 +1215,7 @@
 
       canvas.addEventListener('pointerdown', (e) => {
         const isStylus = e.pointerType === 'pen' || e.pointerType === 'mouse';
-        if (!isStylus) return; // Ignore fingers to allow natural page scrolling
+        if (!isStylus) return; // Allow normal finger touch scrolling
         if (e.cancelable) e.preventDefault();
         try { canvas.setPointerCapture(e.pointerId); } catch (_) {}
         padState[idx].drawing = true;
@@ -1853,7 +1344,7 @@
       }
     }
 
-    /* Full-Screen iPad Screen Annotation Engine with Exact Coordinate Projection */
+    /* Full-Screen iPad Screen Annotation Engine with Exact Calibrated Projection */
     let screenDrawActive = false;
     let screenCtx = null;
     let screenCanvas = null;
@@ -1896,7 +1387,7 @@
       screenCanvas.addEventListener('pointerdown', (e) => {
         if (!screenDrawActive) return;
         const isStylus = e.pointerType === 'pen' || e.pointerType === 'mouse';
-        if (!isStylus) return; // Allow finger scrolling when overlay is active if desired
+        if (!isStylus) return;
         if (e.cancelable) e.preventDefault();
         try { screenCanvas.setPointerCapture(e.pointerId); } catch (_) {}
         isScreenDrawing = true;
