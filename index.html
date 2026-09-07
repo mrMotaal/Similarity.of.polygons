@@ -1661,6 +1661,9 @@
 
   <script>
     function switchTab(tabId) {
+      // Capture and persist all drawings before leaving the concept tab
+      captureAllPadCanvases();
+
       const sections = ['concept', 'revision', 'quiz'];
       sections.forEach(s => {
         const el = document.getElementById(`section-${s}`);
@@ -1678,6 +1681,14 @@
         activeBtn.classList.add('bg-white', 'text-blue-600', 'shadow-clay-btn');
         activeBtn.classList.remove('text-slate-600');
       }
+
+      // Restore all pad canvases seamlessly upon returning to concept tab
+      if (tabId === 'concept') {
+        requestAnimationFrame(() => {
+          restoreAllPadWorkspaces();
+        });
+      }
+
       if (tabId === 'quiz') startQuizTimer();
       if (window.MathJax && MathJax.typesetPromise) MathJax.typesetPromise();
     }
@@ -2179,10 +2190,16 @@
       const q = quizSets[currentQuizSetIndex][qIdx];
       for (let i = 0; i < q.options.length; i++) {
         const btn = document.getElementById(`quiz-opt-${qIdx}-${i}`);
-        if (btn) { btn.classList.remove('border-blue-600', 'bg-blue-50/90'); btn.classList.add('border-slate-200', 'bg-white/80'); }
+        if (btn) {
+          btn.classList.remove('border-blue-600', 'bg-blue-50/90');
+          btn.classList.add('border-slate-200', 'bg-white/80');
+        }
       }
       const chosenBtn = document.getElementById(`quiz-opt-${qIdx}-${oIdx}`);
-      if (chosenBtn) { chosenBtn.classList.remove('border-slate-200', 'bg-white/80'); chosenBtn.classList.add('border-blue-600', 'bg-blue-50/90'); }
+      if (chosenBtn) {
+        chosenBtn.classList.remove('border-slate-200', 'bg-white/80');
+        chosenBtn.classList.add('border-blue-600', 'bg-blue-50/90');
+      }
       updateQuizProgress();
     }
 
@@ -2198,146 +2215,108 @@
     }
 
     function resetQuizState() {
-      quizTimeLeft = 15 * 60;
       userQuizAnswers = {};
+      quizTimeLeft = 15 * 60;
       const resultsCard = document.getElementById('quiz-results-card');
       const submitArea = document.getElementById('quiz-submit-area');
-      const selector = document.getElementById('quiz-set-selector');
-      if (selector) selector.value = currentQuizSetIndex.toString();
       if (resultsCard) resultsCard.classList.add('hidden');
       if (submitArea) submitArea.classList.remove('hidden');
+      const selector = document.getElementById('quiz-set-selector');
+      if (selector) selector.value = currentQuizSetIndex;
       renderQuiz();
       startQuizTimer();
-    }
-
-    function retakeCurrentQuiz() {
-      resetQuizState();
-      window.scrollTo({ top: document.getElementById('section-quiz').offsetTop - 80, behavior: 'smooth' });
-    }
-
-    function startNextQuiz() {
-      currentQuizSetIndex = (currentQuizSetIndex + 1) % quizSets.length;
-      resetQuizState();
-      window.scrollTo({ top: document.getElementById('section-quiz').offsetTop - 80, behavior: 'smooth' });
     }
 
     function submitQuiz() {
       if (quizTimerInterval) clearInterval(quizTimerInterval);
       const qList = quizSets[currentQuizSetIndex];
       let score = 0;
-      qList.forEach((q, idx) => { if (userQuizAnswers[idx] === q.correctIndex) score++; });
+      let reviewHtml = '';
 
-      const resultsCard = document.getElementById('quiz-results-card');
-      const submitArea = document.getElementById('quiz-submit-area');
-      if (!resultsCard) return;
-
-      let badgeColor = "bg-emerald-100 text-emerald-800 border-emerald-300";
-      let badgeIcon = "fa-trophy";
-      let assessmentTitle = "Outstanding Mastery!";
-      let assessmentDesc = "Congratulations! You have demonstrated exceptional understanding of geometric similarity of polygons and all proportional calculations.";
-
-      if (score >= 8 && score < 10) {
-        badgeColor = "bg-blue-100 text-blue-800 border-blue-300";
-        badgeIcon = "fa-star";
-        assessmentTitle = "Very Good Performance!";
-        assessmentDesc = "Great job! You have grasped nearly all fundamental concepts. Review the few missed questions below to achieve full marks.";
-      } else if (score >= 5 && score < 8) {
-        badgeColor = "bg-amber-100 text-amber-800 border-amber-300";
-        badgeIcon = "fa-check";
-        assessmentTitle = "Good Effort - Needs Practice";
-        assessmentDesc = "You passed, but several important criteria (special quadrilaterals or algebraic steps) need closer attention. Review the solutions below.";
-      } else if (score < 5) {
-        badgeColor = "bg-rose-100 text-rose-800 border-rose-300";
-        badgeIcon = "fa-triangle-exclamation";
-        assessmentTitle = "Review Required";
-        assessmentDesc = "Don't worry! Review the 4 lesson ideas in Tab 1, study the flashcards, and retake the quiz to boost your grade.";
-      }
-
-      let breakdownHtml = '';
       qList.forEach((q, idx) => {
         const userChoice = userQuizAnswers[idx];
-        const isCorrect = (userChoice === q.correctIndex);
-        const userOptText = userChoice !== undefined ? `${q.options[userChoice].letter}. ${q.options[userChoice].text}` : '<span class="text-rose-500 italic">Unanswered</span>';
-        const correctOptText = `${q.options[q.correctIndex].letter}. ${q.options[q.correctIndex].text}`;
+        const isCorrect = userChoice === q.correctIndex;
+        if (isCorrect) score++;
 
-        breakdownHtml += `
-          <div class="p-5 rounded-3xl border-2 ${isCorrect ? 'border-emerald-200 bg-emerald-50/50' : 'border-rose-200 bg-rose-50/50'} space-y-3">
+        const userChoiceLetter = userChoice !== undefined ? q.options[userChoice].letter : 'None';
+        const correctChoiceLetter = q.options[q.correctIndex].letter;
+
+        reviewHtml += `
+          <div class="p-4 rounded-2xl border ${isCorrect ? 'bg-emerald-50/70 border-emerald-200' : 'bg-rose-50/70 border-rose-200'} space-y-2">
             <div class="flex items-center justify-between">
-              <span class="font-bold text-xs sm:text-sm flex items-center gap-2 ${isCorrect ? 'text-emerald-800' : 'text-rose-800'}">
-                <i class="fa-solid ${isCorrect ? 'fa-circle-check text-emerald-600' : 'fa-circle-xmark text-rose-600'} text-base"></i>
-                Question ${idx + 1}
+              <span class="font-bold text-xs ${isCorrect ? 'text-emerald-800' : 'text-rose-800'}">
+                <i class="fa-solid ${isCorrect ? 'fa-check-circle text-emerald-600' : 'fa-xmark-circle text-rose-600'} mr-1"></i> Question ${idx + 1}
               </span>
-              <span class="px-2.5 py-0.5 rounded-full text-[11px] font-black uppercase ${isCorrect ? 'bg-emerald-200 text-emerald-900' : 'bg-rose-200 text-rose-900'}">
-                ${isCorrect ? '1 / 1 Mark' : '0 / 1 Mark'}
+              <span class="text-xs font-bold px-2 py-0.5 rounded-full ${isCorrect ? 'bg-emerald-200/80 text-emerald-900' : 'bg-rose-200/80 text-rose-900'}">
+                ${isCorrect ? '+1 Mark' : '0 Mark'}
               </span>
             </div>
-
-            <div class="text-sm font-bold text-slate-900 leading-snug">${q.text}</div>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-2 text-xs">
-              <div class="p-2.5 rounded-xl bg-white border ${isCorrect ? 'border-emerald-200' : 'border-rose-200'}">
-                <span class="font-bold text-slate-500">Your Answer:</span>
-                <span class="font-bold ml-1 ${isCorrect ? 'text-emerald-700' : 'text-rose-700'}">${userOptText}</span>
-              </div>
-              <div class="p-2.5 rounded-xl bg-white border border-slate-200">
-                <span class="font-bold text-slate-500">Correct Answer:</span>
-                <span class="font-bold ml-1 text-emerald-700">${correctOptText}</span>
-              </div>
+            <p class="text-xs sm:text-sm font-semibold text-slate-800">${q.text}</p>
+            <div class="flex flex-wrap gap-4 text-xs font-medium pt-1">
+              <span class="${isCorrect ? 'text-emerald-700' : 'text-rose-700'}">Your Choice: <strong>(${userChoiceLetter})</strong></span>
+              <span class="text-emerald-800">Correct Choice: <strong>(${correctChoiceLetter}) ${q.options[q.correctIndex].text}</strong></span>
             </div>
-
-            <div class="p-3 rounded-2xl bg-white/90 border border-slate-200 text-xs text-slate-700 space-y-1">
-              <div class="font-bold text-slate-900 flex items-center gap-1.5"><i class="fa-solid fa-graduation-cap text-blue-600"></i> Mathematical Explanation:</div>
-              <p class="leading-relaxed text-slate-600">${q.explanation}</p>
+            <div class="p-2.5 bg-white/90 rounded-xl border border-slate-200/80 text-xs text-slate-600 space-y-1">
+              <div class="font-bold text-slate-700"><i class="fa-solid fa-graduation-cap text-blue-600 mr-1"></i> Mathematical Reasoning:</div>
+              <p>${q.explanation}</p>
             </div>
           </div>
         `;
       });
 
-      resultsCard.innerHTML = `
-        <div class="text-center space-y-4 pb-2 border-b border-slate-100">
-          <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border ${badgeColor} text-xs font-black uppercase tracking-wide">
-            <i class="fa-solid ${badgeIcon}"></i> ${assessmentTitle}
-          </div>
-          <h3 class="text-3xl sm:text-4xl font-black font-display text-slate-900">
-            Final Score: <span class="text-blue-600">${score}</span> / 10
-          </h3>
-          <p class="text-slate-600 text-xs sm:text-sm max-w-xl mx-auto leading-relaxed">
-            ${assessmentDesc}
-          </p>
+      let performanceBadge = '';
+      if (score >= 9) {
+        performanceBadge = '<span class="px-3.5 py-1 rounded-full bg-emerald-100 text-emerald-800 text-xs font-extrabold uppercase">Outstanding! Excellent Mastery ⭐⭐⭐</span>';
+      } else if (score >= 7) {
+        performanceBadge = '<span class="px-3.5 py-1 rounded-full bg-blue-100 text-blue-800 text-xs font-extrabold uppercase">Very Good! Solid Understanding ⭐⭐</span>';
+      } else if (score >= 5) {
+        performanceBadge = '<span class="px-3.5 py-1 rounded-full bg-amber-100 text-amber-800 text-xs font-extrabold uppercase">Passed! Needs Some Review ⭐</span>';
+      } else {
+        performanceBadge = '<span class="px-3.5 py-1 rounded-full bg-rose-100 text-rose-800 text-xs font-extrabold uppercase">Revision Recommended! Keep Practicing</span>';
+      }
 
-          <div class="flex flex-wrap items-center justify-center gap-3 pt-2">
-            <button onclick="retakeCurrentQuiz()" class="px-5 py-2.5 rounded-2xl bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs sm:text-sm shadow-clay-btn transition-all active:scale-95 flex items-center gap-2">
-              <i class="fa-solid fa-rotate-right"></i> Retake This Quiz
-            </button>
-            <button onclick="startNextQuiz()" class="px-5 py-2.5 rounded-2xl bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white font-bold text-xs sm:text-sm shadow-clay-btn transition-all active:scale-95 flex items-center gap-2">
-              <i class="fa-solid fa-forward-step"></i> Try Quiz #${((currentQuizSetIndex + 1) % quizSets.length) + 1}
-            </button>
-            <button onclick="switchTab('concept')" class="px-5 py-2.5 rounded-2xl bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs sm:text-sm border border-slate-300 transition-all active:scale-95 flex items-center gap-2">
-              <i class="fa-solid fa-book-open"></i> Review Lesson Concepts
-            </button>
-          </div>
-        </div>
+      const nextQuizIndex = (currentQuizSetIndex + 1) % quizSets.length;
 
-        <div class="space-y-4 pt-3">
-          <div class="flex items-center justify-between">
-            <h4 class="text-base sm:text-lg font-black font-display text-slate-900 flex items-center gap-2">
-              <i class="fa-solid fa-clipboard-check text-blue-600"></i> Comprehensive Question-by-Question Analysis
+      const resultsCard = document.getElementById('quiz-results-card');
+      const submitArea = document.getElementById('quiz-submit-area');
+      if (resultsCard) {
+        resultsCard.innerHTML = `
+          <div class="text-center space-y-3 border-b pb-6">
+            <div class="inline-flex">${performanceBadge}</div>
+            <h3 class="text-3xl font-black font-display text-slate-900">
+              Final Score: <span class="text-blue-600">${score}</span> / 10
+            </h3>
+            <p class="text-slate-600 text-xs sm:text-sm max-w-lg mx-auto">
+              You answered ${score} out of 10 questions correctly. Check the step-by-step solutions below to reinforce your understanding.
+            </p>
+            <div class="flex flex-wrap justify-center gap-3 pt-3">
+              <button onclick="resetQuizState()" class="px-5 py-2.5 rounded-2xl bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs sm:text-sm shadow-clay-btn transition-all active:scale-95 flex items-center gap-2">
+                <i class="fa-solid fa-rotate-left"></i> Retake This Quiz
+              </button>
+              <button onclick="manualSwitchQuizSet(${nextQuizIndex})" class="px-5 py-2.5 rounded-2xl bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-xs sm:text-sm shadow-clay-btn transition-all active:scale-95 flex items-center gap-2">
+                <i class="fa-solid fa-forward-step"></i> Try Quiz #${nextQuizIndex + 1}
+              </button>
+              <button onclick="switchTab('concept')" class="px-5 py-2.5 rounded-2xl bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs sm:text-sm border border-slate-300 transition-all active:scale-95 flex items-center gap-2">
+                <i class="fa-solid fa-book-open"></i> Review Lesson Concepts
+              </button>
+            </div>
+          </div>
+
+          <div class="space-y-4 pt-2">
+            <h4 class="font-bold text-slate-900 text-base flex items-center gap-2">
+              <i class="fa-solid fa-list-check text-blue-600"></i> Detailed Question-by-Question Feedback:
             </h4>
-            <span class="text-xs font-bold text-slate-500">${score} Correct • ${10 - score} Incorrect</span>
+            <div class="space-y-3">${reviewHtml}</div>
           </div>
-          <div class="space-y-4">
-            ${breakdownHtml}
-          </div>
-        </div>
-      `;
-
-      if (submitArea) submitArea.classList.add('hidden');
-      resultsCard.classList.remove('hidden');
-      resultsCard.scrollIntoView({ behavior: 'smooth' });
-      if (window.MathJax && MathJax.typesetPromise) MathJax.typesetPromise();
+        `;
+        if (submitArea) submitArea.classList.add('hidden');
+        resultsCard.classList.remove('hidden');
+        resultsCard.scrollIntoView({ behavior: 'smooth' });
+        if (window.MathJax && MathJax.typesetPromise) MathJax.typesetPromise();
+      }
     }
 
-    /* iPad Stylus Canvas Engine with Strict Stylus-Only Drawing */
+    /* iPad Stylus Canvas Engine with Strict Stylus-Only Drawing & Auto-Save */
     function upgradeWorkspacesWithStylusSupport() {
       const workspaces = document.querySelectorAll('.space-y-2.pt-2');
       workspaces.forEach((ws, idx) => {
@@ -2352,6 +2331,7 @@
                 <button type="button" onclick="switchPadMode(${idx}, 'pen')" id="pad-btn-pen-${idx}" class="px-2.5 py-1 rounded-lg text-xs font-bold bg-white text-blue-600 shadow-sm flex items-center gap-1 transition-all"><i class="fa-solid fa-pen-nib text-indigo-500"></i> <span class="hidden sm:inline">iPad Stylus</span></button>
                 <button type="button" onclick="switchPadMode(${idx}, 'text')" id="pad-btn-text-${idx}" class="px-2.5 py-1 rounded-lg text-xs font-bold text-slate-600 hover:text-slate-900 flex items-center gap-1 transition-all"><i class="fa-solid fa-keyboard text-slate-400"></i> <span class="hidden sm:inline">Type</span></button>
               </div>
+              <span class="text-[10px] text-emerald-600 font-bold bg-emerald-50 border border-emerald-200/80 px-2 py-0.5 rounded-full hidden sm:inline-flex items-center gap-1"><i class="fa-solid fa-cloud-check"></i> Auto-saved</span>
             </div>
             <div id="pad-toolbar-${idx}" class="flex flex-wrap items-center gap-1.5 sm:gap-2">
               <div class="flex items-center bg-slate-100 p-0.5 rounded-xl border border-slate-200">
@@ -2365,9 +2345,9 @@
                 <button type="button" onclick="setPadColor(${idx}, '#059669')" class="w-4 h-4 rounded-full bg-emerald-600 border border-white active:scale-90" title="Green"></button>
                 <button type="button" onclick="setPadColor(${idx}, 'rgba(250, 204, 21, 0.45)')" class="w-4 h-4 rounded-full bg-amber-300 border border-white active:scale-90" title="Highlighter"></button>
               </div>
-              <button type="button" onclick="togglePadEraser(${idx})" id="pad-eraser-${idx}" class="px-2 py-1 rounded-xl bg-slate-100 text-slate-600 border text-xs font-bold"><i class="fa-solid fa-eraser"></i></button>
-              <button type="button" onclick="undoPadCanvas(${idx})" class="p-1.5 rounded-xl bg-slate-100 text-slate-600 border text-xs"><i class="fa-solid fa-rotate-left"></i></button>
-              <button type="button" onclick="clearPadCanvas(${idx})" class="p-1.5 rounded-xl bg-slate-100 text-slate-400 hover:text-rose-600 border text-xs"><i class="fa-solid fa-trash-can"></i></button>
+              <button type="button" onclick="togglePadEraser(${idx})" id="pad-eraser-${idx}" class="px-2 py-1 rounded-xl bg-slate-100 text-slate-600 border text-xs font-bold" title="Eraser"><i class="fa-solid fa-eraser"></i></button>
+              <button type="button" onclick="undoPadCanvas(${idx})" class="p-1.5 rounded-xl bg-slate-100 text-slate-600 border text-xs" title="Undo"><i class="fa-solid fa-rotate-left"></i></button>
+              <button type="button" onclick="clearPadCanvas(${idx})" class="p-1.5 rounded-xl bg-slate-100 text-slate-400 hover:text-rose-600 border text-xs" title="Clear All (Only deletes when clicked)"><i class="fa-solid fa-trash-can"></i></button>
             </div>
           `;
         }
@@ -2378,6 +2358,19 @@
         ws.insertBefore(canvasContainer, textarea);
         textarea.id = `textarea-${idx}`;
         textarea.classList.add('hidden');
+
+        // Restore typed text if saved in localStorage
+        try {
+          const savedText = localStorage.getItem(`math_prep3_text_${idx}`);
+          if (savedText) textarea.value = savedText;
+        } catch (_) {}
+
+        textarea.addEventListener('input', () => {
+          try {
+            localStorage.setItem(`math_prep3_text_${idx}`, textarea.value);
+          } catch (_) {}
+        });
+
         initPadCanvas(idx);
       });
     }
@@ -2398,8 +2391,46 @@
       ctx.lineCap = 'round';
       ctx.lineJoin = 'round';
 
-      padState[idx] = { ctx, canvas, color: '#1E3A8A', isEraser: false, size: 2.5, drawing: false, lastX: 0, lastY: 0, history: [] };
-      savePadState(idx);
+      padState[idx] = { 
+        ctx, 
+        canvas, 
+        color: '#1E3A8A', 
+        isEraser: false, 
+        size: 2.5, 
+        drawing: false, 
+        lastX: 0, 
+        lastY: 0, 
+        history: [],
+        offscreen: document.createElement('canvas')
+      };
+
+      // Auto-load previously saved drawing if available
+      try {
+        const savedDataUrl = localStorage.getItem(`math_prep3_pad_${idx}`);
+        if (savedDataUrl) {
+          const img = new Image();
+          img.onload = () => {
+            ctx.save();
+            ctx.setTransform(1, 0, 0, 1, 0, 0);
+            ctx.drawImage(img, 0, 0);
+            ctx.restore();
+
+            // Sync offscreen buffer
+            const off = padState[idx].offscreen;
+            off.width = canvas.width;
+            off.height = canvas.height;
+            const offCtx = off.getContext('2d');
+            offCtx.drawImage(canvas, 0, 0);
+
+            savePadState(idx);
+          };
+          img.src = savedDataUrl;
+        } else {
+          savePadState(idx);
+        }
+      } catch (_) {
+        savePadState(idx);
+      }
 
       // Prevent page scrolling strictly when touching with Apple Pencil / Stylus
       const handleTouchStart = (e) => {
@@ -2420,7 +2451,7 @@
 
       canvas.addEventListener('pointerdown', (e) => {
         const isStylus = e.pointerType === 'pen' || e.pointerType === 'mouse';
-        if (!isStylus) return; // Ignore fingers to allow natural page scrolling
+        if (!isStylus) return; // Ignore finger touch to allow natural page scrolling
         if (e.cancelable) e.preventDefault();
         try { canvas.setPointerCapture(e.pointerId); } catch (_) {}
         padState[idx].drawing = true;
@@ -2462,14 +2493,94 @@
       canvas.addEventListener('pointercancel', stopDraw);
     }
 
+    function captureAllPadCanvases() {
+      const total = Object.keys(padState).length;
+      for (let idx = 0; idx < total; idx++) {
+        const state = padState[idx];
+        if (!state || !state.canvas || state.canvas.width <= 0) continue;
+        try {
+          if (!state.offscreen) state.offscreen = document.createElement('canvas');
+          state.offscreen.width = state.canvas.width;
+          state.offscreen.height = state.canvas.height;
+          const offCtx = state.offscreen.getContext('2d');
+          offCtx.clearRect(0, 0, state.offscreen.width, state.offscreen.height);
+          offCtx.drawImage(state.canvas, 0, 0);
+
+          // Save to localStorage
+          localStorage.setItem(`math_prep3_pad_${idx}`, state.canvas.toDataURL());
+        } catch (_) {}
+      }
+    }
+
+    function restoreAllPadWorkspaces() {
+      const total = Object.keys(padState).length;
+      for (let idx = 0; idx < total; idx++) {
+        restorePadWorkspace(idx);
+      }
+    }
+
+    function restorePadWorkspace(idx) {
+      const state = padState[idx];
+      if (!state) return;
+      const canvas = state.canvas;
+      const container = document.getElementById(`stylus-container-${idx}`);
+      if (!canvas || !container) return;
+
+      const dpr = window.devicePixelRatio || 1;
+      const rect = container.getBoundingClientRect();
+      const cssWidth = rect.width > 0 ? rect.width : (canvas.clientWidth || 650);
+      const cssHeight = container.clientHeight || 380;
+
+      const targetWidth = Math.round(cssWidth * dpr);
+      const targetHeight = Math.round(cssHeight * dpr);
+
+      if (canvas.width !== targetWidth || canvas.height !== targetHeight) {
+        canvas.width = targetWidth;
+        canvas.height = targetHeight;
+        state.ctx = canvas.getContext('2d');
+        state.ctx.scale(dpr, dpr);
+        state.ctx.lineCap = 'round';
+        state.ctx.lineJoin = 'round';
+      }
+
+      // Redraw drawing buffer from offscreen canvas or localStorage
+      if (state.offscreen && state.offscreen.width > 0 && state.offscreen.height > 0) {
+        state.ctx.save();
+        state.ctx.setTransform(1, 0, 0, 1, 0, 0);
+        state.ctx.clearRect(0, 0, canvas.width, canvas.height);
+        state.ctx.drawImage(state.offscreen, 0, 0);
+        state.ctx.restore();
+      } else {
+        try {
+          const saved = localStorage.getItem(`math_prep3_pad_${idx}`);
+          if (saved) {
+            const img = new Image();
+            img.onload = () => {
+              state.ctx.save();
+              state.ctx.setTransform(1, 0, 0, 1, 0, 0);
+              state.ctx.drawImage(img, 0, 0);
+              state.ctx.restore();
+              if (!state.offscreen) state.offscreen = document.createElement('canvas');
+              state.offscreen.width = canvas.width;
+              state.offscreen.height = canvas.height;
+              state.offscreen.getContext('2d').drawImage(img, 0, 0);
+            };
+            img.src = saved;
+          }
+        } catch (_) {}
+      }
+    }
+
     function resizePadCanvas(idx, newCssHeight) {
       const container = document.getElementById(`stylus-container-${idx}`);
       const canvas = document.getElementById(`stylus-canvas-${idx}`);
       const state = padState[idx];
       if (!container || !canvas || !state) return;
       const clampedHeight = Math.max(180, Math.min(1600, Math.round(newCssHeight)));
+      
       const offscreen = document.createElement('canvas');
-      offscreen.width = canvas.width; offscreen.height = canvas.height;
+      offscreen.width = canvas.width; 
+      offscreen.height = canvas.height;
       const offCtx = offscreen.getContext('2d');
       if (offCtx && canvas.width > 0 && canvas.height > 0) offCtx.drawImage(canvas, 0, 0);
 
@@ -2480,9 +2591,13 @@
       canvas.height = Math.round(clampedHeight * dpr);
       const ctx = canvas.getContext('2d');
       ctx.scale(dpr, dpr);
-      ctx.lineCap = 'round'; ctx.lineJoin = 'round';
+      ctx.lineCap = 'round'; 
+      ctx.lineJoin = 'round';
       state.ctx = ctx;
-      ctx.save(); ctx.setTransform(1, 0, 0, 1, 0, 0); ctx.drawImage(offscreen, 0, 0); ctx.restore();
+      ctx.save(); 
+      ctx.setTransform(1, 0, 0, 1, 0, 0); 
+      ctx.drawImage(offscreen, 0, 0); 
+      ctx.restore();
       savePadState(idx);
     }
 
@@ -2503,6 +2618,17 @@
       try {
         if (state.history.length > 20) state.history.shift();
         state.history.push(state.ctx.getImageData(0, 0, state.canvas.width, state.canvas.height));
+
+        // Sync offscreen memory buffer
+        if (!state.offscreen) state.offscreen = document.createElement('canvas');
+        state.offscreen.width = state.canvas.width;
+        state.offscreen.height = state.canvas.height;
+        const offCtx = state.offscreen.getContext('2d');
+        offCtx.clearRect(0, 0, state.offscreen.width, state.offscreen.height);
+        offCtx.drawImage(state.canvas, 0, 0);
+
+        // Auto-save to localStorage
+        localStorage.setItem(`math_prep3_pad_${idx}`, state.canvas.toDataURL());
       } catch (_) {}
     }
 
@@ -2511,13 +2637,32 @@
       if (!state || state.history.length <= 1) return;
       state.history.pop();
       const prev = state.history[state.history.length - 1];
-      if (prev) state.ctx.putImageData(prev, 0, 0);
+      if (prev) {
+        state.ctx.putImageData(prev, 0, 0);
+        if (!state.offscreen) state.offscreen = document.createElement('canvas');
+        state.offscreen.width = state.canvas.width;
+        state.offscreen.height = state.canvas.height;
+        const offCtx = state.offscreen.getContext('2d');
+        offCtx.clearRect(0, 0, state.offscreen.width, state.offscreen.height);
+        offCtx.drawImage(state.canvas, 0, 0);
+        try {
+          localStorage.setItem(`math_prep3_pad_${idx}`, state.canvas.toDataURL());
+        } catch (_) {}
+      }
     }
 
     function clearPadCanvas(idx) {
       const state = padState[idx];
       if (!state) return;
       state.ctx.clearRect(0, 0, state.canvas.width, state.canvas.height);
+      if (state.offscreen) {
+        const offCtx = state.offscreen.getContext('2d');
+        offCtx.clearRect(0, 0, state.offscreen.width, state.offscreen.height);
+      }
+      state.history = [];
+      try {
+        localStorage.removeItem(`math_prep3_pad_${idx}`);
+      } catch (_) {}
       savePadState(idx);
     }
 
